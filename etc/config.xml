@@ -1,0 +1,21 @@
+<?xml version='1.0'?>
+<config
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='urn:magento:module:Magento_Store:etc/config.xsd'
+>
+    <default>
+		<df_payment>
+			<square>
+				<askForBillingAddress>1</askForBillingAddress>
+				<currency>order</currency>
+				<title>Bank Card</title>
+				<title_backend>Square</title_backend>
+			</square>
+		</df_payment>
+        <payment>
+            <dfe_square>
+				<model>Dfe\Square\Method</model>
+            </dfe_square>
+        </payment>
+    </default>
+</config>

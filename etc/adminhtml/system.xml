@@ -1,0 +1,178 @@
+<?xml version='1.0'?>
+<config
+    xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+    xsi:noNamespaceSchemaLocation='urn:magento:module:Df_Config:etc/system_file.xsd'
+>
+    <system>
+        <section id='df_payment'>
+            <!--
+                2015-09-25
+                1-я и 2-я цифры sortOrder соответствуют порядковому номеру первой буквы модуля
+                в английском алфавите: https://en.wikipedia.org/wiki/English_alphabet
+				3-я и 4-я цифры sortOrder соответствуют порядковому номеру второй буквы модуля
+                в английском алфавите.
+            -->
+            <group
+                id='square'
+                translate='label'
+                type='text'
+                sortOrder='1917'
+                showInDefault='1'
+                showInWebsite='1'
+                showInStore='1'
+            >
+                <label>Square</label>
+				<dfExtension>Dfe\Square\Ext</dfExtension>
+				<frontend_model>Df\Config\Block\System\Config\Form\Fieldset\Ext</frontend_model>
+                <field
+                    id='enable'
+                    translate='label'
+                    type='Df\Framework\Form\Element\Enable'
+                    sortOrder='1'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+                >
+                    <label>Enable?</label>
+					<backend_model>Df\Framework\Form\Element\Enable\Backend</backend_model>
+                    <comment><![CDATA[Enable the «<a href='https://mage2.pro/c/extensions/square' target='_blank'>Square</a>» payment extension?]]></comment>
+                </field>
+				<field
+					id='title'
+					translate='label'
+					type='text'
+					sortOrder='2'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Title</label>
+					<comment><![CDATA[It is shown on the checkout screen.]]></comment>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
+					id='test'
+					translate='label'
+					type='Df\Framework\Form\Element\Checkbox'
+					sortOrder='3'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Sandbox Mode?</label>
+					<backend_model>Df\Config\Backend\Checkbox</backend_model>
+					<comment><![CDATA[<a href='https://mage2.pro/t/2097' target='_blank'>The test bank cards</a>.]]></comment>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
+					id='sandboxApplicationID'
+					translate='label'
+					sortOrder='4'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Sandbox Application ID</label>
+					<validate>required-entry validate-length maximum-length-37 minimum-length-37</validate>
+					<comment><![CDATA[<a href='https://mage2.pro/t/2103' target='_blank'>Where to find it?</a>]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>1</field>
+					</depends>
+				</field>
+				<field
+					id='sandboxAccessToken'
+					translate='label'
+					type='obscure'
+					sortOrder='5'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Sandbox Access Token</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<validate>required-entry</validate>
+					<comment><![CDATA[<a href='https://mage2.pro/t/2104' target='_blank'>Where to find it?</a>]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>1</field>
+					</depends>
+				</field>
+				<field
+					id='applicationID'
+					translate='label'
+					sortOrder='6'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Application ID</label>
+					<validate>required-entry validate-length maximum-length-29 minimum-length-29</validate>
+					<comment><![CDATA[<a href='https://mage2.pro/t/2101' target='_blank'>Where to find it?</a>]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>0</field>
+					</depends>
+				</field>
+				<field
+					id='personalAccessToken'
+					translate='label'
+					type='obscure'
+					sortOrder='7'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Personal Access Token</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<validate>required-entry</validate>
+					<comment><![CDATA[<a href='https://mage2.pro/t/2102' target='_blank'>Where to find it?</a>]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>0</field>
+					</depends>
+				</field>
+				<field
+					id='webhook'
+					translate='label'
+					type='Df\Framework\Form\Element\Webhook'
+					dfWebhook_routePath='dfe-square'
+					sortOrder='8'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Webhook</label>
+					<comment><![CDATA[<a href='https://mage2.pro/t/2107' target='_blank'>set it in your Square account</a>]]></comment>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
+					id='currency'
+					translate='label'
+					type='Df\Payment\FormElement\Currency'
+					sortOrder='9'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Payment Currency</label>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
+					id='askForBillingAddress'
+					translate='label'
+					type='Df\Framework\Form\Element\Checkbox'
+					sortOrder='10'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Ask for the Billing Address?</label>
+					<backend_model>Df\Config\Backend\Checkbox</backend_model>
+					<comment><![CDATA[If <b>checked</b>, Magento will require the billing address. It it the default Magento behaviour.<br/>If <b>unchecked</b>, Magento will not require the billing address, and even will not ask for it.]]></comment>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+			</group>
+        </section>
+    </system>
+</config>
