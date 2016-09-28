@@ -10,4 +10,11 @@
 			</argument>
 		</arguments>
 	</type>
+	<type name='Magento\Payment\Model\CcGenericConfigProvider'>
+		<arguments>
+			<argument name='methodCodes' xsi:type='array'>
+				<item name='dfe_square' xsi:type='string'>dfe_square</item>
+			</argument>
+		</arguments>
+	</type>
 </config>

@@ -2,7 +2,7 @@
 // 2016-09-28
 namespace Dfe\Square;
 /** @method Settings s() */
-class ConfigProvider extends \Df\Payment\ConfigProvider {
+class ConfigProvider extends \Df\Payment\ConfigProvider\BankCard {
 	/**
 	 * 2016-09-28
 	 * @override
