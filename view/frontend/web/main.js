@@ -33,21 +33,35 @@ define ([
     dfOnRender: function() {
 		var paymentForm = new SqPaymentForm({
 			applicationId: this.config('applicationID'),
-			cardNumber: {
-				elementId: this.dfCardNumberId(),
-				placeholder: '•••• •••• •••• ••••'
-			},
-			cvv: {
-				elementId: this.dfCardVerificationId(),
-				placeholder: 'CVV'
-			},
-			expirationDate: {
-				elementId: this.dfCardExpirationCompositeId(),
-				placeholder: 'MM/YY'
-			},
-			// 2016-09-28
-			// Это поле является обязательным.
-			inputClass: 'dummy',
+			cardNumber: {elementId: this.dfCardNumberId(),},
+			cvv: {elementId: this.dfCardVerificationId(),},
+			expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'},
+			/**
+			 * 2016-09-28
+			 * Это поле является обязательным.
+			 *
+			 * 2016-09-29
+			 * «This CSS class is assigned to all four of the iframes generated for the payment form.
+			 * You can create CSS rules for this class to style the exterior of the inputs
+			 * (i.e., borders and margins). See Styling input exteriors for more information.»
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
+			 */
+			inputClass: 'dfe-square',
+			/**
+			 * 2016-09-29
+			 * «Each object in this array defines styles to apply
+			 * to the interior of the payment form inputs.
+			 * The array can include multiple objects that apply to different ranges of screen widths,
+			 * or a single object that applies universally.»
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#stylinginputinteriors
+			 */
+			inputStyles: [{
+				fontFamily: 'sans-serif'
+				,fontSize: '14px'
+				,lineHeight: '20px'
+				,padding: '6px 9px'
+			}],
 			postalCode: {elementId: this.dfCardPostalCodeId()},
 			callbacks: {
 				cardNonceResponseReceived: function(errors, nonce, cardData) {
@@ -60,7 +74,7 @@ define ([
 					}
 				},
 				paymentFormLoaded: function() {
-					debugger;
+					//debugger;
 					paymentForm.setPostalCode('94103');
 					// Fill in this callback to perform actions after the payment form is
 					// done loading (such as setting the postal code field programmatically).
