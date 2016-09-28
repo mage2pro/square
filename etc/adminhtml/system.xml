@@ -147,10 +147,27 @@
 					<depends><field id='enable'>1</field></depends>
 				</field>
 				<field
+					id='webhookSignatureKey'
+					translate='label'
+					type='obscure'
+					sortOrder='9'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Webhook Signature Key</label>
+					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
+					<validate>required-entry</validate>
+					<comment><![CDATA[<a href='https://mage2.pro/t/2108' target='_blank'>Where to find it?</a>]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+					</depends>
+				</field>
+				<field
 					id='currency'
 					translate='label'
 					type='Df\Payment\FormElement\Currency'
-					sortOrder='9'
+					sortOrder='10'
 					showInDefault='1'
 					showInWebsite='1'
 					showInStore='1'
@@ -162,7 +179,7 @@
 					id='askForBillingAddress'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='10'
+					sortOrder='11'
 					showInDefault='1'
 					showInWebsite='1'
 					showInStore='1'
