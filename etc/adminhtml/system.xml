@@ -65,7 +65,7 @@
 					<depends><field id='enable'>1</field></depends>
 				</field>
 				<field
-					id='sandboxApplicationID'
+					id='testApplicationID'
 					translate='label'
 					sortOrder='4'
 					showInDefault='1'
@@ -81,7 +81,7 @@
 					</depends>
 				</field>
 				<field
-					id='sandboxAccessToken'
+					id='testAccessToken'
 					translate='label'
 					type='obscure'
 					sortOrder='5'
@@ -99,7 +99,7 @@
 					</depends>
 				</field>
 				<field
-					id='applicationID'
+					id='liveApplicationID'
 					translate='label'
 					sortOrder='6'
 					showInDefault='1'
@@ -115,7 +115,7 @@
 					</depends>
 				</field>
 				<field
-					id='personalAccessToken'
+					id='liveAccessToken'
 					translate='label'
 					type='obscure'
 					sortOrder='7'

@@ -8,6 +8,7 @@
 			<square>
 				<askForBillingAddress>1</askForBillingAddress>
 				<currency>order</currency>
+				<payment_action>authorize_capture</payment_action>
 				<title>Bank Card</title>
 				<title_backend>Square</title_backend>
 			</square>
