@@ -60,7 +60,7 @@ define ([
 				fontFamily: 'sans-serif'
 				,fontSize: '14px'
 				,lineHeight: '20px'
-				,padding: '6px 9px'
+				,padding: '5px 9px'
 			}],
 			postalCode: {elementId: this.dfCardPostalCodeId()},
 			callbacks: {
