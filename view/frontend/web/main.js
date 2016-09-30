@@ -83,7 +83,6 @@ define ([
 				},
 				paymentFormLoaded: function() {
 					var postalCode = null;
-					debugger;
 					if (dfc.addressB()) {
 						postalCode = dfc.addressB().postcode;
 					}
@@ -95,7 +94,7 @@ define ([
 					}
 					else {
 						$.when(dfc.geo()).then(function(data) {
-							_this.square.setPostalCode(data.zip_code);
+							_this.square.setPostalCode(data['zip_code']);
 						});
 					}
 				}
