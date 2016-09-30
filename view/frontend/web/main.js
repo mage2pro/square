@@ -1,10 +1,11 @@
 // 2016-09-28
 define ([
-	'Df_Payment/card'
+	'Df_Checkout/js/data'
+	,'Df_Payment/card'
 	,'Dfe_Square/API'
 	,'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
-], function(parent, Square, $, creditCardData) {'use strict'; return parent.extend({
+], function(dfc, parent, Square, $, creditCardData) {'use strict'; return parent.extend({
 	defaults: {
 		df: {
 			card: {
@@ -31,7 +32,9 @@ define ([
 	 * https://mage2.pro/t/1936
 	 */
     dfOnRender: function() {
-		var paymentForm = new SqPaymentForm({
+		var _this = this;
+		//var postalCode = dfc.postalCode();
+		this.square = new SqPaymentForm({
 			applicationId: this.config('applicationID'),
 			cardNumber: {elementId: this.dfCardNumberId(),},
 			cvv: {elementId: this.dfCardVerificationId(),},
@@ -65,24 +68,40 @@ define ([
 			postalCode: {elementId: this.dfCardPostalCodeId()},
 			callbacks: {
 				cardNonceResponseReceived: function(errors, nonce, cardData) {
-					if (errors) {
-						console.log("Encountered errors:");
-						errors.forEach(function(error) {console.log('  ' + error.message);});
+					if (!errors) {
+						_this.token = nonce;
+						_this.placeOrderInternal();
 					}
 					else {
-						alert('Nonce received: ' + nonce);
+						/** @type {String[]} */
+						var errorsA = [];
+						errors.forEach(function(error) {
+							errorsA.push(error.message);
+						});
+						_this.showErrorMessage(errorsA.join("\n"));
 					}
 				},
 				paymentFormLoaded: function() {
-					//debugger;
-					paymentForm.setPostalCode('94103');
-					// Fill in this callback to perform actions after the payment form is
-					// done loading (such as setting the postal code field programmatically).
-					// paymentForm.setPostalCode('94103');
+					var postalCode = null;
+					debugger;
+					if (dfc.addressB()) {
+						postalCode = dfc.addressB().postcode;
+					}
+					if (!postalCode && dfc.addressS()) {
+						postalCode = dfc.addressS().postcode;
+					}
+					if (postalCode) {
+						_this.square.setPostalCode(postalCode);
+					}
+					else {
+						$.when(dfc.geo()).then(function(data) {
+							_this.square.setPostalCode(data.zip_code);
+						});
+					}
 				}
 			}
 		});
-		paymentForm.build();
+		this.square.build();
 	},
 	/**
 	 * 2016-09-28
@@ -110,6 +129,16 @@ define ([
 			// https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Payment/Model/Config.php#L141-L158
 			creditCardData.expirationMonth = parseInt($.trim(a[0]));
 		});
+		/**
+		 * 	2016-09-30
+		 * 	Unlike all the other payment services,
+		 * 	Square does not allow to populate the payment form fields programmatically,
+		 * 	so the Magento 2 Swuare extension does not contain
+		 * 	the standard «Prefill the Payment Form with Test Data?» option,
+		 * 	and you should to fill the payment form manually each time.
+		 * 	https://mage2.pro/t/2097
+		 * 	https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfieldsprogrammatically
+		 */
 		return this;
 	},
 	/**
@@ -129,7 +158,6 @@ define ([
 	 * @param {this} _this
 	*/
 	placeOrder: function(_this) {
-		if (this.validate()) {
-		}
+		this.square.requestCardNonce();
 	}
 });});
