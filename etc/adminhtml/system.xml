@@ -98,6 +98,23 @@
 						<field id='test'>1</field>
 					</depends>
 				</field>
+				<field
+					id='testLocation'
+					translate='label'
+					type='select'
+					sortOrder='6'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Sandbox Location</label>
+					<source_model>Dfe\Square\Source\Location\Test</source_model>
+					<comment><![CDATA[]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>1</field>
+					</depends>
+				</field>
 <!--
 	2016-09-30
 	Unlike all the other payment services,
@@ -137,6 +154,23 @@
 					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
 					<validate>required-entry</validate>
 					<comment><![CDATA[<a href='https://mage2.pro/t/2102' target='_blank'>Where to find it?</a>]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='test'>0</field>
+					</depends>
+				</field>
+				<field
+					id='liveLocation'
+					translate='label'
+					type='select'
+					sortOrder='6'
+					showInDefault='1'
+					showInWebsite='1'
+					showInStore='1'
+				>
+					<label>Live Location</label>
+					<source_model>Dfe\Square\Source\Location\Live</source_model>
+					<comment><![CDATA[]]></comment>
 					<depends>
 						<field id='enable'>1</field>
 						<field id='test'>0</field>

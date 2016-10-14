@@ -7,7 +7,33 @@ final class Settings extends \Df\Payment\Settings\BankCard {
 	 * 2016-09-28
 	 * @return string
 	 */
+	public function accessToken() {return $this->testable();}
+
+	/**
+	 * 2016-10-06
+	 * @return string
+	 */
+	public function location() {return $this->testable();}
+
+	/**
+	 * 2016-09-28
+	 * @return string
+	 */
 	public function applicationID() {return $this->testable();}
+
+	/**
+	 * 2016-09-28
+	 * «Mage2.PRO» → «Payment» → «Square» → «Personal Access Token»
+	 * @return string
+	 */
+	public function liveAccessToken() {return $this->p();}
+
+	/**
+	 * 2016-09-28
+	 * «Mage2.PRO» → «Payment» → «Square» → «Sandbox Access Token»
+	 * @return string
+	 */
+	public function testAccessToken() {return $this->p();}
 
 	/**
 	 * 2016-09-28
@@ -17,11 +43,11 @@ final class Settings extends \Df\Payment\Settings\BankCard {
 	protected function liveApplicationID() {return $this->v();}
 
 	/**
-	 * 2016-09-28
-	 * «Mage2.PRO» → «Payment» → «Square» → «Personal Access Token»
+	 * 2016-10-06
+	 * «Mage2.PRO» → «Payment» → «Square» → «Live Location»
 	 * @return string
 	 */
-	protected function liveAccessToken() {return $this->p();}
+	protected function liveLocation() {return $this->v();}
 
 	/**
 	 * 2016-09-28
@@ -31,17 +57,11 @@ final class Settings extends \Df\Payment\Settings\BankCard {
 	protected function testApplicationID() {return $this->v();}
 
 	/**
-	 * 2016-09-28
-	 * «Mage2.PRO» → «Payment» → «Square» → «Sandbox Access Token»
+	 * 2016-10-06
+	 * «Mage2.PRO» → «Payment» → «Square» → «Sandbox Location»
 	 * @return string
 	 */
-	protected function testAccessToken() {return $this->p();}
-
-	/**
-	 * 2016-09-28
-	 * @return string
-	 */
-	private function accessToken() {return $this->testable();}
+	protected function testLocation() {return $this->v();}
 }
 
 
