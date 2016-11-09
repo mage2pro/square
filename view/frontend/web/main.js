@@ -1,11 +1,24 @@
 // 2016-09-28
 define ([
-	'Df_Checkout/js/data'
+	'df'
+	,'Df_Checkout/js/data'
 	,'Df_Payment/card'
 	,'Dfe_Square/API'
 	,'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
-], function(dfc, parent, Square, $, creditCardData) {'use strict'; return parent.extend({
+], function(df, dfc, parent, Square, $, creditCardData) {'use strict'; return parent.extend({
+	/**
+	 * 2016-11-09
+	 * The «Square» payment form works only if your checkout page is loaded over HTTPS:
+	 * https://mage2.pro/t/2259
+	 * @override
+	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @returns {String}
+	 */
+	debugMessage: df.c(function() {
+		return 'https:' === window.location.protocol ? '' : '<span class="df-error">The payment form must be generated on a webpage that uses <b>HTTPS</b>, with one exception: you can test on <b>localhost</b> without using HTTPS: <a href="https://mage2.pro/t/topic/2259" target="_blank" title="Mage2.PRO support forum">https://mage2.pro/t/topic/2259</a></span>'
+		;
+	}),
 	defaults: {
 		df: {
 			card: {
