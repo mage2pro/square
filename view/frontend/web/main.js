@@ -12,7 +12,7 @@ define ([
 	 * The «Square» payment form works only if your checkout page is loaded over HTTPS:
 	 * https://mage2.pro/t/2259
 	 * @override
-	 * @see mage2pro/core/Payment/view/frontend/web/js/view/payment/mixin.js
+	 * @see mage2pro/core/Payment/view/frontend/web/mixin.js
 	 * @returns {String}
 	 */
 	debugMessage: df.c(function() {
