@@ -6,7 +6,7 @@ define ([
 	,'Dfe_Square/API'
 	,'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
-], function(df, dfc, parent, Square, $, creditCardData) {'use strict'; return parent.extend({
+], function(df, dfc, parent, API, $, creditCardData) {'use strict'; return parent.extend({
 	/**
 	 * 2016-11-09
 	 * The «Square» payment form works only if your checkout page is loaded over HTTPS:
