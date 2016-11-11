@@ -1,5 +1,5 @@
 // 2016-09-28
-define ([
+define([
 	'df'
 	,'Df_Checkout/js/data'
 	,'Df_Payment/card'
@@ -122,7 +122,7 @@ define ([
 	getCardTypes: function() {return ['VI', 'MC', 'AE', 'JCB', 'DI', 'DN', 'CUN'];},
 	/**
 	 * 2016-09-28
-	 * @return {Object}
+	 * @returns {Object}
 	*/
 	initialize: function() {
 		this._super();
@@ -155,7 +155,7 @@ define ([
 	},
 	/**
 	 * 2016-09-28
-	 * @return {Object}
+	 * @returns {Object}
 	*/
 	initObservable: function() {
 		this._super();
