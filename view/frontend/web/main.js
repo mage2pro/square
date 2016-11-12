@@ -48,7 +48,7 @@ define([
 		var _this = this;
 		//var postalCode = dfc.postalCode();
 		this.square = new SqPaymentForm({
-			applicationId: this.config('applicationID'),
+			applicationId: this.config('publicKey'),
 			cardNumber: {elementId: this.dfCardNumberId(),},
 			cvv: {elementId: this.dfCardVerificationId(),},
 			expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'},
@@ -169,7 +169,5 @@ define([
 	 * @used-by https://github.com/magento/magento2/blob/2.1.0/lib/web/knockoutjs/knockout.js#L3863
 	 * @param {this} _this
 	*/
-	placeOrder: function(_this) {
-		this.square.requestCardNonce();
-	}
+	placeOrder: function(_this) {this.square.requestCardNonce();}
 });});

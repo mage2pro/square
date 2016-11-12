@@ -7,5 +7,5 @@ class Live extends \Dfe\Square\Source\Location {
 	 * @override
 	 * @return string
 	 */
-	protected function token() {return S::s()->liveAccessToken();}
+	protected function token() {return S::s()->v('liveAccessToken');}
 }
