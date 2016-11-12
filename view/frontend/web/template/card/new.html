@@ -37,7 +37,6 @@
 				data-bind="
 					attr: {
 						autocomplete: off,
-						data: df.card.number,
 						'data-container': getCode() + '-cc-number',
 						'data-validate': JSON.stringify({
 							'required-number': true
@@ -88,8 +87,7 @@
 				class="input-text cvv"
 				data-bind="
 					attr: {
-						data: df.card.verification
-						,'data-container': getCode() + '-cc-cvv'
+						'data-container': getCode() + '-cc-cvv'
 						,'data-validate': JSON.stringify({
 							'required-number':true
 							,'validate-cc-cvn':'#' + fid('cc_type')

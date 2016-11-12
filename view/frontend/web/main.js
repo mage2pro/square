@@ -155,6 +155,8 @@ define([
 	},
 	/**
 	 * 2016-09-28
+	 * @override
+	 * @see mage2pro/core/Payment/view/frontend/web/card.js
 	 * @returns {Object}
 	*/
 	initObservable: function() {
