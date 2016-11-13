@@ -12,15 +12,6 @@ use SquareConnect\Model\Transaction as SquareTransaction;
 /** @method Settings s() */
 class Method extends \Df\Payment\Method {
 	/**
-	 * 2016-10-06
-	 * @override
-	 * @see \Df\Payment\Method::amountFormat()
-	 * @param float $amount
-	 * @return int
-	 */
-	public function amountFormat($amount) {return ceil($amount * 100);}
-
-	/**
 	 * 2016-09-30
 	 * @override
 	 * @see \Df\Payment\Method::charge()
