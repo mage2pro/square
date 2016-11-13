@@ -65,7 +65,7 @@ class Method extends \Df\Payment\Method {
 	 * «We can't void the payment right now» надо вернуть объект именно класса
 	 * @uses \Magento\Framework\Exception\LocalizedException
 	 * https://mage2.pro/t/945
-	 * https://github.com/magento/magento2/blob/8fd3e8/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Sales/Controller/Adminhtml/Order/VoidPayment.php#L20-L30
 	 * @param array(callable|array(string => mixed)) ... $args
 	 * @return mixed
 	 * @throws DFE|Exception|LE
