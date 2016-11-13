@@ -1,0 +1,26 @@
+<?xml version='1.0'?>
+<config
+	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
+	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
+>
+	<virtualType name='Dfe\Square\Enabler' type='Df\Framework\Form\Element\Enabler'>
+		<arguments>
+			<argument name='requirements' xsi:type='array'>
+				<item xsi:type='object' name='currency'>Dfe\Square\Enable\Requirement\Currency</item>
+			</argument>
+		</arguments>
+	</virtualType>
+	<virtualType
+		name='Dfe\Square\Enable\Requirement\Currency'
+		type='Df\Framework\Form\Element\Enable\Requirement\Currency'
+	>
+		<arguments>
+<!--
+2016-11-13
+Square на сегодняшний день поддерживает 2 валюты: USD и CAD.
+https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-the-smallest-denomination-of-a/m-p/20372#M11
+-->
+			<argument name='iso3' xsi:type='string'>USD,CAD</argument>
+		</arguments>
+	</virtualType>
+</config>

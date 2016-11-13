@@ -7,7 +7,12 @@
 		<df_payment>
 			<square>
 				<askForBillingAddress>1</askForBillingAddress>
-				<currency>order</currency>
+<!--
+2016-11-13
+Square на сегодняшний день поддерживает 2 валюты: USD и CAD.
+https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-the-smallest-denomination-of-a/m-p/20372#M11
+-->
+				<currency>USD</currency>
 				<payment_action>authorize_capture</payment_action>
 				<title>Bank Card</title>
 				<title_backend>Square</title_backend>
