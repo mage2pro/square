@@ -9,16 +9,10 @@ class Info extends \Df\Payment\Block\Info {
 	/**
 	 * 2016-10-06
 	 * @override
-	 * @see \Magento\Payment\Block\ConfigurableInfo::_prepareSpecificInformation()
-	 * @used-by \Magento\Payment\Block\Info::getSpecificInformation()
-	 * @param DataObject|null $transport
-	 * @return DataObject
+	 * @see \Df\Payment\Block\Info::prepare()
+	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
 	 */
-	protected function _prepareSpecificInformation($transport = null) {
-		/** @var DataObject $result */
-		$result = parent::_prepareSpecificInformation($transport);
-		$result['Card'] = df_cc_s($this->ii()->getCcType(), '****' . $this->ii()->getCcLast4());
-		$this->markTestMode($result);
-		return $result;
+	protected function prepare() {
+		$this->si('Card', df_cc_s($this->ii()->getCcType(), '****' . $this->ii()->getCcLast4()));
 	}
 }
