@@ -7,5 +7,5 @@ class Test extends \Dfe\Square\Source\Location {
 	 * @override
 	 * @return string
 	 */
-	protected function token() {return S::s()->v('testAccessToken');}
+	protected function token() {return S::s()->p('testAccessToken');}
 }
