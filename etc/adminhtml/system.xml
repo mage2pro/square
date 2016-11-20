@@ -55,6 +55,7 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 					<label>Title</label>
 					<comment><![CDATA[It is shown on the checkout screen.]]></comment>
 					<depends><field id='enable'>1</field></depends>
+					<validate>required-entry</validate>
 				</field>
 				<field
 					id='test'
