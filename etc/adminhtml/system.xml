@@ -40,7 +40,7 @@
 Square на сегодняшний день поддерживает 2 валюты: USD и CAD.
 https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-the-smallest-denomination-of-a/m-p/20372#M11
 -->
-					<dfValidator>Dfe\Square\Validator\Enable</dfValidator>
+					<dfValidator>Dfe\Square\Validator\Currency</dfValidator>
                     <comment><![CDATA[Enable the «<a href='https://mage2.pro/c/extensions/square' target='_blank'>Square</a>» payment extension?]]></comment>
                 </field>
 				<field
