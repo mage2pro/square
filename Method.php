@@ -12,6 +12,18 @@ use SquareConnect\Model\Transaction as SquareTransaction;
 /** @method Settings s() */
 class Method extends \Df\Payment\Method {
 	/**
+	 * 2016-12-22
+	 * https://code.dmitry-fedyuk.com/m2e/square/issues/6
+	 * https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-What-are-the-minimum-and-maximum-limits-for/m-p/26939#M346
+	 * https://mage2.pro/t/2411
+	 * @override
+	 * @see \Df\Payment\Method::amountLimits()
+	 * @used-by isAvailable()
+	 * @return array(string => array(int|float))
+	 */
+	protected function amountLimits() {return ['USD' => [1, null], 'CAD' => [1, null]];}
+
+	/**
 	 * 2016-09-30
 	 * @override
 	 * @see \Df\Payment\Method::charge()
