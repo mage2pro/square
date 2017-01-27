@@ -1,7 +1,7 @@
 {
 	"name": "mage2pro/square"
 	,"version": "1.0.14"
-	,"description": "«Square» Magento 2 payment extension."
+	,"description": "The «Square» payment extension for Magento 2."
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro/c/extensions/square"
 	,"license": "proprietary"
