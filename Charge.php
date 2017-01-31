@@ -1,7 +1,7 @@
 <?php
 // 2016-10-06
 namespace Dfe\Square;
-class Charge extends \Df\Payment\Charge\WithToken {
+final class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2016-10-06
 	 * https://docs.connect.squareup.com/articles/processing-payment-php/#chargingcardnonce
