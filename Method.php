@@ -10,7 +10,7 @@ use SquareConnect\Model\ChargeResponse;
 use SquareConnect\Model\Tender;
 use SquareConnect\Model\Transaction as SquareTransaction;
 /** @method Settings s() */
-class Method extends \Df\Payment\Method {
+final class Method extends \Df\Payment\Method {
 	/**
 	 * 2016-12-22
 	 * https://code.dmitry-fedyuk.com/m2e/square/issues/6
