@@ -14,15 +14,19 @@
 	,"require": {"mage2pro/core": "^1.12.3", "mage2pro/square-php-sdk": "^2.0.2"}
 	,"autoload": {"files": ["registration.php"], "psr-4": {"Dfe\\Square\\": ""}}
 	,"keywords": [
-		"api"
-		,"bank card"
-		,"canada"
-		,"ecommerce"
-		,"magento"
-		,"magento 2"
-		,"magento extension"
-		,"payment"
-		,"square"
-		,"usa"
+		"API"
+		,"Bank card"
+		,"Canada"
+		,"Credit card"
+		,"eCommerce"
+		,"Magento"
+		,"Magento 2"
+		,"Magento extension"
+		,"Payment"
+		,"Payment authorization"
+		,"Payment integration"
+		,"Payment gateway"
+		,"Square"
+		,"USA"
 	]
 }
