@@ -1,8 +1,12 @@
 <?php
-// 2016-10-06
 namespace Dfe\Square\Source;
 use SquareConnect\Api\LocationApi as API;
 use SquareConnect\ApiException;
+/**
+ * 2016-10-06
+ * @see \Dfe\Square\Source\Location\Live
+ * @see \Dfe\Square\Source\Location\Test
+ */
 abstract class Location extends \Df\Config\SourceT {
 	/** @return string */
 	abstract protected function token();
