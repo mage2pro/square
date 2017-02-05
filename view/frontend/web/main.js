@@ -117,6 +117,8 @@ define([
 	},
 	/**
 	 * 2016-09-28
+	 * 2017-02-05
+	 * The bank card network codes: https://mage2.pro/t/2647
 	 * @returns {String[]}
 	 */
 	getCardTypes: function() {return ['VI', 'MC', 'AE', 'JCB', 'DI', 'DN', 'CUN'];},
