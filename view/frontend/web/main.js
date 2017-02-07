@@ -2,7 +2,7 @@
 define([
 	'df'
 	,'Df_Checkout/js/data'
-	,'Df_Payment/card'
+	,'Df_Payment/stripeClone'
 	,'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'https://js.squareup.com/v2/paymentform'
@@ -48,7 +48,7 @@ define([
 		var _this = this;
 		//var postalCode = dfc.postalCode();
 		this.square = new SqPaymentForm({
-			applicationId: this.config('publicKey'),
+			applicationId: this.publicKey(),
 			cardNumber: {elementId: this.dfCardNumberId(),},
 			cvv: {elementId: this.dfCardVerificationId(),},
 			expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'},
