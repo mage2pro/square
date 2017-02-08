@@ -18,7 +18,7 @@ final class Settings extends \Df\StripeClone\Settings {
 
 	/**
 	 * 2016-11-12
-	 * «Mage2.PRO» → «Payment» → «Square» → «Application ID»
+	 * «Application ID»
 	 * @override
 	 * @see \Df\StripeClone\Settings::publicKey()
 	 * @return string
