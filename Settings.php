@@ -8,13 +8,13 @@ final class Settings extends \Df\StripeClone\Settings {
 	 * «Personal Access Token»
 	 * @return string
 	 */
-	public function accessToken() {return $this->testableP();}
+	function accessToken() {return $this->testableP();}
 
 	/**
 	 * 2016-10-06
 	 * @return string
 	 */
-	public function location() {return $this->testable();}
+	function location() {return $this->testable();}
 
 	/**
 	 * 2016-11-12
@@ -23,7 +23,7 @@ final class Settings extends \Df\StripeClone\Settings {
 	 * @see \Df\StripeClone\Settings::publicKey()
 	 * @return string
 	 */
-	public function publicKey() {return $this->testable('applicationID');}
+	function publicKey() {return $this->testable('applicationID');}
 }
 
 

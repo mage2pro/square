@@ -12,5 +12,5 @@ class Index extends \Magento\Framework\App\Action\Action {
 	 * @see \Magento\Framework\App\Action\Action::execute()
 	 * @return Json
 	 */
-	public function execute() {return Json::i('OK');}
+	function execute() {return Json::i('OK');}
 }

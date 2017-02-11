@@ -11,7 +11,7 @@ final class Exception extends \Df\Payment\Exception {
 	 * @param ApiException $prev
 	 * @param array(string => mixed) $request [optional]
 	 */
-	public function __construct(ApiException $prev, array $request = []) {
+	function __construct(ApiException $prev, array $request = []) {
 		$this->_request = $request;
 		parent::__construct($prev);
 	}
@@ -22,7 +22,7 @@ final class Exception extends \Df\Payment\Exception {
 	 * @see \Df\Core\Exception::message()
 	 * @return string
 	 */
-	public function message() {return df_cc_n(
+	function message() {return df_cc_n(
 		'The Square request is failed.'
 		,$this->prev()->getMessage()
 		,!$this->_request ? null : ['Request:', df_json_encode_pretty($this->_request)]
@@ -34,7 +34,7 @@ final class Exception extends \Df\Payment\Exception {
 	 * @see \Df\Core\Exception::messageC()
 	 * @return string
 	 */
-	public function messageC() {return dfp_error_message($this->prev()->getMessage());}
+	function messageC() {return dfp_error_message($this->prev()->getMessage());}
 
 	/**
 	 * 2016-10-06
