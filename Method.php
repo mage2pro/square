@@ -21,7 +21,7 @@ final class Method extends \Df\Payment\Method {
 	 * @used-by isAvailable()
 	 * @return array(string => array(int|float))
 	 */
-	protected function amountLimits() {return ['USD' => [1, null], 'CAD' => [1, null]];}
+	protected function amountLimits() {return ['USD' => [1, 50000], 'CAD' => [1, 50000]];}
 
 	/**
 	 * 2016-09-30
