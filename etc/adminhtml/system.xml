@@ -115,7 +115,7 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 					showInStore='1'
 				>
 					<label>Sandbox Location</label>
-					<source_model>Dfe\Square\Source\Location\Test</source_model>
+					<source_model>Dfe\Square\Source\Location</source_model>
 					<comment><![CDATA[]]></comment>
 					<depends>
 						<field id='enable'>1</field>
@@ -176,7 +176,7 @@ https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfields
 					showInStore='1'
 				>
 					<label>Live Location</label>
-					<source_model>Dfe\Square\Source\Location\Live</source_model>
+					<source_model>Dfe\Square\Source\Location</source_model>
 					<comment><![CDATA[]]></comment>
 					<depends>
 						<field id='enable'>1</field>

@@ -1,15 +1,10 @@
 <?php
 namespace Dfe\Square\Source;
+use Dfe\Square\Settings as S;
 use SquareConnect\Api\LocationApi as API;
 use SquareConnect\ApiException;
-/**
- * 2016-10-06
- * @see \Dfe\Square\Source\Location\Live
- * @see \Dfe\Square\Source\Location\Test
- */
-abstract class Location extends \Df\Config\SourceT {
-	/** @return string */
-	abstract protected function token();
+// 2016-10-06
+final class Location extends \Df\Config\SourceT {
 	/**
 	 * 2016-10-06
 	 * https://docs.connect.squareup.com/articles/processing-payment-php/#retrievinglocationids
@@ -21,12 +16,10 @@ abstract class Location extends \Df\Config\SourceT {
 	protected function map() {
 		/** @var array(string => string) $result */
 		$result = [0 => 'Specify an Access Token first, and then save the settings.'];
-		if ($this->token()) {
+		/** @var string $token */
+		if ($token = S::s()->p(($this->test() ? 'test' : 'live') . 'AccessToken')) {
 			try {
-				$result = df_column(
-					(new API)->listLocations($this->token())->getLocations()
-					,'getName', 'getId'
-				);
+				$result = df_column((new API)->listLocations($token)->getLocations(), 'getName', 'getId');
 			}
 			/**
 			 * 2016-10-06
@@ -42,4 +35,12 @@ abstract class Location extends \Df\Config\SourceT {
 		}
 		return $result;
 	}
+
+	/**
+	 * 2017-02-16
+	 * @return bool
+	 */
+	private function test() {return dfc($this, function($path) {return
+		df_starts_with(df_last(df_explode_path($path)), 'test')
+	;}, [$this['path']]);}
 }
