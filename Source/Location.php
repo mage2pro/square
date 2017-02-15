@@ -3,35 +3,49 @@ namespace Dfe\Square\Source;
 use SquareConnect\Api\LocationApi as API;
 use SquareConnect\ApiException;
 // 2016-10-06
-final class Location extends \Df\Config\Source\Testable {
+final class Location extends \Df\Config\Source\Testable\Api {
 	/**
-	 * 2016-10-06
-	 * https://docs.connect.squareup.com/articles/processing-payment-php/#retrievinglocationids
+	 * 2017-02-15
 	 * @override
-	 * @see \Df\Config\Source::map()
-	 * @used-by \Df\Config\Source::toOptionArray()
+	 * @see \Df\Config\Source\Testable\Api::apiKeyName()
+	 * @used-by \Df\Config\Source\Testable\Api::map()
+	 * @return string
+	 */
+	protected function apiKeyName() {return 'AccessToken';}
+
+	/**
+	 * 2017-02-15
+	 * @override
+	 * @see \Df\Config\Source\Testable\Api::apiKeyTitle()
+	 * @used-by \Df\Config\Source\Testable\Api::map()
+	 * @return string
+	 */
+	protected function apiKeyTitle() {return 'an Access Token';}
+
+	/**
+	 * 2017-02-15
+	 * @override
+	 * @see \Df\Config\Source\Testable\Api::exception()
+	 * @used-by \Df\Config\Source\Testable\Api::map()
+	 * @param \Exception|ApiException $e
 	 * @return array(string => string)
 	 */
-	protected function map() {
-		/** @var array(string => string) $result */
-		$result = [0 => 'Specify an Access Token first, and then save the settings.'];
-		/** @var string $token */
-		if ($token = $this->ss()->p($this->tkey('AccessToken'))) {
-			try {
-				$result = df_column((new API)->listLocations($token)->getLocations(), 'getName', 'getId');
-			}
-			/**
-			 * 2016-10-06
-			 * Я работал с неактивированной учётной записью Square,
-			 * и в промышленном режиме у меня этот запрос вызывал исключительную ситуацию:
-			 * [HTTP/1.1 403 Forbidden] {"errors":[{"category":"AUTHENTICATION_ERROR","code":"FORBIDDEN","detail":"You have insufficient permissions to perform that action."}]}
-			 */
-			catch (ApiException $e) {
-				/** @var object $error */
-				$error = df_first(dfo($e->getResponseBody(), 'errors'));
-				return [dfo($error, 'code') => dfo($error, 'detail')];
-			}
-		}
-		return $result;
+	protected function exception(\Exception $e) {
+		/** @var object $error */
+		$error = df_first(dfo($e->getResponseBody(), 'errors'));
+		return [dfo($error, 'code') => dfo($error, 'detail')];
 	}
+
+	/**
+	 * 2017-02-15
+	 * https://docs.connect.squareup.com/articles/processing-payment-php/#retrievinglocationids
+	 * @override
+	 * @see \Df\Config\Source\Testable\Api::fetch()
+	 * @used-by \Df\Config\Source\Testable\Api::map()
+	 * @param string $token
+	 * @return array(string => string)
+	 */
+	protected function fetch($token) {return df_column(
+		(new API)->listLocations($token)->getLocations(), 'getName', 'getId'
+	);}
 }
