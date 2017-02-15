@@ -6,7 +6,7 @@
     <default>
 		<df_payment>
 			<square>
-				<askForBillingAddress>1</askForBillingAddress>
+				<requireBillingAddress>1</requireBillingAddress>
 <!--
 2016-11-13
 Square на сегодняшний день поддерживает 2 валюты: USD и CAD.
