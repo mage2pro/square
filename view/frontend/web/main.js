@@ -2,7 +2,7 @@
 define([
 	'df'
 	,'Df_Checkout/js/data'
-	,'Df_Payment/stripeClone'
+	,'Df_StripeClone/main'
 	,'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'https://js.squareup.com/v2/paymentform'
