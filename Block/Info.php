@@ -1,10 +1,12 @@
 <?php
-// 2016-10-06
 namespace Dfe\Square\Block;
 use Dfe\Square\Method;
-use Magento\Framework\DataObject;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-/** @method Method m() */
+/**
+ * 2016-10-06
+ * @final
+ * @method Method m()
+ */
 class Info extends \Df\Payment\Block\Info {
 	/**
 	 * 2016-10-06
