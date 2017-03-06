@@ -3,6 +3,10 @@
 namespace Dfe\Square;
 use Df\Core\Exception as DFE;
 use Magento\Framework\Exception\LocalizedException as LE;
+use Magento\Payment\Model\Info as I;
+use Magento\Payment\Model\InfoInterface as II;
+use Magento\Quote\Model\Quote\Payment as QP;
+use Magento\Sales\Model\Order\Payment as OP;
 use SquareConnect\Api\TransactionApi as API;
 use SquareConnect\ApiException;
 use SquareConnect\Model\Card;
@@ -32,18 +36,20 @@ final class Method extends \Df\Payment\Method {
 	 * @return void
 	 */
 	protected function charge($amount, $capture = true) {
-		/** @var array(string => mixed) $params */
-		$params = Charge::request($this, $this->iia(self::$TOKEN), $amount);
+		/** @var array(string => mixed) $p */
+		$p = Charge::p($this, $this->iia(self::$TOKEN), $amount);
+		/** @var II|I|OP|QP $ii */
+		$ii = $this->ii();
 		/** @var ChargeResponse $response */
-		$response = $this->api($params, function() use($params) {
+		$response = $this->api($p, function() use($p) {
 			/** @var Settings $s */
 			$s = $this->s();
 			/** @noinspection PhpParamsInspection */
-			return (new API)->charge($s->accessToken(), $s->location(), $params);
+			return (new API)->charge($s->accessToken(), $s->location(), $p);
 		});
 		/** @var SquareTransaction $transaction */
 		$transaction = $response->getTransaction();
-		$this->ii()->setTransactionId($transaction->getId());
+		$ii->setTransactionId($transaction->getId());
 		/**
 		 * 2016-03-15
 		 * Если оставить открытой транзакцию «capture»,
@@ -72,13 +78,13 @@ final class Method extends \Df\Payment\Method {
 		 * «How does Magento 2 decide whether to show the «Capture Online» dropdown
 		 * on a backend's invoice screen?»: https://mage2.pro/t/2475
 		 */
-		$this->ii()->setIsTransactionClosed($capture);
+		$ii->setIsTransactionClosed($capture);
 		/** @var Tender $tender */
 		$tender = df_first($transaction->getTenders());
 		/** @var Card $card */
 		$card = $tender->getCardDetails()->getCard();
-		$this->ii()->setCcLast4($card->getLast4());
-		$this->ii()->setCcType($card->getCardBrand());
+		$ii->setCcLast4($card->getLast4());
+		$ii->setCcType($card->getCardBrand());
 	}
 
 	/**

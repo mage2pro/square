@@ -4,10 +4,11 @@ namespace Dfe\Square;
 final class Charge extends \Df\Payment\Charge\WithToken {
 	/**
 	 * 2016-10-06
+	 * @used-by p()
 	 * https://docs.connect.squareup.com/articles/processing-payment-php/#chargingcardnonce
 	 * @return array(string => mixed)
 	 */
-	private function _request() {return [
+	private function pCharge() {return [
 		'amount_money' => ['amount' => $this->amountF(), 'currency' => $this->currencyC()]
 		,'card_nonce' => $this->token()
 		,'idempotency_key' => uniqid()
@@ -21,9 +22,7 @@ final class Charge extends \Df\Payment\Charge\WithToken {
 	 * @param float|null $amount [optional]
 	 * @return array(string => mixed)
 	 */
-	static function request(Method $method, $token, $amount = null) {return (new self([
-		self::$P__AMOUNT => $amount
-		,self::$P__METHOD => $method
-		,self::$P__TOKEN => $token
-	]))->_request();}
+	static function p(Method $method, $token, $amount = null) {return (new self([
+		self::$P__AMOUNT => $amount, self::$P__METHOD => $method, self::$P__TOKEN => $token
+	]))->pCharge();}
 }
