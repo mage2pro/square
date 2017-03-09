@@ -1,7 +1,7 @@
 <?php
 namespace Dfe\Square\Block;
 // 2016-10-06
-/** @final Unable to use the PHP «final» keyword because of the M2 code generation. */
+/** @final Unable to use the PHP «final» keyword here because of the M2 code generation. */
 class Info extends \Df\Payment\Block\Info {
 	/**
 	 * 2016-10-06
