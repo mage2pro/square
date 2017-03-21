@@ -62,16 +62,16 @@ final class Method extends \Df\Payment\Method {
 		 * Наоборот: если закрыть транзакцию типа «authorize»,
 		 * то операция «Capture Online» из административного интерфейса будет недоступна:
 		 * @see \Magento\Sales\Model\Order\Payment::canCapture()
-				if ($authTransaction && $authTransaction->getIsClosed()) {
-					$orderTransaction = $this->transactionRepository->getByTransactionType(
-						Transaction::TYPE_ORDER,
-						$this->getId(),
-						$this->getOrder()->getId()
-					);
-					if (!$orderTransaction) {
-						return false;
-					}
-				}
+		 *		if ($authTransaction && $authTransaction->getIsClosed()) {
+		 *			$orderTransaction = $this->transactionRepository->getByTransactionType(
+		 *				Transaction::TYPE_ORDER,
+		 *				$this->getId(),
+		 *				$this->getOrder()->getId()
+		 *			);
+		 *			if (!$orderTransaction) {
+		 *				return false;
+		 *			}
+		 *		}
 		 * https://github.com/magento/magento2/blob/2.1.3/app/code/Magento/Sales/Model/Order/Payment.php#L263-L281
 		 * «How is \Magento\Sales\Model\Order\Payment::canCapture() implemented and used?»
 		 * https://mage2.pro/t/650
