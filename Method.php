@@ -33,7 +33,6 @@ final class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::charge()
 	 * @param float $amount
 	 * @param bool|null $capture [optional]
-	 * @return void
 	 */
 	protected function charge($amount, $capture = true) {
 		/** @var array(string => mixed) $p */
