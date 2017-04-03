@@ -124,6 +124,9 @@ define([
 	getCardTypes: function() {return ['VI', 'MC', 'AE', 'JCB', 'DI', 'DN', 'CUN'];},
 	/**
 	 * 2016-09-28
+	 * @override
+	 * @see Df_Payment/card::initialize()
+	 * https://github.com/mage2pro/core/blob/2.4.21/Payment/view/frontend/web/card.js#L77-L110
 	 * @returns {Object}
 	*/
 	initialize: function() {
@@ -143,16 +146,14 @@ define([
 			// https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Payment/Model/Config.php#L141-L158
 			creditCardData.expirationMonth = parseInt($.trim(a[0]));
 		});
-		/**
-		 * 	2016-09-30
-		 * 	Unlike all the other payment services,
-		 * 	Square does not allow to populate the payment form fields programmatically,
-		 * 	so the Magento 2 Swuare extension does not contain
-		 * 	the standard «Prefill the Payment Form with Test Data?» option,
-		 * 	and you should to fill the payment form manually each time.
-		 * 	https://mage2.pro/t/2097
-		 * 	https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfieldsprogrammatically
-		 */
+		// 2016-09-30
+		// Unlike all the other payment services,
+		// Square does not allow to populate the payment form fields programmatically,
+		// so the Magento 2 Swuare extension does not contain
+		// the standard «Prefill the Payment Form with Test Data?» option,
+		// and you should to fill the payment form manually each time.
+		// https://mage2.pro/t/2097
+		// https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfieldsprogrammatically
 		return this;
 	},
 	/**
