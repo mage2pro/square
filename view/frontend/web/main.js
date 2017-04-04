@@ -1,9 +1,6 @@
 // 2016-09-28
 define([
-	'df'
-	,'Df_Checkout/js/data'
-	,'Df_StripeClone/main'
-	,'jquery'
+	'df', 'Df_Checkout/data', 'Df_StripeClone/main', 'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'https://js.squareup.com/v2/paymentform'
 ], function(df, dfc, parent, $, creditCardData) {'use strict'; return parent.extend({
