@@ -1,7 +1,8 @@
 <?php
 // 2016-10-06
 namespace Dfe\Square;
-final class Charge extends \Df\Payment\Charge\WithToken {
+use Df\Payment\Token;
+final class Charge extends \Df\Payment\Charge {
 	/**
 	 * 2016-10-06
 	 * @used-by p()
@@ -10,7 +11,7 @@ final class Charge extends \Df\Payment\Charge\WithToken {
 	 */
 	private function pCharge() {return [
 		'amount_money' => ['amount' => $this->amountF(), 'currency' => $this->currencyC()]
-		,'card_nonce' => $this->token()
+		,'card_nonce' => Token::get($this->op())
 		,'idempotency_key' => uniqid()
 	];}
 
@@ -18,9 +19,8 @@ final class Charge extends \Df\Payment\Charge\WithToken {
 	 * 2016-10-06
 	 * @used-by \Dfe\Square\Method::charge()
 	 * @param Method $m
-	 * @param string $token
 	 * @param float $amount [optional]
 	 * @return array(string => mixed)
 	 */
-	static function p(Method $m, $token, $amount) {return (new self($m, $token, $amount))->pCharge();}
+	static function p(Method $m, $amount) {return (new self($m, $amount))->pCharge();}
 }

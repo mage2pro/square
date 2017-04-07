@@ -2,6 +2,7 @@
 // 2016-09-28
 namespace Dfe\Square;
 use Df\Core\Exception as DFE;
+use Df\Payment\Token;
 use Magento\Framework\Exception\LocalizedException as LE;
 use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
@@ -38,7 +39,7 @@ final class Method extends \Df\Payment\Method {
 	 */
 	protected function charge($amount, $capture = true) {
 		/** @var array(string => mixed) $p */
-		$p = Charge::p($this, $this->iia(self::$TOKEN), $amount);
+		$p = Charge::p($this, $amount);
 		/** @var II|I|OP|QP $ii */
 		$ii = $this->ii();
 		/** @var ChargeResponse $response */
@@ -95,7 +96,7 @@ final class Method extends \Df\Payment\Method {
 	 * @used-by \Df\Payment\Method::assignData()
 	 * @return string[]
 	 */
-	protected function iiaKeys() {return [self::$TOKEN];}
+	protected function iiaKeys() {return [Token::KEY];}
 
 	/**
 	 * 2016-10-06
@@ -118,10 +119,4 @@ final class Method extends \Df\Payment\Method {
 		catch (ApiException $e) {throw new Exception($e, $request);}
 		catch (\Exception $e) {throw df_le($e);}
 	}
-
-	/**
-	 * 2016-09-28
-	 * @var string
-	 */
-	private static $TOKEN = 'token';
 }
