@@ -1,6 +1,7 @@
 <?php
 // 2016-10-06
 namespace Dfe\Square;
+use Df\Payment\Operation\Source\Order as OpSource;
 use Df\Payment\Token;
 final class Charge extends \Df\Payment\Charge {
 	/**
@@ -22,5 +23,5 @@ final class Charge extends \Df\Payment\Charge {
 	 * @param float $amount [optional]
 	 * @return array(string => mixed)
 	 */
-	static function p(Method $m, $amount) {return (new self($m, $amount))->pCharge();}
+	static function p(Method $m, $amount) {return (new self(new OpSource($m, $amount)))->pCharge();}
 }
