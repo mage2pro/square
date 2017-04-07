@@ -19,8 +19,8 @@ final class Charge extends \Df\Payment\Charge\WithToken {
 	 * @used-by \Dfe\Square\Method::charge()
 	 * @param Method $m
 	 * @param string $token
-	 * @param float|null $amount [optional]
+	 * @param float $amount [optional]
 	 * @return array(string => mixed)
 	 */
-	static function p(Method $m, $token, $amount = null) {return (new self($m, $token, $amount))->pCharge();}
+	static function p(Method $m, $token, $amount) {return (new self($m, $token, $amount))->pCharge();}
 }
