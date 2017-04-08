@@ -11,7 +11,7 @@ final class Charge extends \Df\Payment\Charge {
 	 */
 	private function pCharge() {return [
 		'amount_money' => ['amount' => $this->amountF(), 'currency' => $this->currencyC()]
-		,'card_nonce' => Token::get($this->op())
+		,'card_nonce' => Token::get($this->ii())
 		,'idempotency_key' => uniqid()
 	];}
 
