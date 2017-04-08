@@ -34,12 +34,11 @@ final class Method extends \Df\Payment\Method {
 	 * @see \Df\Payment\Method::charge()
 	 * @used-by \Df\Payment\Method::authorize()
 	 * @used-by \Df\Payment\Method::capture()
-	 * @param float $amount
 	 * @param bool|null $capture [optional]
 	 */
-	protected function charge($amount, $capture = true) {
+	protected function charge($capture = true) {
 		/** @var array(string => mixed) $p */
-		$p = Charge::p($this, $amount);
+		$p = Charge::p($this);
 		/** @var II|I|OP|QP $ii */
 		$ii = $this->ii();
 		/** @var ChargeResponse $response */

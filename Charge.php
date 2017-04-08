@@ -20,8 +20,7 @@ final class Charge extends \Df\Payment\Charge {
 	 * 2016-10-06
 	 * @used-by \Dfe\Square\Method::charge()
 	 * @param Method $m
-	 * @param float $amount [optional]
 	 * @return array(string => mixed)
 	 */
-	static function p(Method $m, $amount) {return (new self(new OpSource($m, $amount)))->pCharge();}
+	static function p(Method $m) {return (new self(new OpSource($m)))->pCharge();}
 }
