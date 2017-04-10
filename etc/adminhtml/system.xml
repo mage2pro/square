@@ -22,8 +22,8 @@
 				showInStore='1'
 			>
 				<label>Square</label>
-				<dfExtension>Dfe\Square\Ext</dfExtension>
-				<frontend_model>Df\Config\Block\System\Config\Form\Fieldset\Ext</frontend_model>
+				<dfExtension>Dfe_Square</dfExtension>
+				<frontend_model>Df\Config\Fieldset</frontend_model>
 				<field
 					id='enable'
 					translate='label'
