@@ -13,7 +13,7 @@ define([
 	 * @returns {String}
 	 */
 	debugMessage: df.c(function() {
-		return 'https:' === window.location.protocol ? '' : '<span class="df-error">The payment form must be generated on a webpage that uses <b>HTTPS</b>, with one exception: you can test on <b>localhost</b> without using HTTPS: <a href="https://mage2.pro/t/topic/2259" target="_blank" title="Mage2.PRO support forum">https://mage2.pro/t/topic/2259</a></span>'
+		return 'https:' === window.location.protocol ? '' : '<span class="df-error">The payment form must be generated on a webpage that uses <b>HTTPS</b>, with one exception: you can test on <b>localhost</b> without using HTTPS: <a href="https://mage2.pro/t/2259" target="_blank" title="Mage2.PRO support forum">https://mage2.pro/t/2259</a></span>'
 		;
 	}),
 	defaults: {
