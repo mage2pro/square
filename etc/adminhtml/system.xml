@@ -15,7 +15,6 @@
 			<group
 				id='square'
 				translate='label'
-				type='text'
 				sortOrder='1917'
 				showInDefault='1'
 				showInWebsite='1'
