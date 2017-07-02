@@ -3,21 +3,21 @@ namespace Dfe\Square\Source;
 use SquareConnect\Api\LocationApi as API;
 use SquareConnect\ApiException;
 // 2016-10-06
-final class Location extends \Df\Payment\Source\Testable\Api {
+final class Location extends \Df\Payment\Source\API\Key\Testable {
 	/**
 	 * 2017-02-15
 	 * @override
-	 * @see \Df\Payment\Source\Testable\Api::apiKeyName()
-	 * @used-by \Df\Payment\Source\Testable\Api::map()
+	 * @see \Df\Config\Source\API\Key::apiKeyName()
+	 * @used-by \Df\Config\Source\API\Key::apiKey()
 	 * @return string
 	 */
-	protected function apiKeyName() {return 'AccessToken';}
+	protected function apiKeyName() {return $this->tkey('AccessToken');}
 
 	/**
 	 * 2017-02-15
 	 * @override
-	 * @see \Df\Payment\Source\Testable\Api::apiKeyTitle()
-	 * @used-by \Df\Payment\Source\Testable\Api::map()
+	 * @see \Df\Config\Source\API\Key::apiKeyTitle()
+	 * @used-by \Df\Config\Source\API\Key::requirementTitle()
 	 * @return string
 	 */
 	protected function apiKeyTitle() {return 'an Access Token';}
@@ -25,8 +25,8 @@ final class Location extends \Df\Payment\Source\Testable\Api {
 	/**
 	 * 2017-02-15
 	 * @override
-	 * @see \Df\Payment\Source\Testable\Api::exception()
-	 * @used-by \Df\Payment\Source\Testable\Api::map()
+	 * @see \Df\Config\Source\API::exception()
+	 * @used-by \Df\Config\Source\API::map()
 	 * @param \Exception|ApiException $e
 	 * @return array(string => string)
 	 */
@@ -40,12 +40,11 @@ final class Location extends \Df\Payment\Source\Testable\Api {
 	 * 2017-02-15
 	 * https://docs.connect.squareup.com/articles/processing-payment-php/#retrievinglocationids
 	 * @override
-	 * @see \Df\Payment\Source\Testable\Api::fetch()
-	 * @used-by \Df\Payment\Source\Testable\Api::map()
-	 * @param string $token
+	 * @see \Df\Config\Source\API::fetch()
+	 * @used-by \Df\Config\Source\API::map()
 	 * @return array(string => string)
 	 */
-	protected function fetch($token) {return df_column(
-		(new API)->listLocations($token)->getLocations(), 'getName', 'getId'
+	protected function fetch() {return df_column(
+		(new API)->listLocations($this->apiKey())->getLocations(), 'getName', 'getId'
 	);}
 }
