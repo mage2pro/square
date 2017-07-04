@@ -14,23 +14,19 @@
 -->
 			<group
 				id='square'
-				translate='label'
+				showInDefault='1' showInStore='1' showInWebsite='1'
 				sortOrder='1917'
-				showInDefault='1'
-				showInWebsite='1'
-				showInStore='1'
+				translate='label'
 			>
 				<label>Square</label>
 				<dfExtension>Dfe_Square</dfExtension>
 				<frontend_model>Df\Config\Fieldset</frontend_model>
 				<field
 					id='enable'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='1'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='1'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Enable?</label>
 					<backend_model>Df\Config\Backend\Checkbox</backend_model>
@@ -44,12 +40,10 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='title'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='2'
 					translate='label'
 					type='text'
-					sortOrder='2'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Title</label>
 					<comment><![CDATA[It is shown on the checkout screen.]]></comment>
@@ -58,12 +52,10 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='test'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='3'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='3'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Sandbox Mode?</label>
 					<backend_model>Df\Config\Backend\Checkbox</backend_model>
@@ -72,11 +64,9 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='testApplicationID'
-					translate='label'
+					showInDefault='1' showInStore='1' showInWebsite='1'
 					sortOrder='4'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
+					translate='label'
 				>
 					<label>Sandbox Application ID</label>
 					<validate>required-entry validate-length maximum-length-37 minimum-length-37</validate>
@@ -88,12 +78,10 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='testAccessToken'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='5'
 					translate='label'
 					type='obscure'
-					sortOrder='5'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Sandbox Access Token</label>
 					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
@@ -106,12 +94,10 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='testLocation'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='6'
 					translate='label'
 					type='select'
-					sortOrder='6'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Sandbox Location</label>
 					<source_model>Dfe\Square\Source\Location</source_model>
@@ -133,11 +119,9 @@ https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfields
 -->
 				<field
 					id='liveApplicationID'
-					translate='label'
+					showInDefault='1' showInStore='1' showInWebsite='1'
 					sortOrder='6'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
+					translate='label'
 				>
 					<label>Application ID</label>
 					<validate>required-entry validate-length maximum-length-29 minimum-length-29</validate>
@@ -149,12 +133,10 @@ https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfields
 				</field>
 				<field
 					id='liveAccessToken'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='7'
 					translate='label'
 					type='obscure'
-					sortOrder='7'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Personal Access Token</label>
 					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
@@ -167,12 +149,10 @@ https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfields
 				</field>
 				<field
 					id='liveLocation'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='6'
 					translate='label'
 					type='select'
-					sortOrder='6'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Live Location</label>
 					<source_model>Dfe\Square\Source\Location</source_model>
@@ -184,12 +164,10 @@ https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfields
 				</field>
 				<field
 					id='webhook'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='8'
 					translate='label'
 					type='Df\Framework\Form\Element\Webhook'
-					sortOrder='8'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Webhook</label>
 					<comment><![CDATA[<a href='https://mage2.pro/t/2107' target='_blank'>set it in your Square account</a>]]></comment>
@@ -197,12 +175,10 @@ https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfields
 				</field>
 				<field
 					id='webhookSignatureKey'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='9'
 					translate='label'
 					type='obscure'
-					sortOrder='9'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Webhook Signature Key</label>
 					<backend_model>Magento\Config\Model\Config\Backend\Encrypted</backend_model>
@@ -218,26 +194,22 @@ Square на сегодняшний день поддерживает 2 валю�
 https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-the-smallest-denomination-of-a/m-p/20372#M11
 -->
 				<field
+					dfValues='USD,CAD'
 					id='currency'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='10'
 					translate='label'
 					type='Df\Directory\FormElement\Currency'
-					dfValues='USD,CAD'
-					sortOrder='10'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Payment Currency</label>
 					<depends><field id='enable'>1</field></depends>
 				</field>
 				<field
 					id='requireBillingAddress'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='11'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
-					sortOrder='11'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Require the billing address?</label>
 					<backend_model>Df\Config\Backend\Checkbox</backend_model>
@@ -246,12 +218,10 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='min_order_total'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='12'
 					translate='label'
 					type='text'
-					sortOrder='12'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Minimum Order Total</label>
 					<comment><![CDATA[]]></comment>
@@ -260,12 +230,10 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='max_order_total'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='13'
 					translate='label'
 					type='text'
-					sortOrder='13'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Maximum Order Total</label>
 					<comment><![CDATA[]]></comment>
@@ -274,12 +242,10 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='country_restriction'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='14'
 					translate='label'
 					type='select'
-					sortOrder='14'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Country Restriction</label>
 					<source_model>Df\Config\Source\NoWhiteBlack</source_model>
@@ -287,12 +253,10 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				</field>
 				<field
 					id='countries'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='15'
 					translate='label'
 					type='Df\Framework\Form\Element\Multiselect'
-					sortOrder='15'
-					showInDefault='1'
-					showInWebsite='1'
-					showInStore='1'
 				>
 					<label>Countries</label>
 					<source_model>Magento\Directory\Model\Config\Source\Country</source_model>
