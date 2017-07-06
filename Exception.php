@@ -25,7 +25,7 @@ final class Exception extends \Df\Payment\Exception {
 	function message() {return df_cc_n(
 		'The Square request is failed.'
 		,$this->prev()->getMessage()
-		,!$this->_request ? null : ['Request:', df_json_encode_pretty($this->_request)]
+		,!$this->_request ? null : ['Request:', df_json_encode($this->_request)]
 	);}
 
 	/**
