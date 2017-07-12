@@ -160,7 +160,7 @@ define([
 	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/card.js#L141-L157
 	 * @used-by Magento_Ui/js/lib/core/element/element::initialize()
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.3/app/code/Magento/Ui/view/base/web/js/lib/core/element/element.js#L104
-	 * @returns {Object}
+	 * @returns {Element} Chainable
 	*/
 	initObservable: function() {this._super(); this.observe(['expirationComposite']); return this;},
 	/**
