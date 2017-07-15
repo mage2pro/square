@@ -138,10 +138,10 @@ define([
 			}
 			// 2016-09-28
 			// https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Payment/Model/Config.php#L160-L175
-			creditCardData.expirationYear = parseInt(year);
+			creditCardData.expirationYear = df.int(year);
 			// 2016-09-28
 			// https://github.com/magento/magento2/blob/2.1.1/app/code/Magento/Payment/Model/Config.php#L141-L158
-			creditCardData.expirationMonth = parseInt($.trim(a[0]));
+			creditCardData.expirationMonth = df.int($.trim(a[0]));
 		});
 		// 2016-09-30
 		// Unlike all the other payment services,
