@@ -3,14 +3,11 @@
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xsi:noNamespaceSchemaLocation='urn:magento:framework:ObjectManager/etc/config.xsd'
 >
-	<virtualType name='Dfe\Square\Validator\Currency' type='Df\Framework\Validator\Currency'>
-		<arguments>
-<!--
-2016-11-13
-Square на сегодняшний день поддерживает 2 валюты: USD и CAD.
+<!-- 2016-11-13
+Square currently supports only USD and CAD:
 https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-the-smallest-denomination-of-a/m-p/20372#M11
 -->
-			<argument name='iso3' xsi:type='string'>USD,CAD</argument>
-		</arguments>
+	<virtualType name='Dfe\Square\Validator\Currency' type='Df\Framework\Validator\Currency'>
+		<arguments><argument name='iso3' xsi:type='string'>CAD,USD</argument></arguments>
 	</virtualType>
 </config>
