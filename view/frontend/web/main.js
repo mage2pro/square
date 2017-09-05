@@ -3,7 +3,9 @@ define([
 	'df', 'Df_Checkout/data', 'Df_StripeClone/main', 'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'https://js.squareup.com/v2/paymentform'
-], function(df, dfc, parent, $, creditCardData) {'use strict'; return parent.extend({
+], function(df, dfc, parent, $, creditCardData) {'use strict';
+/** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
+return parent.extend({
 	/**
 	 * 2016-11-09
 	 * The «Square» payment form works only if your checkout page is loaded over HTTPS:
