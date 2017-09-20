@@ -91,7 +91,7 @@ return parent.extend({
 							errorsA.push(error.message);
 						});
 						_this.showErrorMessage(errorsA.join("\n"));
-						this.isPlaceOrderActionAllowed(true);
+						this.state_waitingForServerResponse(false);
 					}
 				},
 				paymentFormLoaded: function() {
@@ -191,7 +191,7 @@ return parent.extend({
 			event.preventDefault();
 		}
 		// 2017-07-26 «Sometimes getting duplicate orders in checkout»: https://mage2.pro/t/4217
-		this.isPlaceOrderActionAllowed(false);
+		this.state_waitingForServerResponse(true);
 		this.square.requestCardNonce();
 	}
 });});
