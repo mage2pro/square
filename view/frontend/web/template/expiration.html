@@ -3,7 +3,7 @@
 		<span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
 	</label>
 	<div class='control'>
-		<input class='input-text' type='text' value='' data-bind="
+		<input afterRender="dfOnRender" class='input-text' type='text' value='' data-bind="
 			attr: {
 				autocomplete: off
 				,data: df.card.expirationComposite

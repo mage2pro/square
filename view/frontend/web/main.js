@@ -45,65 +45,70 @@ return parent.extend({
 	 * @used-by Dfe_Square/atTheEnd.html
 	 */
     dfOnRender: function() {
-		var _this = this;
-		this.square = new SqPaymentForm({
-			applicationId: this.publicKey()
-			,callbacks: {
-				cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
-					if (!errors) {
-						this.token = nonce;
-						this.placeOrderInternal();
-					}
-					else {
-						/** @type {String[]} */ var errorsA = [];
-						errors.forEach(function(error) {
-							errorsA.push(error.message);
-						});
-						this.showErrorMessage(errorsA.join("\n"));
-						this.state_waitingForServerResponse(false);
-					}
-				}, this),
-				paymentFormLoaded: $.proxy(function() {
-					var postalCode = null;
-					if (dfc.addressB()) {
-						postalCode = dfc.addressB().postcode;
-					}
-					if (!postalCode && dfc.addressS()) {
-						postalCode = dfc.addressS().postcode;
-					}
-					if (postalCode) {
-						this.square.setPostalCode(postalCode);
-					}
-					else {
-						$.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);});
-					}
-				}, this)
-			}
-			,cardNumber: {elementId: this.dfCardNumberId(),}
-			,cvv: {elementId: this.dfCardVerificationId()}
-			,expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'}
-			/**
-			 * 2016-09-28 Это поле является обязательным.
-			 * 2016-09-29
-			 * «This CSS class is assigned to all four of the iframes generated for the payment form.
-			 * You can create CSS rules for this class to style the exterior of the inputs
-			 * (i.e., borders and margins). See Styling input exteriors for more information.»
-			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
-			 */
-			,inputClass: 'dfe-square'
-			/**
-			 * 2016-09-29
-			 * «Each object in this array defines styles to apply
-			 * to the interior of the payment form inputs.
-			 * The array can include multiple objects that apply to different ranges of screen widths,
-			 * or a single object that applies universally.»
-			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
-			 * https://docs.connect.squareup.com/articles/adding-payment-form/#stylinginputinteriors
-			 */
-			,inputStyles: [{fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '20px', padding: '5px 9px'}]
-			,postalCode: {elementId: this.dfCardPostalCodeId()}
-		});
-		this.square.build();
+    	this.renderCount = 1 + (this.renderCount || 0);
+    	if (2 === this.renderCount) {
+			var _this = this;
+			this.square = new SqPaymentForm({
+				applicationId: this.publicKey()
+				,callbacks: {
+					cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
+						if (!errors) {
+							this.token = nonce;
+							this.placeOrderInternal();
+						}
+						else {
+							/** @type {String[]} */ var errorsA = [];
+							errors.forEach(function(error) {
+								errorsA.push(error.message);
+							});
+							this.showErrorMessage(errorsA.join("\n"));
+							this.state_waitingForServerResponse(false);
+						}
+					}, this),
+					paymentFormLoaded: $.proxy(function() {
+						var postalCode = null;
+						if (dfc.addressB()) {
+							postalCode = dfc.addressB().postcode;
+						}
+						if (!postalCode && dfc.addressS()) {
+							postalCode = dfc.addressS().postcode;
+						}
+						if (postalCode) {
+							this.square.setPostalCode(postalCode);
+						}
+						else {
+							$.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);});
+						}
+					}, this)
+				}
+				,cardNumber: {elementId: this.dfCardNumberId(),}
+				,cvv: {elementId: this.dfCardVerificationId()}
+				,expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'}
+				/**
+				 * 2016-09-28 Это поле является обязательным.
+				 * 2016-09-29
+				 * «This CSS class is assigned to all four of the iframes generated for the payment form.
+				 * You can create CSS rules for this class to style the exterior of the inputs
+				 * (i.e., borders and margins). See Styling input exteriors for more information.»
+				 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
+				 */
+				,inputClass: 'dfe-square'
+				/**
+				 * 2016-09-29
+				 * «Each object in this array defines styles to apply
+				 * to the interior of the payment form inputs.
+				 * The array can include multiple objects that apply to different ranges of screen widths,
+				 * or a single object that applies universally.»
+				 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
+				 * https://docs.connect.squareup.com/articles/adding-payment-form/#stylinginputinteriors
+				 */
+				,inputStyles: [{
+					fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '20px', padding: '5px 9px'
+				}]
+				,postalCode: {elementId: this.dfCardPostalCodeId()}
+			});
+			this.square.build();
+		}
 	},
 	/**
 	 * 2016-09-28
