@@ -60,7 +60,7 @@ return parent.extend({
 							errorsA.push(error.message);
 						});
 						_this.showErrorMessage(errorsA.join("\n"));
-						this.state_waitingForServerResponse(false);
+						_this.state_waitingForServerResponse(false);
 					}
 				},
 				paymentFormLoaded: function() {
