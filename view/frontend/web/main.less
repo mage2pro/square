@@ -1,8 +1,6 @@
 // 2016-09-29
 form.dfe_square {
-	.control {
-		height: 32px;
-	}
+	.control {height: 32px;}
 	// 2016-09-29
 	// Умышленно не помещаем это правило внутрь .control,
 	// потому что sq-postal-code-iframe находится вне .control.
@@ -11,4 +9,9 @@ form.dfe_square {
 		&[name='sq-cvv-iframe'] {margin-right: 10px;}
 		&[name='sq-postal-code-iframe'] {display: none;}
 	}
+	// 2017-10-05
+	// M2 has a build-in rule: .fieldset > .fields > .field:last-child {margin-bottom: 0;}
+	// In the Square's case, the CVV field is not the last child, but the last visible child,
+	// so the {margin-bottom: 0;} rule should be added exactly.
+	.field.cvv {margin-bottom: 0;}
 }
