@@ -30,62 +30,32 @@ return parent.extend({
 	},
 	/**
 	 * 2016-09-28
+	 * Dfe_Square/expiration.html
 	 * @returns {String[]}
 	 */
 	dfCardExpirationCompositeId: function() {return this.fid('expiration_composite');},
 	/**
 	 * 2016-09-28
+	 * @used-by Dfe_Square/atTheEnd.html
 	 * @returns {String[]}
 	 */
 	dfCardPostalCodeId: function() {return this.fid('postal_code');},
     /**
-	 * 2016-09-28
-	 * https://mage2.pro/t/1936
+	 * 2016-09-28 https://mage2.pro/t/1936
+	 * @used-by Dfe_Square/atTheEnd.html
 	 */
     dfOnRender: function() {
 		var _this = this;
-		//var postalCode = dfc.postalCode();
 		this.square = new SqPaymentForm({
-			applicationId: this.publicKey(),
-			cardNumber: {elementId: this.dfCardNumberId(),},
-			cvv: {elementId: this.dfCardVerificationId(),},
-			expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'},
-			/**
-			 * 2016-09-28
-			 * Это поле является обязательным.
-			 *
-			 * 2016-09-29
-			 * «This CSS class is assigned to all four of the iframes generated for the payment form.
-			 * You can create CSS rules for this class to style the exterior of the inputs
-			 * (i.e., borders and margins). See Styling input exteriors for more information.»
-			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
-			 */
-			inputClass: 'dfe-square',
-			/**
-			 * 2016-09-29
-			 * «Each object in this array defines styles to apply
-			 * to the interior of the payment form inputs.
-			 * The array can include multiple objects that apply to different ranges of screen widths,
-			 * or a single object that applies universally.»
-			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
-			 * https://docs.connect.squareup.com/articles/adding-payment-form/#stylinginputinteriors
-			 */
-			inputStyles: [{
-				fontFamily: 'sans-serif'
-				,fontSize: '14px'
-				,lineHeight: '20px'
-				,padding: '5px 9px'
-			}],
-			postalCode: {elementId: this.dfCardPostalCodeId()},
-			callbacks: {
+			applicationId: this.publicKey()
+			,callbacks: {
 				cardNonceResponseReceived: function(errors, nonce, cardData) {
 					if (!errors) {
 						_this.token = nonce;
 						_this.placeOrderInternal();
 					}
 					else {
-						/** @type {String[]} */
-						var errorsA = [];
+						/** @type {String[]} */ var errorsA = [];
 						errors.forEach(function(error) {
 							errorsA.push(error.message);
 						});
@@ -109,13 +79,35 @@ return parent.extend({
 					}
 				}
 			}
+			,cardNumber: {elementId: this.dfCardNumberId(),}
+			,cvv: {elementId: this.dfCardVerificationId()}
+			,expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'}
+			/**
+			 * 2016-09-28 Это поле является обязательным.
+			 * 2016-09-29
+			 * «This CSS class is assigned to all four of the iframes generated for the payment form.
+			 * You can create CSS rules for this class to style the exterior of the inputs
+			 * (i.e., borders and margins). See Styling input exteriors for more information.»
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
+			 */
+			,inputClass: 'dfe-square'
+			/**
+			 * 2016-09-29
+			 * «Each object in this array defines styles to apply
+			 * to the interior of the payment form inputs.
+			 * The array can include multiple objects that apply to different ranges of screen widths,
+			 * or a single object that applies universally.»
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#stylinginputinteriors
+			 */
+			,inputStyles: [{fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '20px', padding: '5px 9px'}]
+			,postalCode: {elementId: this.dfCardPostalCodeId()}
 		});
 		this.square.build();
 	},
 	/**
 	 * 2016-09-28
-	 * 2017-02-05
-	 * The bank card network codes: https://mage2.pro/t/2647
+	 * 2017-02-05 The bank card network codes: https://mage2.pro/t/2647
 	 * @returns {String[]}
 	 */
 	getCardTypes: function() {return ['VI', 'MC', 'AE', 'JCB', 'DI', 'DN', 'CUN'];},
@@ -129,10 +121,8 @@ return parent.extend({
 	initialize: function() {
 		this._super();
 		this.expirationComposite.subscribe(function(v) {
-			/** @type {String[]} */
-			var a = v.split('/');
-			/** @type {String} */
-			var year = $.trim(a[1]);
+			/** @type {String[]} */ var a = v.split('/');
+			/** @type {String} */ var year = $.trim(a[1]);
 			if (2 === year.length) {
 				year = '20' + year;
 			}
@@ -144,7 +134,7 @@ return parent.extend({
 			creditCardData.expirationMonth = df.int($.trim(a[0]));
 		});
 		// 2016-09-30
-		// Unlike all the other payment services,
+		// Unlike other payment services,
 		// Square does not allow to populate the payment form fields programmatically,
 		// so the Magento 2 Swuare extension does not contain
 		// the standard «Prefill the Payment Form with Test Data?» option,
