@@ -49,21 +49,21 @@ return parent.extend({
 		this.square = new SqPaymentForm({
 			applicationId: this.publicKey()
 			,callbacks: {
-				cardNonceResponseReceived: function(errors, nonce, cardData) {
+				cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
 					if (!errors) {
-						_this.token = nonce;
-						_this.placeOrderInternal();
+						this.token = nonce;
+						this.placeOrderInternal();
 					}
 					else {
 						/** @type {String[]} */ var errorsA = [];
 						errors.forEach(function(error) {
 							errorsA.push(error.message);
 						});
-						_this.showErrorMessage(errorsA.join("\n"));
-						_this.state_waitingForServerResponse(false);
+						this.showErrorMessage(errorsA.join("\n"));
+						this.state_waitingForServerResponse(false);
 					}
-				},
-				paymentFormLoaded: function() {
+				}, this),
+				paymentFormLoaded: $.proxy(function() {
 					var postalCode = null;
 					if (dfc.addressB()) {
 						postalCode = dfc.addressB().postcode;
@@ -72,12 +72,12 @@ return parent.extend({
 						postalCode = dfc.addressS().postcode;
 					}
 					if (postalCode) {
-						_this.square.setPostalCode(postalCode);
+						this.square.setPostalCode(postalCode);
 					}
 					else {
 						$.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);});
 					}
-				}
+				}, this)
 			}
 			,cardNumber: {elementId: this.dfCardNumberId(),}
 			,cvv: {elementId: this.dfCardVerificationId()}
