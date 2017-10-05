@@ -1,0 +1,19 @@
+<div class='field date date-composite required' data-bind="attr: {id: fid('cc_type_exp_div')}">
+	<label data-bind="attr: {for: dfCardExpirationCompositeId()}" class='label'>
+		<span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
+	</label>
+	<div class='control'>
+		<input class='input-text' type='text' value='' data-bind="
+			attr: {
+				autocomplete: off
+				,data: df.card.expirationComposite
+				,'data-container': getCode() + '-cc-expiration-composite'
+				,'data-validate': JSON.stringify({'required-number': true})
+				,id: dfCardExpirationCompositeId()
+				,title: $t('Expiration Date')
+			}
+			,value: expirationComposite
+			,valueUpdate: 'keyup'
+		"/>
+	</div>
+</div>

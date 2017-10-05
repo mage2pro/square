@@ -22,9 +22,7 @@ return parent.extend({
 		df: {
 			card: {
 				expirationComposite: 'expirationComposite'
-				// 2016-09-28
-				// @used-by mage2pro/core/Payment/view/frontend/web/template/card.html
-				,newTemplate: 'Dfe_Square/card/new'
+				,field: {expiration: 'Dfe_Square/card/expiration'}
 			}
 		}
 		,expirationComposite: ''
