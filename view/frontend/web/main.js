@@ -22,7 +22,8 @@ return parent.extend({
 		df: {
 			card: {
 				expirationComposite: 'expirationComposite'
-				,field: {expiration: 'Dfe_Square/card/expiration'}
+				,field: {expiration: 'Dfe_Square/expiration'}
+				,new: {atTheEnd: 'Dfe_Square/atTheEnd'}
 			}
 		}
 		,expirationComposite: ''
