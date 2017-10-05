@@ -1,4 +1,5 @@
 // 2016-09-28
+// 2017-10-05 E-commerce API: https://docs.connect.squareup.com/articles/paymentform-overview
 define([
 	'df', 'Df_Checkout/data', 'Df_StripeClone/main', 'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'

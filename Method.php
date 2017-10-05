@@ -22,8 +22,12 @@ final class Method extends \Df\Payment\Method {
 	 * https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-What-are-the-minimum-and-maximum-limits-for/m-p/26939#M346
 	 * https://mage2.pro/t/2411
 	 * 2017-10-05
+	 * Note 1.
 	 * What are the minimum and maximum limits for payment amounts in JPY, GBP, and AUD?
 	 * https://www.sellercommunity.com/t5/Developer-Discussions/Connect-API-v2-What-are-the-minimum-and-maximum-limits-for/m-p/52016#M891
+	 * Note 2.
+	 * «Add support for the new Square merchant countries: Japan, Australia, and the United Kingdom»
+	 * https://github.com/mage2pro/square/issues/8
 	 * @override
 	 * @see \Df\Payment\Method::amountLimits()
 	 * @used-by isAvailable()
