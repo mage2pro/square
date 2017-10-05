@@ -16,7 +16,6 @@
 	,"keywords": [
 		"API"
 		,"Bank card"
-		,"Canada"
 		,"Credit card"
 		,"eCommerce"
 		,"Magento"
@@ -27,6 +26,6 @@
 		,"Payment integration"
 		,"Payment gateway"
 		,"Square"
-		,"USA"
+		,"USA", "Canada", "Japan", "Australia", "United Kingdom"
 	]
 }
