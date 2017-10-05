@@ -190,11 +190,12 @@ https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfields
 				</field>
 <!--
 2016-11-13
-Square на сегодняшний день поддерживает 2 валюты: USD и CAD.
+Square currently supports only USD and CAD:
 https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-the-smallest-denomination-of-a/m-p/20372#M11
+2017-10-05 Square now supports JPY, GBP, and AUD: https://mage2.pro/t/4634
 -->
 				<field
-					dfValues='USD,CAD'
+					dfValues='AUD,CAD,GBP,JPY,USD'
 					id='currency'
 					showInDefault='1' showInStore='1' showInWebsite='1'
 					sortOrder='10'

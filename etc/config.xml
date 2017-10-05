@@ -9,8 +9,9 @@
 				<requireBillingAddress>1</requireBillingAddress>
 <!--
 2016-11-13
-Square на сегодняшний день поддерживает 2 валюты: USD и CAD.
+Square currently supports only USD and CAD:
 https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-the-smallest-denomination-of-a/m-p/20372#M11
+2017-10-05 Square now supports JPY, GBP, and AUD: https://mage2.pro/t/4634
 -->
 				<currency>USD</currency>
 				<payment_action>authorize_capture</payment_action>

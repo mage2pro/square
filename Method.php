@@ -21,12 +21,21 @@ final class Method extends \Df\Payment\Method {
 	 * https://code.dmitry-fedyuk.com/m2e/square/issues/6
 	 * https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-What-are-the-minimum-and-maximum-limits-for/m-p/26939#M346
 	 * https://mage2.pro/t/2411
+	 * 2017-10-05
+	 * What are the minimum and maximum limits for payment amounts in JPY, GBP, and AUD?
+	 * https://www.sellercommunity.com/t5/Developer-Discussions/Connect-API-v2-What-are-the-minimum-and-maximum-limits-for/m-p/52016#M891
 	 * @override
 	 * @see \Df\Payment\Method::amountLimits()
 	 * @used-by isAvailable()
 	 * @return array(string => array(int|float))
 	 */
-	protected function amountLimits() {return ['USD' => [1, 50000], 'CAD' => [1, 50000]];}
+	protected function amountLimits() {return [
+		'AUD' => [1, 50000], 'CAD' => [1, 50000], 'GBP' => [1, 50000]
+		// 2017-10-05 @todo It is certainly wrong!
+		// Need to be updated when I will have the right limits from the Square support.
+		,'JPY' => [1, 50000]
+		,'USD' => [1, 50000]
+	];}
 
 	/**
 	 * 2016-09-30

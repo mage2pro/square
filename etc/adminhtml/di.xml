@@ -6,8 +6,9 @@
 <!-- 2016-11-13
 Square currently supports only USD and CAD:
 https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-the-smallest-denomination-of-a/m-p/20372#M11
+2017-10-05 Square now supports JPY, GBP, and AUD: https://mage2.pro/t/4634
 -->
 	<virtualType name='Dfe\Square\Validator\Currency' type='Df\Framework\Validator\Currency'>
-		<arguments><argument name='iso3' xsi:type='string'>CAD,USD</argument></arguments>
+		<arguments><argument name='iso3' xsi:type='string'>AUD,CAD,GBP,JPY,USD</argument></arguments>
 	</virtualType>
 </config>
