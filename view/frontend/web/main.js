@@ -191,11 +191,12 @@ return parent.extend({
 				 */
 				paymentFormLoaded: $.proxy(function() {
 					var postalCode = null;
-					if (dfc.addressB()) {
-						postalCode = dfc.addressB().postcode;
+					/** @type {?Object} */ var a; 
+					if (a = dfc.addressB()) {
+						postalCode = a.postcode;
 					}
-					if (!postalCode && dfc.addressS()) {
-						postalCode = dfc.addressS().postcode;
+					if (!postalCode && (a = dfc.addressS())) {
+						postalCode = a.postcode;
 					}
 					postalCode
 						? this.square.setPostalCode(postalCode)
