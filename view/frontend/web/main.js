@@ -190,7 +190,7 @@ return parent.extend({
 				 * https://docs.connect.squareup.com/articles/adding-payment-form#populatingfieldsprogrammatically
 				 */
 				paymentFormLoaded: $.proxy(function() {
-					var postalCode = null;
+					/** @type {?String} */ var postalCode = null;
 					/** @type {?Object} */ var a; 
 					if (a = dfc.addressB()) {
 						postalCode = a.postcode;
