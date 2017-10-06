@@ -8,7 +8,7 @@ use Magento\Payment\Model\Info as I;
 use Magento\Payment\Model\InfoInterface as II;
 use Magento\Quote\Model\Quote\Payment as QP;
 use Magento\Sales\Model\Order\Payment as OP;
-use SquareConnect\Api\TransactionApi as API;
+use SquareConnect\Api\TransactionsApi as API;
 use SquareConnect\ApiException;
 use SquareConnect\Model\Card;
 use SquareConnect\Model\ChargeResponse;
@@ -43,6 +43,9 @@ final class Method extends \Df\Payment\Method {
 
 	/**
 	 * 2016-09-30
+	 * 2017-10-06
+	 * «Charge the card nonce»
+	 * https://github.com/square/connect-php-sdk/tree/e510b9e0#charge-the-card-nonce
 	 * @override
 	 * @see \Df\Payment\Method::charge()
 	 * @used-by \Df\Payment\Method::authorize()
@@ -50,19 +53,16 @@ final class Method extends \Df\Payment\Method {
 	 * @param bool|null $capture [optional]
 	 */
 	protected function charge($capture = true) {
-		/** @var array(string => mixed) $p */
-		$p = Charge::p($this);
-		/** @var II|I|OP|QP $ii */
-		$ii = $this->ii();
+		$p = Charge::p($this); /** @var array(string => mixed) $p */
+		$ii = $this->ii(); /** @var II|I|OP|QP $ii */
 		/** @var ChargeResponse $response */
 		$response = $this->api($p, function() use($p) {
-			/** @var Settings $s */
-			$s = $this->s();
+			$s = $this->s(); /** @var Settings $s */
+			\SquareConnect\Configuration::getDefaultConfiguration()->setAccessToken($s->accessToken());
 			/** @noinspection PhpParamsInspection */
-			return (new API)->charge($s->accessToken(), $s->location(), $p);
+			return (new API)->charge($s->location(), $p);
 		});
-		/** @var SquareTransaction $transaction */
-		$transaction = $response->getTransaction();
+		$transaction = $response->getTransaction(); /** @var SquareTransaction $transaction */
 		$ii->setTransactionId($transaction->getId());
 		/**
 		 * 2016-03-15

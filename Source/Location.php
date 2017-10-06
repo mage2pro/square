@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\Square\Source;
-use SquareConnect\Api\LocationApi as API;
+use SquareConnect\Api\LocationsApi as API;
 use SquareConnect\ApiException;
 // 2016-10-06
 final class Location extends \Df\Payment\Source\API\Key\Testable {
@@ -44,7 +44,8 @@ final class Location extends \Df\Payment\Source\API\Key\Testable {
 	 * @used-by \Df\Config\Source\API::map()
 	 * @return array(string => string)
 	 */
-	protected function fetch() {return df_column(
-		(new API)->listLocations($this->apiKey())->getLocations(), 'getName', 'getId'
-	);}
+	protected function fetch() {
+		\SquareConnect\Configuration::getDefaultConfiguration()->setAccessToken($this->apiKey());
+		return df_column((new API)->listLocations()->getLocations(), 'getName', 'getId');
+	}
 }
