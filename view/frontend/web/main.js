@@ -90,13 +90,13 @@ return parent.extend({
 				}, this),
 				/**
 				 * 2017-10-06
-				 * Note 1. «SqPaymentForm callbacks»
+				 * Note 1. «Square Connect API» → «SqPaymentForm callbacks»
 				 * «Called when one of a variety of events occurs
 				 * while a buyer is filling out the payment form.
 				 * See `Working with payment form input events` for details.»
 				 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformcallbacks
 				 *
-				 * Note 2. «Working with payment form input events»
+				 * Note 2. «Square Connect API» → «Working with payment form input events»
 				 * «While a buyer is filling in the fields of the payment form,
 				 * the `inputEventReceived` callback function you specified during initalization
 				 * is called every time certain events occur
@@ -161,6 +161,34 @@ return parent.extend({
 						}));
 					}
 				}, this),
+				/**
+				 * 2017-10-06
+				 * Note 1. «Square Connect API» → «SqPaymentForm callbacks»
+				 * «Called when all payment form iframes have successfully been added to the webpage.
+				 * Indicates that payment form functions like `setPostalCode` can now be called.
+				 * See Populating form fields programmatically for details.»
+				 *
+				 * Note 2. «Square Connect API» → «Populating form fields programmatically»
+				 * «You can use the SqPaymentForm's `setPostalCode` function
+				 * to populate the postal code field programmatically.
+				 * This is convenient for a buyer that has already provided their postal code elsewhere,
+				 * such as when specifying their shipping address.
+				 * The buyer can always replace the value you populate.
+				 *
+				 * You should call the `setPostalCode` function
+				 * in the `paymentFormLoaded` callback you specify when initializing the payment form,
+				 * as shown in Sample webpage:
+				 * https://docs.connect.squareup.com/articles/adding-payment-form#samplewebpage
+				 * This ensures that the form is fully loaded when you call the function.
+				 * This function will fail if you call it before the payment form is finished loading
+				 * 		paymentFormLoaded: function() {
+				 * 			paymentForm.setPostalCode('94103');
+				 * 		}
+				 * Calling this function fires the `postalCodeChanged` input event described in Input event types.
+				 * https://docs.connect.squareup.com/articles/adding-payment-form#inputeventtypes
+				 * You cannot programmatically populate payment form fields besides the postal code field.»
+				 * https://docs.connect.squareup.com/articles/adding-payment-form#populatingfieldsprogrammatically
+				 */
 				paymentFormLoaded: $.proxy(function() {
 					var postalCode = null;
 					if (dfc.addressB()) {
