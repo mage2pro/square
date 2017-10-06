@@ -1,10 +1,10 @@
 // 2016-09-28
 // 2017-10-05 E-commerce API: https://docs.connect.squareup.com/articles/paymentform-overview
 define([
-	'df', 'Df_Checkout/data', 'Df_StripeClone/main', 'jquery'
+	'df', 'df-lodash', 'Df_Checkout/data', 'Df_StripeClone/main', 'jquery'
 	,'Magento_Payment/js/model/credit-card-validation/credit-card-data'
 	,'https://js.squareup.com/v2/paymentform'
-], function(df, dfc, parent, $, creditCardData) {'use strict';
+], function(df, _, dfc, parent, $, creditCardData) {'use strict';
 /** 2017-09-06 @uses Class::extend() https://github.com/magento/magento2/blob/2.2.0-rc2.3/app/code/Magento/Ui/view/base/web/js/lib/core/class.js#L106-L140 */	
 return parent.extend({
 	/**
@@ -45,72 +45,88 @@ return parent.extend({
 	 * 2016-09-28 https://mage2.pro/t/1936
 	 * @used-by Dfe_Square/atTheEnd.html
 	 */
-    dfOnRender: function() {
-    	this.renderCount = 1 + (this.renderCount || 0);
-    	if (2 === this.renderCount) {
-			var _this = this;
-			this.square = new SqPaymentForm({
-				applicationId: this.publicKey()
-				,callbacks: {
-					cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
-						if (!errors) {
-							this.token = nonce;
-							this.placeOrderInternal();
-						}
-						else {
-							/** @type {String[]} */ var errorsA = [];
-							errors.forEach(function(error) {
-								errorsA.push(error.message);
-							});
-							this.showErrorMessage(errorsA.join("\n"));
-							this.state_waitingForServerResponse(false);
-						}
-					}, this),
-					paymentFormLoaded: $.proxy(function() {
-						var postalCode = null;
-						if (dfc.addressB()) {
-							postalCode = dfc.addressB().postcode;
-						}
-						if (!postalCode && dfc.addressS()) {
-							postalCode = dfc.addressS().postcode;
-						}
-						if (postalCode) {
-							this.square.setPostalCode(postalCode);
-						}
-						else {
-							$.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);});
-						}
-					}, this)
-				}
-				,cardNumber: {elementId: this.dfCardNumberId(),}
-				,cvv: {elementId: this.dfCardVerificationId()}
-				,expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'}
-				/**
-				 * 2016-09-28 Это поле является обязательным.
-				 * 2016-09-29
-				 * «This CSS class is assigned to all four of the iframes generated for the payment form.
-				 * You can create CSS rules for this class to style the exterior of the inputs
-				 * (i.e., borders and margins). See Styling input exteriors for more information.»
-				 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
-				 */
-				,inputClass: 'dfe-square'
-				/**
-				 * 2016-09-29
-				 * «Each object in this array defines styles to apply
-				 * to the interior of the payment form inputs.
-				 * The array can include multiple objects that apply to different ranges of screen widths,
-				 * or a single object that applies universally.»
-				 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
-				 * https://docs.connect.squareup.com/articles/adding-payment-form/#stylinginputinteriors
-				 */
-				,inputStyles: [{
-					fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '20px', padding: '5px 9px'
-				}]
-				,postalCode: {elementId: this.dfCardPostalCodeId()}
-			});
-			this.square.build();
-		}
-	},
+    dfOnRender: _.after(2, function() {
+		var _this = this;
+		// 2017-10-06
+		// `SqPaymentForm` parameters:
+		// https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+		this.square = new SqPaymentForm({
+			// 2017-10-06
+			// «Your application's ID, available from the application dashboard.
+			// While you're testing out the e-commerce API,
+			// you should provide your sandbox application ID.»
+			// Type: string.
+			applicationId: this.publicKey()
+			/**
+			 * 2017-10-06
+			 * «Defines callbacks that are executed when certain payment form events occur.
+			 * The only field you must provide in this object is `cardNonceResponseReceived`,
+			 * which is a callback that's executed
+			 * when the form generates a nonce from the buyer's card details.
+			 * See `Appendix: SqPaymentForm callbacks` for a list of all available callbacks:
+			 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformcallbacks»
+			 * Type: object.
+			 */
+			,callbacks: {
+				// 2017-10-06
+				// «Required.
+				// Called when the generation of a nonce completes (or an error occurs during generation).»
+				cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
+					if (!errors) {
+						this.token = nonce;
+						this.placeOrderInternal();
+					}
+					else {
+						/** @type {String[]} */ var errorsA = [];
+						errors.forEach(function(error) {
+							errorsA.push(error.message);
+						});
+						this.showErrorMessage(errorsA.join("\n"));
+						this.state_waitingForServerResponse(false);
+					}
+				}, this),
+				paymentFormLoaded: $.proxy(function() {
+					var postalCode = null;
+					if (dfc.addressB()) {
+						postalCode = dfc.addressB().postcode;
+					}
+					if (!postalCode && dfc.addressS()) {
+						postalCode = dfc.addressS().postcode;
+					}
+					if (postalCode) {
+						this.square.setPostalCode(postalCode);
+					}
+					else {
+						$.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);});
+					}
+				}, this)
+			}
+			,cardNumber: {elementId: this.dfCardNumberId(),}
+			,cvv: {elementId: this.dfCardVerificationId()}
+			,expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'}
+			/**
+			 * 2016-09-28 Это поле является обязательным.
+			 * 2016-09-29
+			 * «This CSS class is assigned to all four of the iframes generated for the payment form.
+			 * You can create CSS rules for this class to style the exterior of the inputs
+			 * (i.e., borders and margins). See Styling input exteriors for more information.»
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
+			 */
+			,inputClass: 'dfe-square'
+			/**
+			 * 2016-09-29
+			 * «Each object in this array defines styles to apply
+			 * to the interior of the payment form inputs.
+			 * The array can include multiple objects that apply to different ranges of screen widths,
+			 * or a single object that applies universally.»
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#sqpaymentformparameters
+			 * https://docs.connect.squareup.com/articles/adding-payment-form/#stylinginputinteriors
+			 */
+			,inputStyles: [{fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '20px', padding: '5px 9px'}]
+			,postalCode: {elementId: this.dfCardPostalCodeId()}
+		});
+		this.square.build();
+	}),
 	/**
 	 * 2016-09-28
 	 * 2017-02-05 The bank card network codes: https://mage2.pro/t/2647
