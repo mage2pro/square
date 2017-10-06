@@ -70,12 +70,47 @@ return parent.extend({
 			,callbacks: {
 				/**
 				 * 2017-10-06
+				 * Note 1.
 				 * «Called when the generation of a nonce completes (or an error occurs during generation).»
 				 * Required.
 				 * An example: https://github.com/square/connect-api-examples/blob/8b317991/connect-examples/v2/php_payment/index.html#L56-L76
+				 * Note 2. «Square Connect API» → «Nonce callback format»
+				 * The function you specify for the `cardNonceResponseReceived` callback
+				 * takes three parameters, like so:
+				 * 		cardNonceResponseReceived: function(errors, nonce, cardData) {
+				 * 			// Handle the nonce
+				 * 		}
+				 * 	<...>
+				 The `cardData` parameter is an object that contains non-confidential information
+				 about the buyer's credit card (or null if any errors occurred).
+				 It has the following format:
+				 *		{
+				 *			"card_brand": "VISA",
+				 *			"last_4": "1111",
+				 *			"exp_month": 11,
+				 *			"exp_year": 2016,
+				 *			"billing_postal_code": "94103"
+				 *		}
+				 * https://docs.connect.squareup.com/articles/adding-payment-form#noncecallbackformat
 				 */
-				cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
+				cardNonceResponseReceived: $.proxy(function(errors, nonce) {
+					/**
+					 * 2017-10-06
+					 * «The `errors` parameter is an array of objects
+					 * that describe any errors that occurred during nonce creation.
+					 * If no errors occurred, this is null.
+					 * See «Nonce generation errors» for the object format and a list of the most common errors.»
+					 * https://docs.connect.squareup.com/articles/adding-payment-form#noncecallbackformat
+					 * https://docs.connect.squareup.com/articles/adding-payment-form#noncegenerationerrors
+					 */
 					if (!errors) {
+						/**
+						 * 2017-10-06
+						 * «The `nonce` parameter is simply the string value of the nonce,
+						 * which you send to your server and then along to the Charge endpoint.
+						 * This value is null if any errors occurred.»
+						 * https://docs.connect.squareup.com/articles/adding-payment-form#noncecallbackformat
+						 */
 						this.token = nonce;
 						this.placeOrderInternal();
 					}
@@ -261,6 +296,7 @@ return parent.extend({
 			,inputStyles: [{fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '20px', padding: '5px 9px'}]
 			/**
 			 * 2017-10-06
+			 * Note 1. «Square Connect API» → «SqPaymentForm parameters»
 			 * «Defines the details of the input field for the buyer's card postal code.
 			 * This object has the same format as the object you specify for cardNumber.
 			 * If object set to false, postal code field will not load.
@@ -269,6 +305,17 @@ return parent.extend({
 			 * as Postal Code is a required field in these countries.»
 			 * Type: object.
 			 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+			 *
+			 * Note 2. «Square Connect API» → «Remove Postal Code Field»
+			 * «You can remove the postal code field by setting the postal code block from:
+			 *		postalCode: {
+			 *			elementId: 'sq-postal-code'
+			 *		}
+			 * to:
+			 * 		postalCode: false
+			 * Important: For United States, Canada, and United Kingdom merchants
+			 * this will result in declining all charges as Postal Code is a required field in these countries.»
+			 * https://docs.connect.squareup.com/articles/adding-payment-form#removepostalcodefield
 			 */
 			,postalCode: {elementId: this.dfCardPostalCodeId()}
 		});
