@@ -9,6 +9,18 @@ form.dfe_square {
 		&[name='sq-cvv-iframe'] {margin-right: 10px;}
 		&[name='sq-postal-code-iframe'] {display: none;}
 	}
+	// 2017-10-06
+	// Note 1. «Highlight the focused bank card form field (like the Stripe extension does)»
+	// https://github.com/mage2pro/square/issues/13
+	//
+	// Note 2. «Square Connect API» → «Adjusting exterior styles for input focus and validation errors»
+	// In certain situations, additional classes are applied to one or more of the form's four iframes:
+	// When a particular input has focus,
+	// its iframe is given a class name with the pattern `[value of inputClass]--focus`.
+	// For example, if you specify `card-form` as the base `inputClass`,
+	// an iframe with focus is given the additional class `card-form--focus`:
+	// https://docs.connect.squareup.com/articles/adding-payment-form#adjustingexteriorstyles
+	iframe.dfe-square--focus {box-shadow: 0 0 3px 1px #00699d;}
 	// 2017-10-05
 	// M2 has a build-in rule: .fieldset > .fields > .field:last-child {margin-bottom: 0;}
 	// In the Square's case, the CVV field is not the last child, but the last visible child,
