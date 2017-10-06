@@ -68,13 +68,16 @@ return parent.extend({
 			 * Type: object.
 			 */
 			,callbacks: {
-				// 2017-10-06
-				// «Required.
-				// Called when the generation of a nonce completes (or an error occurs during generation).»
+				/**
+				 * 2017-10-06
+				 * «Called when the generation of a nonce completes (or an error occurs during generation).»
+				 * Required.
+				 * An example: https://github.com/square/connect-api-examples/blob/8b317991/connect-examples/v2/php_payment/index.html#L56-L76
+				 */
 				cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
 					if (!errors) {
 						this.token = nonce;
-						this.placeOrderInternal();
+						//this.placeOrderInternal();
 					}
 					else {
 						/** @type {String[]} */ var errorsA = [];
@@ -83,6 +86,79 @@ return parent.extend({
 						});
 						this.showErrorMessage(errorsA.join("\n"));
 						this.state_waitingForServerResponse(false);
+					}
+				}, this),
+				/**
+				 * 2017-10-06
+				 * Note 1. «SqPaymentForm callbacks»
+				 * «Called when one of a variety of events occurs
+				 * while a buyer is filling out the payment form.
+				 * See `Working with payment form input events` for details.»
+				 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformcallbacks
+				 *
+				 * Note 2. «Working with payment form input events»
+				 * «While a buyer is filling in the fields of the payment form,
+				 * the `inputEventReceived` callback function you specified during initalization
+				 * is called every time certain events occur
+				 * (for example, every time a form field gains or loses focus).
+				 * Every inputEvent object sent to the callback function has the following structure:
+				 *	{
+				 *		cardBrand: "masterCard",
+				 *		elementId: "sq-card-number",
+				 *		eventType: "focusClassRemoved",
+				 *		field: "cardNumber",
+				 *		currentState: {
+				 *			hasErrorClass: false,
+				 *			hasFocusClass: false,
+				 *			isCompletelyValid: true,
+				 *			isPotentiallyValid: true
+				 *		},
+				 *		previousState: {
+				 *			hasErrorClass: false,
+				 *			hasFocusClass: false,
+				 *			isCompletelyValid: false,
+				 *			isPotentiallyValid: true
+				 *		}
+				 *	}
+				 * »
+				 * https://docs.connect.squareup.com/articles/adding-payment-form#inputevents
+				 *
+				 * Note 3.
+				 * An example: https://github.com/square/connect-api-examples/blob/8b317991/connect-examples/v2/rails_payment/app/views/welcome/jquery.html.erb#L223-L246
+				 */
+				inputEventReceived: $.proxy(function(event) {
+					/**
+					 * 2017-10-06
+					 * @var {Object} event
+					 * @property {String} event.cardBrand
+					 * @property {String} event.eventType
+					 * https://docs.connect.squareup.com/articles/adding-payment-form#inputevents
+					 */
+					/**
+					 * 2017-10-06
+					 * «Square Connect API» → «Input event types»
+					 * https://docs.connect.squareup.com/articles/adding-payment-form#inputeventtypes
+					 * `cardBrandChanged`:
+					 * 		«The payment form detected a new likely credit card brand based on the card number»
+					 */
+					if ('cardBrandChanged' === event.eventType) {
+						/**
+						 * 2017-10-06
+						 * Note 1. «Square Connect API» → «Card brands»
+						 * https://docs.connect.squareup.com/articles/adding-payment-form#cardbrands
+						 * Note 2. I have implemented it similar to @see Magento_Payment/cc-form::initialize():
+						 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L55-L79
+						 */
+						this.selectedCardType(df.tr(event.cardBrand, {
+							americanExpress: 'AE'
+							,discover: 'DI'
+							,discoverDiners: 'DN'
+							,JCB: 'JCB'
+							,masterCard: 'MC'
+							,unionPay: 'CUN'
+							,visa: 'VI'
+							,unknown: null
+						}));
 					}
 				}, this),
 				paymentFormLoaded: $.proxy(function() {
@@ -130,6 +206,8 @@ return parent.extend({
 	/**
 	 * 2016-09-28
 	 * 2017-02-05 The bank card network codes: https://mage2.pro/t/2647
+	 * 2017-10-06 «Square Connect API» → «Card brands»:
+	 * https://docs.connect.squareup.com/articles/adding-payment-form#cardbrands
 	 * @returns {String[]}
 	 */
 	getCardTypes: function() {return ['VI', 'MC', 'AE', 'JCB', 'DI', 'DN', 'CUN'];},
@@ -163,6 +241,9 @@ return parent.extend({
 		// and you should to fill the payment form manually each time.
 		// https://mage2.pro/t/2097
 		// https://docs.connect.squareup.com/articles/adding-payment-form/#populatingfieldsprogrammatically
+		// 2017-10-06
+		// Without it, the MasterCard brand will be initially (with empty Credit Card Number» field) highlighted.
+		this.selectedCardType(null);
 		return this;
 	},
 	/**
