@@ -87,7 +87,7 @@ return parent.extend({
 						this.showErrorMessage(errorsA.join("\n"));
 						this.state_waitingForServerResponse(false);
 					}
-				}, this),
+				}, this)
 				/**
 				 * 2017-10-06
 				 * Note 1. «Square Connect API» → «SqPaymentForm callbacks»
@@ -126,7 +126,7 @@ return parent.extend({
 				 * Note 3.
 				 * An example: https://github.com/square/connect-api-examples/blob/8b317991/connect-examples/v2/rails_payment/app/views/welcome/jquery.html.erb#L223-L246
 				 */
-				inputEventReceived: $.proxy(function(event) {
+				,inputEventReceived: $.proxy(function(event) {
 					/**
 					 * 2017-10-06
 					 * @var {Object} event
@@ -160,7 +160,7 @@ return parent.extend({
 							,unknown: null
 						}));
 					}
-				}, this),
+				}, this)
 				/**
 				 * 2017-10-06
 				 * Note 1. «Square Connect API» → «SqPaymentForm callbacks»
@@ -189,7 +189,7 @@ return parent.extend({
 				 * You cannot programmatically populate payment form fields besides the postal code field.»
 				 * https://docs.connect.squareup.com/articles/adding-payment-form#populatingfieldsprogrammatically
 				 */
-				paymentFormLoaded: $.proxy(function() {
+				,paymentFormLoaded: $.proxy(function() {
 					/** @type {?String} */ var postalCode = null;
 					/** @type {?Object} */ var a; 
 					if (a = dfc.addressB()) {
@@ -203,9 +203,42 @@ return parent.extend({
 						: $.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);})
 					;
 				}, this)
+				/**
+				 * 2017-10-06
+				 * «Square Connect API» → «SqPaymentForm callbacks»
+				 * «Called when the SqPaymentForm detects that the buyer is using an unsupported browser.
+				 * Recommended.»
+				 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+				 */
+				,unsupportedBrowserDetected: $.proxy(function() {
+					this.showErrorMessage('Unfortunately, your browser does not support this payment option.');
+				}, this),
 			}
-			,cardNumber: {elementId: this.dfCardNumberId(),}
+			/**
+			 * 2017-10-06
+			 * «Defines the details of the input field for the buyer's card number.
+			 * The only field you must provide in this object is `elementId`,
+			 * which specifies the id of the element on your page that will be replaced with the card number input.
+			 * You can also specify placeholder text, which is shown when the input is empty.»
+			 * Type: object.
+			 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+			 */
+			,cardNumber: {elementId: this.dfCardNumberId()}
+			/**
+			 * 2017-10-06
+			 * «Defines the details of the input field for the buyer's card CVV.
+			 * This object has the same format as the object you specify for `cardNumber`.»
+			 * Type: object.
+			 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+			 */
 			,cvv: {elementId: this.dfCardVerificationId()}
+			/**
+			 * 2017-10-06
+			 * «Defines the details of the input field for the buyer's card expiration date.
+			 * This object has the same format as the object you specify for `cardNumber`.»
+			 * Type: object.
+			 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+			 */
 			,expirationDate: {elementId: this.dfCardExpirationCompositeId(), placeholder: 'MM/YY'}
 			/**
 			 * 2016-09-28 Это поле является обязательным.
@@ -226,8 +259,35 @@ return parent.extend({
 			 * https://docs.connect.squareup.com/articles/adding-payment-form/#stylinginputinteriors
 			 */
 			,inputStyles: [{fontFamily: 'sans-serif', fontSize: '14px', lineHeight: '20px', padding: '5px 9px'}]
+			/**
+			 * 2017-10-06
+			 * «Defines the details of the input field for the buyer's card postal code.
+			 * This object has the same format as the object you specify for cardNumber.
+			 * If object set to false, postal code field will not load.
+			 * Warning: for United States, Canada, or United Kingdom
+			 * merchants this will result in declining all charges
+			 * as Postal Code is a required field in these countries.»
+			 * Type: object.
+			 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+			 */
 			,postalCode: {elementId: this.dfCardPostalCodeId()}
 		});
+		/**
+		 * 2017-10-06
+		 * Generating the payment form
+		 * In most cases, the SqPaymentForm automatically generates form fields on your webpage
+		 * when you initialize it.
+		 * However, the form does not automatically generate its fields
+		 * if it never detects a `DOMContentLoaded` event.
+		 * This occurs most commonly in single-page web applications
+		 * when the form is initialized long after the `DOMContentLoaded` event has fired.
+		 * In this case, you can generate the payment form with an extra line of Javascript, like so:
+		 * 		// Call this after initializing the payment form _and_ after the DOM is fully loaded
+		 * 		paymentForm.build();
+		 * Calling `build` on an `SqPaymentForm` that has already been generated
+		 * will log an error to the Javascript console, but it is otherwise harmless.
+		 * https://docs.connect.squareup.com/articles/adding-payment-form#generatingpaymentform
+		 */
 		this.square.build();
 	}),
 	/**
@@ -311,6 +371,25 @@ return parent.extend({
 		}
 		// 2017-07-26 «Sometimes getting duplicate orders in checkout»: https://mage2.pro/t/4217
 		this.state_waitingForServerResponse(true);
+		/**
+		 * 2017-10-06 «Square Connect API» → «Obtaining a nonce»
+		 * «When a buyer has entered their card details into the `SqPaymentForm`
+		 * and has indicated that they're ready to pay,
+		 * your webpage should call the `requestCardNonce` function of your `SqPaymentForm`, like so:
+		 * 		// Call this to obtain a card nonce from a populated `SqPaymentForm`
+		 * 		paymentForm.requestCardNonce();
+		 * This tells the `SqPaymentForm` to generate a nonce from the buyer's card details.
+		 * When nonce generation completes,
+		 * the form will execute the callback you specified in the `cardNonceResponseReceived` field
+		 * (as demonstrated in Initializing the payment form).
+		 * https://docs.connect.squareup.com/articles/adding-payment-form#settinguppaymentform
+		 * The generated nonce is provided as a parameter to this callback.
+		 * When you receive the nonce,
+		 * you're ready to kick off the process to submit all relevant payment information
+		 * (including the nonce and the amount to charge) to your server.
+		 * Important: Card nonces expire after 24 hours.»
+		 * https://docs.connect.squareup.com/articles/adding-payment-form#obtainingnonce
+		 */
 		this.square.requestCardNonce();
 	}
 });});
