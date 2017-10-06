@@ -77,7 +77,7 @@ return parent.extend({
 				cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
 					if (!errors) {
 						this.token = nonce;
-						//this.placeOrderInternal();
+						this.placeOrderInternal();
 					}
 					else {
 						/** @type {String[]} */ var errorsA = [];
@@ -197,12 +197,10 @@ return parent.extend({
 					if (!postalCode && dfc.addressS()) {
 						postalCode = dfc.addressS().postcode;
 					}
-					if (postalCode) {
-						this.square.setPostalCode(postalCode);
-					}
-					else {
-						$.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);});
-					}
+					postalCode
+						? this.square.setPostalCode(postalCode)
+						: $.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);})
+					;
 				}, this)
 			}
 			,cardNumber: {elementId: this.dfCardNumberId(),}
