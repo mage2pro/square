@@ -119,7 +119,11 @@ return parent.extend({
 						errors.forEach(function(error) {
 							errorsA.push(error.message);
 						});
-						this.showErrorMessage(errorsA.join("\n"));
+						// 2017-10-06
+						// We should use `<br/>`, not `\n`:
+						// «Multiple error messages are wrongly shown on the same line»
+						// https://github.com/mage2pro/square/issues/14
+						this.showErrorMessage(errorsA.join("<br/>"));
 						this.state_waitingForServerResponse(false);
 					}
 				}, this)
