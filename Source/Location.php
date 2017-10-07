@@ -2,7 +2,18 @@
 namespace Dfe\Square\Source;
 use SquareConnect\Api\LocationsApi as API;
 use SquareConnect\ApiException;
-// 2016-10-06
+/**
+ * 2016-10-06
+ * 2017-10-07
+ * «Processing a card payment (PHP)» → «Retrieving your location IDs»
+ * «Every Square merchant's business consists of one or more locations.
+ * Every payment a merchant processes is associated with one of these locations (even online payments).
+ * In order to process a payment with Connect v2,
+ * you need to know which location you want to associate the payment with.
+ * The SquareConnect library has an easy method for obtaining a business' location IDs:
+ * the `listLocations` method.»
+ * https://docs.connect.squareup.com/articles/processing-payment-php#retrievinglocationids
+ */
 final class Location extends \Df\Payment\Source\API\Key\Testable {
 	/**
 	 * 2017-02-15
@@ -31,8 +42,7 @@ final class Location extends \Df\Payment\Source\API\Key\Testable {
 	 * @return array(string => string)
 	 */
 	protected function exception(\Exception $e) {
-		/** @var object $error */
-		$error = df_first(dfo($e->getResponseBody(), 'errors'));
+		$error = df_first(dfo($e->getResponseBody(), 'errors')); /** @var object $error */
 		return [dfo($error, 'code') => dfo($error, 'detail')];
 	}
 
