@@ -248,6 +248,24 @@ return parent.extend({
 				 * «Called when the SqPaymentForm detects that the buyer is using an unsupported browser.
 				 * Recommended.»
 				 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+				 * 2017-10-07
+				 * «Square Connect API» → «Unsupported browsers»
+				 * «If the `SqPaymentForm` does not support a buyer's current browser, it calls the function
+				 * that you specified as the `unsupportedBrowserDetected` callback during initialization, if any.
+				 * Specifying this callback lets you signal to the buyer in any way you choose
+				 * that their browser is not supported.
+				 * The `SqPaymentForm` supports most modern browsers.
+				 * Versions of Internet Explorer prior to Internet Explorer 10 are not supported.
+				 * NOTE: Square's integration with Apple Pay
+				 * adheres to Apple's development requirements for Apple Pay and is only supported for:
+				 * 		iOS 10 and later:
+				 * 				Apple Pay JavaScript is supported on all iOS devices with a Secure Element.
+				 * 				It is supported both in Safari and `SFSafariViewController objects`.
+				 * 		MacOS 10.12 and later:
+				 * 				Apple Pay JavaScript is supported in Safari.
+				 * 				The user must have an iPhone or Apple Watch to authorize the payment,
+				 * 				or a MacBook Pro with Touch ID.»
+				 * https://docs.connect.squareup.com/articles/adding-payment-form#unsupportedbrowsers
 				 */
 				,unsupportedBrowserDetected: $.proxy(function() {
 					this.showErrorMessage('Unfortunately, your browser does not support this payment option.');
