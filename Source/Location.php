@@ -1,7 +1,7 @@
 <?php
 namespace Dfe\Square\Source;
-use SquareConnect\Api\LocationsApi as API;
-use SquareConnect\ApiException;
+use Dfe\Square\API\Facade\Location as L;
+use Dfe\Square\API\Validator as V;
 /**
  * 2016-10-06
  * 2017-10-07
@@ -9,9 +9,7 @@ use SquareConnect\ApiException;
  * «Every Square merchant's business consists of one or more locations.
  * Every payment a merchant processes is associated with one of these locations (even online payments).
  * In order to process a payment with Connect v2,
- * you need to know which location you want to associate the payment with.
- * The SquareConnect library has an easy method for obtaining a business' location IDs:
- * the `listLocations` method.»
+ * you need to know which location you want to associate the payment with.»
  * https://docs.connect.squareup.com/articles/processing-payment-php#retrievinglocationids
  */
 final class Location extends \Df\Payment\Source\API\Key\Testable {
@@ -38,24 +36,17 @@ final class Location extends \Df\Payment\Source\API\Key\Testable {
 	 * @override
 	 * @see \Df\Config\Source\API::exception()
 	 * @used-by \Df\Config\Source\API::map()
-	 * @param \Exception|ApiException $e
+	 * @param \Exception|V $e
 	 * @return array(string => string)
 	 */
-	protected function exception(\Exception $e) {
-		$error = df_first(dfo($e->getResponseBody(), 'errors')); /** @var object $error */
-		return [dfo($error, 'code') => dfo($error, 'detail')];
-	}
+	protected function exception(\Exception $e) {return ['error' => $e instanceof V ? $e->short() : df_ets($e)];}
 
 	/**
 	 * 2017-02-15
-	 * https://docs.connect.squareup.com/articles/processing-payment-php/#retrievinglocationids
 	 * @override
 	 * @see \Df\Config\Source\API::fetch()
 	 * @used-by \Df\Config\Source\API::map()
 	 * @return array(string => string)
 	 */
-	protected function fetch() {
-		\SquareConnect\Configuration::getDefaultConfiguration()->setAccessToken($this->apiKey());
-		return df_column((new API)->listLocations()->getLocations(), 'getName', 'getId');
-	}
+	protected function fetch() {return (new L)->map();}
 }

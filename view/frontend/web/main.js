@@ -41,12 +41,25 @@ return parent.extend({
 	 * @returns {String[]}
 	 */
 	dfCardPostalCodeId: function() {return this.fid('postal_code');},
+	/**
+	 * 2017-10-09
+	 * These data are submitted to the M2 server part
+	 * as the `additional_data` property value on the «Place Order» button click:
+	 * @used-by Df_Payment/mixin::getData():
+	 *		getData: function() {return {additional_data: this.dfData(), method: this.item.method};},
+	 * https://github.com/mage2pro/core/blob/2.8.4/Payment/view/frontend/web/mixin.js#L224
+	 * @override
+	 * @see Df_Payment/card::dfData()
+	 * @returns {Object}
+	 */
+	dfData: function() {return df.o.merge(this._super(), {
+		cardholder: this.cardholder(), postalCode: this.postalCode
+	});},
     /**
 	 * 2016-09-28 https://mage2.pro/t/1936
 	 * @used-by Dfe_Square/atTheEnd.html
 	 */
     dfOnRender: _.after(2, function() {
-		var _this = this;
 		// 2017-10-06
 		// `SqPaymentForm` parameters:
 		// https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
@@ -237,10 +250,16 @@ return parent.extend({
 					if (!postalCode && (a = dfc.addressS())) {
 						postalCode = a.postcode;
 					}
-					postalCode
-						? this.square.setPostalCode(postalCode)
-						: $.when(dfc.geo()).then(function(data) {_this.square.setPostalCode(data['zip_code']);})
-					;
+					if (postalCode) {
+						this.square.setPostalCode(postalCode);
+						this.postalCode = postalCode;
+					}
+					else {
+						$.when(dfc.geo()).then($.proxy(function(data) {
+							this.postalCode = data['zip_code'];
+							this.square.setPostalCode(this.postalCode);
+						}), this)
+					}
 				}, this)
 				/**
 				 * 2017-10-06
@@ -459,6 +478,12 @@ return parent.extend({
 		 * Important: Card nonces expire after 24 hours.»
 		 * https://docs.connect.squareup.com/articles/adding-payment-form#obtainingnonce
 		 */
-		this.square.requestCardNonce();
+		if (this.isNewCardChosen()) {
+			this.square.requestCardNonce();
+		}
+		else {
+			this.token = this.currentCard();
+			this.placeOrderInternal();
+		}
 	}
 });});

@@ -206,9 +206,71 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 					<depends><field id='enable'>1</field></depends>
 				</field>
 				<field
-					id='requireBillingAddress'
+					id='actionForNew'
 					showInDefault='1' showInStore='1' showInWebsite='1'
 					sortOrder='11'
+					translate='label'
+					type='select'
+				>
+					<label>Payment Action for a New Customer</label>
+					<source_model>Df\Payment\Source\AC</source_model>
+					<comment><![CDATA[A customer is regarded as <b>new</b>, if he does not have any order in the «Completed» or «Processing» state.]]></comment>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
+					id='actionForReturned'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='12'
+					translate='label'
+					type='select'
+				>
+					<label>Payment Action for a Returned Customer</label>
+					<source_model>Df\Payment\Source\AC</source_model>
+					<depends><field id='enable'>1</field></depends>
+				</field>
+				<field
+					id='description'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='13'
+					translate='label'
+					type='textarea'
+				>
+					<comment model='Df\Payment\Comment\Description'/>
+					<depends><field id='enable'>1</field></depends>
+					<label>Description</label>
+				</field>
+				<field
+					id='requireCardholder'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='14'
+					translate='label'
+					type='Df\Framework\Form\Element\Checkbox'
+				>
+					<label>Require the cardholder's name?</label>
+					<backend_model>Df\Config\Backend\Checkbox</backend_model>
+					<comment><![CDATA[Square does not require it, but you can require it from your customers.]]></comment>
+					<depends>
+						<field id='enable'>1</field>
+					</depends>
+				</field>
+				<field
+					id='prefillCardholder'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='15'
+					translate='label'
+					type='Df\Framework\Form\Element\Checkbox'
+				>
+					<label>Prefill the cardholder's name from the billing address?</label>
+					<backend_model>Df\Config\Backend\Checkbox</backend_model>
+					<depends>
+						<field id='enable'>1</field>
+						<field id='requireCardholder'>1</field>
+					</depends>
+				</field>
+				<field
+					id='requireBillingAddress'
+					showInDefault='1' showInStore='1' showInWebsite='1'
+					sortOrder='16'
 					translate='label'
 					type='Df\Framework\Form\Element\Checkbox'
 				>
@@ -220,7 +282,7 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				<field
 					id='min_order_total'
 					showInDefault='1' showInStore='1' showInWebsite='1'
-					sortOrder='12'
+					sortOrder='17'
 					translate='label'
 					type='text'
 				>
@@ -232,7 +294,7 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				<field
 					id='max_order_total'
 					showInDefault='1' showInStore='1' showInWebsite='1'
-					sortOrder='13'
+					sortOrder='18'
 					translate='label'
 					type='text'
 				>
@@ -244,7 +306,7 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				<field
 					id='country_restriction'
 					showInDefault='1' showInStore='1' showInWebsite='1'
-					sortOrder='14'
+					sortOrder='19'
 					translate='label'
 					type='select'
 				>
@@ -255,7 +317,7 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 				<field
 					id='countries'
 					showInDefault='1' showInStore='1' showInWebsite='1'
-					sortOrder='15'
+					sortOrder='20'
 					translate='label'
 					type='Df\Framework\Form\Element\Multiselect'
 				>
