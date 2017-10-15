@@ -200,7 +200,7 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 					showInDefault='1' showInStore='1' showInWebsite='1'
 					sortOrder='10'
 					translate='label'
-					type='Df\Directory\FormElement\Currency'
+					type='Df\Directory\FE\Currency'
 				>
 					<label>Payment Currency</label>
 					<depends><field id='enable'>1</field></depends>
