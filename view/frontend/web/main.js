@@ -419,7 +419,7 @@ return parent.extend({
 		// 2016-09-30
 		// Unlike other payment services,
 		// Square does not allow to populate the payment form fields programmatically,
-		// so the Magento 2 Swuare extension does not contain
+		// so the Magento 2 Square extension does not contain
 		// the standard «Prefill the Payment Form with Test Data?» option,
 		// and you should to fill the payment form manually each time.
 		// https://mage2.pro/t/2097
