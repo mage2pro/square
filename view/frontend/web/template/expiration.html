@@ -3,7 +3,11 @@
 		<span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
 	</label>
 	<div class='control'>
-		<input afterRender="dfOnRender" class='input-text' type='text' value='' data-bind="
+<!-- 2017-10-16
+`afterRender` is implemented by analogy with Df_Payment/main.html:
+https://github.com/mage2pro/core/blob/3.2.5/Payment/view/frontend/web/template/main.html#L50-L56
+-->
+		<input afterRender='dfOnRender' class='input-text' type='text' value='' data-bind="
 			attr: {
 				autocomplete: off
 				,data: df.card.expirationComposite
