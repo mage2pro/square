@@ -23,6 +23,7 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 2017-10-05 Square now supports JPY, GBP, and AUD: https://mage2.pro/t/4634
 -->
 				<currency>USD</currency>
+				<description>{order.id}</description>
 				<description_rules>
 					<locations>
 						<merchant>
