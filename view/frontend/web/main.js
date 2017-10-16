@@ -57,9 +57,17 @@ return parent.extend({
 	});},
     /**
 	 * 2016-09-28 https://mage2.pro/t/1936
+	 * 2017-10-16
+	 * Magento <= 2.1.0 calls an `afterRender` handler outside of the `this` context.
+	 * It passes `this` to an `afterRender` handler as the second argument:
+	 * https://github.com/magento/magento2/blob/2.0.9/app/code/Magento/Ui/view/base/web/js/lib/ko/bind/after-render.js#L19
+	 * Magento >= 2.1.0 calls an `afterRender` handler within the `this` context:
+	 * https://github.com/magento/magento2/blob/2.1.0/app/code/Magento/Ui/view/base/web/js/lib/knockout/bindings/after-render.js#L20
 	 * @used-by Dfe_Square/atTheEnd.html
+	 * @param {HTMLElement} element
+	 * @param {Object} _this
 	 */
-    dfOnRender: _.after(2, function() {
+    dfOnRender: _.after(2, function(element, _this) {$.proxy(function() {
 		// 2017-10-06
 		// `SqPaymentForm` parameters:
 		// https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
@@ -243,7 +251,7 @@ return parent.extend({
 				 */
 				,paymentFormLoaded: $.proxy(function() {
 					/** @type {?String} */ var postalCode = null;
-					/** @type {?Object} */ var a; 
+					/** @type {?Object} */ var a;
 					if (a = dfc.addressB()) {
 						postalCode = a.postcode;
 					}
@@ -377,7 +385,7 @@ return parent.extend({
 		 * https://docs.connect.squareup.com/articles/adding-payment-form#generatingpaymentform
 		 */
 		this.square.build();
-	}),
+	}, _this)()}),
 	/**
 	 * 2016-09-28
 	 * 2017-02-05 The bank card network codes: https://mage2.pro/t/2647
