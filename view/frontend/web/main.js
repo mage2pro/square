@@ -31,12 +31,6 @@ return parent.extend({
 	},
 	/**
 	 * 2016-09-28
-	 * Dfe_Square/expiration.html
-	 * @returns {String[]}
-	 */
-	dfCardExpirationCompositeId: function() {return this.fid('expiration_composite');},
-	/**
-	 * 2016-09-28
 	 * @used-by Dfe_Square/atTheEnd.html
 	 * @returns {String[]}
 	 */
@@ -306,6 +300,12 @@ return parent.extend({
 			 * You can also specify placeholder text, which is shown when the input is empty.»
 			 * Type: object.
 			 * https://docs.connect.squareup.com/articles/adding-payment-form#sqpaymentformparameters
+			 *
+			 * 2017-10-17
+			 * I do not set a placeholder here,
+			 * because Square does not allow to specify a custom CSS rules for it,
+			 * and the stantard placeholder font is too bold.
+			 * https://docs.connect.squareup.com/articles/adding-payment-form#stylinginputinteriors
 			 */
 			,cardNumber: {elementId: this.dfCardNumberId()}
 			/**
