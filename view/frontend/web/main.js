@@ -202,6 +202,21 @@ return parent.extend({
 						 * https://docs.connect.squareup.com/articles/adding-payment-form#cardbrands
 						 * Note 2. I have implemented it similar to @see Magento_Payment/cc-form::initialize():
 						 * https://github.com/magento/magento2/blob/2.2.0/app/code/Magento/Payment/view/frontend/web/js/view/payment/cc-form.js#L55-L79
+						 *
+						 * 2017-10-21
+						 * The `this.selectedCardType` property is used not only for decoration
+						 * (to show the selected card brang logotype),
+						 * but also by @see Df_Payment/card::validate():
+						 *	var r = !this.isNewCardChosen() || !!this.selectedCardType();
+						 *	if (!r) {
+						 *		this.showErrorMessage(
+						 *			'It looks like you have entered an incorrect bank card number.'
+						 *		);
+						 *	}
+						 * https://github.com/mage2pro/core/blob/3.2.14/Payment/view/frontend/web/card.js#L287-L299
+						 * So it is vital to initialize it, otherwise we will get the failure:
+						 * «It looks like you have entered an incorrect bank card number»
+						 * https://github.com/mage2pro/stripe/issues/44
 						 */
 						this.selectedCardType(df.tr(event.cardBrand, {
 							americanExpress: 'AE'
