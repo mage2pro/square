@@ -36,7 +36,6 @@ https://www.sellercommunity.com/t5/Developers-API/Connect-API-v2-How-can-I-know-
 						<value>60</value>
 					</maxLength>
 				</description_rules>
-				<payment_action>authorize_capture</payment_action>
 				<requireBillingAddress>1</requireBillingAddress>
 				<title>Bank Card</title>
 				<title_backend>Square</title_backend>
