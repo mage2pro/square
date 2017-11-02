@@ -18,8 +18,7 @@ final class Settings extends \Df\StripeClone\Settings {
 	function location() {return $this->testable();}
 
 	/**
-	 * 2016-11-12
-	 * «Application ID»
+	 * 2016-11-12 «Application ID»
 	 * @override
 	 * @see \Df\StripeClone\Settings::publicKey()
 	 * @return string
