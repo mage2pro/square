@@ -1,4 +1,4 @@
-The extension integrates your Magento 2 based webstore with the **[Square](https://squareup.com/developers)** payment service.  
+This extension integrates a Magento 2 based webstore with the **[Square](https://squareup.com/developers)** payment service.  
 [The supported merchant countries](https://mage2.pro/t/4634): USA, Canada, Japan, Australia, and the United Kingdom.
 
 ![](https://mage2.pro/uploads/default/original/2X/3/3ea222a91c14531e6cbe877fdacaf53534e6b648.png)
