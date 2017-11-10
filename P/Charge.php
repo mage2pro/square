@@ -65,7 +65,7 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return array(string => mixed)
 	 */
-	protected function p() {$a = Address::singleton(); /** @var Address $a */ return [
+	protected function p() {$a = Address::sg(); /** @var Address $a */ return [
 		// 2017-10-09
 		// «The buyer's billing address.
 		// This value is optional, but this transaction is ineligible for chargeback protection

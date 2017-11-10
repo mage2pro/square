@@ -84,5 +84,5 @@ final class Address extends \Df\Payment\Operation {
 	 * @used-by \Dfe\Square\P\Reg::p()
 	 * @return self
 	 */
-	static function singleton() {static $r; return $r ? $r : $r = new self(dfpm(__CLASS__));}
+	static function sg() {static $r; return $r ? $r : $r = new self(dfpm(__CLASS__));}
 }

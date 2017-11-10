@@ -43,7 +43,7 @@ final class Reg extends \Df\StripeClone\P\Reg {
 	protected function p() {return [
 		// 2017-10-10 «The customer's physical address». Type: Address.
 		// https://docs.connect.squareup.com/api/connect/v2#type-address
-		'address' => Address::singleton()->shipping()
+		'address' => Address::sg()->shipping()
 		// 2017-10-10 «The name of the customer's company». Type: string.
 		,'company_name' => $this->addressBS()->getCompany()
 		// 2017-10-10 «The customer's family (i.e., last) name». Type: string.

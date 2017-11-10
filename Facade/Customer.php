@@ -53,7 +53,7 @@ final class Customer extends \Df\StripeClone\Facade\Customer {
 			 * whereas a Magento's billing address can be without a postal code.
 			 */
 			'postal_code' => $m->postalCode()
-		] + Address::singleton()->billing()
+		] + Address::sg()->billing()
 		/**
 		 * 2017-10-08
 		 * «A card nonce representing the credit card to link to the customer.
