@@ -65,7 +65,7 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * in a charge converted to an array by @see \Df\StripeClone\Facade\O::toArray()
 	 * @override
 	 * @see \Df\StripeClone\Facade\Charge::pathToCard()
-	 * @used-by \Df\StripeClone\Block\Info::cardData()
+	 * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
 	 * @used-by \Df\StripeClone\Facade\Charge::cardData()
 	 * @return string
 	 */
