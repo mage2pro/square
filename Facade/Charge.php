@@ -29,28 +29,10 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * [Square] An example of a response to `POST /v2/customers/{customer_id}/cards`: https://mage2.pro/t/4652
 	 * @override
 	 * @see \Df\StripeClone\Facade\Charge::cardIdPrefix()
-	 * @used-by \Df\StripeClone\Payer::usePreviousCard()
+	 * @used-by \Df\StripeClone\Payer::tokenIsNew()
 	 * @return string
 	 */
 	function cardIdPrefix() {return 'icard-';}
-
-	/**
-	 * 2017-10-10
-	 * Note 1.
-	 * The method returns:
-	 * 		`true` if $id is an ID of a previously saved bank card.
-	 * 		`false` if $id is a new card token.
-	 * Note 2.
-	 * A card ID looks like «82e66bb3-36ab-51cd-45e7-f9f251c73b08» (36 characters)
-	 * A token looks like «CBASENWtEICAkOK1sTnHg48psEAgAQ» (30 characters)
-	 * «[Square] An example of a response to `POST /v2/customers/{customer_id}/cards`»: https://mage2.pro/t/4652
-	 * @override
-	 * @see \Df\StripeClone\Facade\Charge::isCardId()
-	 * @used-by \Df\StripeClone\Payer::usePreviousCard()
-	 * @param string $id
-	 * @return bool
-	 */
-	function isCardId($id) {return 36 === strlen($id);}
 
 	/**
 	 * 2017-10-08
@@ -161,6 +143,24 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 			,'tender_id' => $tender['id']
 		]);
 	}
+
+	/**
+	 * 2017-10-10
+	 * Note 1.
+	 * The method returns:
+	 * 		`true` if $id is an ID of a previously saved bank card.
+	 * 		`false` if $id is a new card token.
+	 * Note 2.
+	 * A card ID looks like «82e66bb3-36ab-51cd-45e7-f9f251c73b08» (36 characters)
+	 * A token looks like «CBASENWtEICAkOK1sTnHg48psEAgAQ» (30 characters)
+	 * «[Square] An example of a response to `POST /v2/customers/{customer_id}/cards`»: https://mage2.pro/t/4652
+	 * @override
+	 * @see \Df\StripeClone\Facade\Charge::tokenIsNew()
+	 * @used-by \Df\StripeClone\Payer::tokenIsNew()
+	 * @param string $id
+	 * @return bool
+	 */
+	function tokenIsNew($id) {return 36 !== strlen($id);}
 
 	/**
 	 * 2017-10-09 «Connect API v2 Reference» → «Endpoints» → «Transactions» → «VoidTransaction»
