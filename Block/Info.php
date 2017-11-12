@@ -14,8 +14,7 @@ class Info extends \Df\StripeClone\Block\Info {
 			parent::prepare();
 		}
 		else {
-			// 2017-10-10 This branch is for legacy transactions
-			// (before the `Df_StripeClone` module usage).
+			// 2017-10-10 This branch is for legacy transactions (before the `Df_StripeClone` module usage).
 			$i = $this->ii();
 			$this->si('Card', df_cc_s($i->getCcType(), '****' . $i->getCcLast4()));
 		}
