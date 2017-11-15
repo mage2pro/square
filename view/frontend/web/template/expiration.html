@@ -3,12 +3,16 @@
 		<span><!-- ko i18n: 'Expiration Date'--><!-- /ko --></span>
 	</label>
 	<div class='control'>
-<!-- 2017-10-16
+<!--
+2017-10-16
 `afterRender` is implemented by analogy with Df_Payment/main.html:
 https://github.com/mage2pro/core/blob/3.2.5/Payment/view/frontend/web/template/main.html#L50-L56
+2017-11-15
+`afterRender='<callback>'` does not work at least in Magento 2.0.2: https://github.com/mage2pro/stripe/issues/50
 -->
-		<input afterRender='dfOnRender' class='input-text' type='text' value='' data-bind="
-			attr: {
+		<input class='input-text' type='text' value='' data-bind="
+			afterRender: dfOnRender
+			,attr: {
 				autocomplete: off
 				,data: df.card.expirationComposite
 				,'data-container': getCode() + '-cc-expiration-composite'
