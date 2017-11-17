@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\Square\Controller\Index;
-use Df\Framework\W\Response\Json;
+use Df\Framework\W\Result\Json;
 /**     
  * 2016-09-28
  * @final Unable to use the PHP «final» keyword here because of the M2 code generation. 
