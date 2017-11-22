@@ -7,7 +7,7 @@ class Info extends \Df\StripeClone\Block\Info {
 	 * 2016-10-06
 	 * @override
 	 * @see \Df\StripeClone\Block\Info::prepare()
-	 * @used-by \Df\Payment\Block\Info::_prepareSpecificInformation()
+	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 */
 	final protected function prepare() {
 		if ($this->tm()->res0()) {
