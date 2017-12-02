@@ -16,7 +16,7 @@ final class Card extends \Df\API\Facade {
 	 * 2017-10-08
 	 * @override
 	 * @see \Df\API\Facade::prefix()
-	 * @used-by \Df\API\Facade::p()
+	 * @used-by \Df\API\Facade::path()
 	 * @return string
 	 */
 	protected function prefix() {return "customers/{$this->_customerId}";}

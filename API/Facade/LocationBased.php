@@ -11,7 +11,7 @@ abstract class LocationBased extends \Df\API\Facade {
 	 * 2017-10-08
 	 * @override
 	 * @see \Df\API\Facade::prefix()
-	 * @used-by \Df\API\Facade::p()
+	 * @used-by \Df\API\Facade::path()
 	 * @return string
 	 */
 	protected function prefix() {/** @var S $s */$s = dfps($this); return "locations/{$s->location()}";}
