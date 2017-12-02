@@ -40,8 +40,7 @@ final class Client extends \Df\API\Client {
 		 */
 		$this->resStripRoot();
 	}
-
-
+	
 	/**
 	 * 2017-10-08
 	 * «Connect API v2 Reference» → «Connect API v2 Conventions» → «Request and response headers»
