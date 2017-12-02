@@ -12,7 +12,7 @@ final class Validator extends \Df\API\Response\Validator {
 	 * 2017-10-08
 	 * @override
 	 * @see \Df\API\Exception::long()
-	 * @used-by \Df\API\Client::p()
+	 * @used-by \Df\API\Client::_p()
 	 * @return string
 	 */
 	function long() {return df_json_encode($this->errors());}
@@ -21,7 +21,7 @@ final class Validator extends \Df\API\Response\Validator {
 	 * 2017-10-08
 	 * @override
 	 * @see \Df\API\Exception::short()
-	 * @used-by \Df\API\Client::p()
+	 * @used-by \Df\API\Client::_p()
 	 * @used-by \Dfe\Square\Source\Location::exception()
 	 * @return string
 	 */
