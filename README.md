@@ -12,10 +12,12 @@ Just order my [free installation service](https://mage2.pro/t/3585).
 
 ### 2. Self-installation
 ```
+bin/magento maintenance:enable
 composer require mage2pro/square:*
 bin/magento setup:upgrade
-rm -rf pub/static/* && bin/magento setup:static-content:deploy en_US <additional locales, e.g.: en_CA>
 rm -rf var/di var/generation generated/code && bin/magento setup:di:compile
+rm -rf pub/static/* && bin/magento setup:static-content:deploy en_US <additional locales, e.g.: en_CA>
+bin/magento maintenance:disable
 ```
 If you have problems with these commands, please check the [detailed instruction](https://mage2.pro/t/263).
 
