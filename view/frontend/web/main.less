@@ -21,9 +21,6 @@ form.dfe_square {
 	// an iframe with focus is given the additional class `card-form--focus`:
 	// https://docs.connect.squareup.com/articles/adding-payment-form#adjustingexteriorstyles
 	iframe.dfe-square--focus {box-shadow: 0 0 3px 1px #00699d;}
-	// 2017-10-05
-	// M2 has a build-in rule: .fieldset > .fields > .field:last-child {margin-bottom: 0;}
-	// In the Square's case, the CVV field is not the last child, but the last visible child,
-	// so the {margin-bottom: 0;} rule should be added exactly.
-	.field.cvv {margin-bottom: 0;}
+	div.postalCode {width: 6em;}
+	.field-tooltip {right: -0.5em;}
 }

@@ -28,6 +28,7 @@ return parent.extend({
 			}
 		}
 		,expirationComposite: ''
+		,postalCode: ''
 	},
 	/**
 	 * 2016-09-28
@@ -47,7 +48,7 @@ return parent.extend({
 	 * @returns {Object}
 	 */
 	dfData: function() {return _.assign(this._super(), {
-		cardholder: this.cardholder(), postalCode: this.postalCode
+		cardholder: this.cardholder(), postalCode: this.postalCode()
 	});},
     /**
 	 * 2016-09-28 https://mage2.pro/t/1936
@@ -268,13 +269,11 @@ return parent.extend({
 						postalCode = a.postcode;
 					}
 					if (postalCode) {
-						this.square.setPostalCode(postalCode);
-						this.postalCode = postalCode;
+						this.postalCode(postalCode);
 					}
 					else {
 						$.when(dfc.geo()).then($.proxy(function(data) {
-							this.postalCode = data['zip_code'];
-							this.square.setPostalCode(this.postalCode);
+							this.postalCode(data['zip_code']);
 						}), this)
 					}
 				}, this)
@@ -383,6 +382,7 @@ return parent.extend({
 			 */
 			,postalCode: {elementId: this.dfCardPostalCodeId()}
 		});
+		this.postalCode.subscribe(function(v) {this.square.setPostalCode(v);}, this);
 		/**
 		 * 2017-10-06
 		 * Generating the payment form
@@ -399,7 +399,6 @@ return parent.extend({
 		 * will log an error to the Javascript console, but it is otherwise harmless.
 		 * https://docs.connect.squareup.com/articles/adding-payment-form#generatingpaymentform
 		 */
-		this.square.build();
 	}, _this)()}),
 	/**
 	 * 2016-09-28
@@ -453,7 +452,11 @@ return parent.extend({
 	 * https://github.com/magento/magento2/blob/2.2.0-RC1.3/app/code/Magento/Ui/view/base/web/js/lib/core/element/element.js#L104
 	 * @returns {Element} Chainable
 	*/
-	initObservable: function() {this._super(); this.observe(['expirationComposite']); return this;},
+	initObservable: function() {
+		this._super();
+		this.observe(['expirationComposite', 'postalCode']);
+		return this;
+	},
 	/**
 	 * 2016-09-28
 	 * @override
@@ -508,5 +511,19 @@ return parent.extend({
 			this.token = this.currentCard();
 			this.placeOrderInternal();
 		}
-	}
+	},
+	/**
+	 * 2018-09-08
+	 * Since then, Square does not allow to call `build` on a hidden form:
+	 * «SqPaymentForm element with id `<...>` is not visible. Does it or a parent element have `display:none`?»
+	 * https://github.com/mage2pro/square/issues/28
+	 * @override
+	 * @see Magento_Checkout/js/view/payment/default.js
+	 * @return {Boolean}
+	 */
+	selectPaymentMethod: function () {
+		this._super();
+		this.square.build();
+		return true;
+	},
 });});
