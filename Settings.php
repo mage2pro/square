@@ -21,9 +21,8 @@ final class Settings extends \Df\StripeClone\Settings {
 	 * 2016-11-12 «Application ID»
 	 * @override
 	 * @see \Df\StripeClone\Settings::publicKey()
+	 * @used-by \Df\StripeClone\ConfigProvider::config()
 	 * @return string
 	 */
 	function publicKey() {return $this->testable('applicationID');}
 }
-
-
