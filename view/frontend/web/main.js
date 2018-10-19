@@ -382,6 +382,7 @@ return parent.extend({
 			 */
 			,postalCode: {elementId: this.dfCardPostalCodeId()}
 		});
+		this.tryBuild();
 		this.postalCode.subscribe(function(v) {this.square.setPostalCode(v);}, this);
 		/**
 		 * 2017-10-06
@@ -444,6 +445,7 @@ return parent.extend({
 		// 2017-10-06
 		// Without it, the MasterCard brand will be initially (with empty Credit Card Number» field) highlighted.
 		this.selectedCardType(null);
+		this.built = false;
 		return this;
 	},
 	/**
@@ -460,6 +462,13 @@ return parent.extend({
 		this.observe(['expirationComposite', 'postalCode']);
 		return this;
 	},
+	/**
+	 * 2018-10-19
+	 * @override
+	 * @see Df_Payment/card::newCardChosen()
+	 * @used-by Df_Payment/view/frontend/web/template/card.html
+	 */
+	newCardChosen: function() {this.tryBuild();},
 	/**
 	 * 2016-09-28
 	 * @override
@@ -526,7 +535,26 @@ return parent.extend({
 	 */
 	selectPaymentMethod: function () {
 		this._super();
-		this.square.build();
+		this.tryBuild();
 		return true;
 	},
+	/**
+	 * 2018-10-18
+	 * @used-by dfOnRender()
+	 * @used-by newCardChosen()
+	 * @used-by selectPaymentMethod()
+	 */
+	tryBuild: function() {
+		/**
+		 * 2018-10-18
+		 * Square does not allow to call `build` on a hidden form:
+		 * «SqPaymentForm element with id `<...>` is not visible.
+		 * Does it or a parent element have `display:none`?»
+		 * https://github.com/mage2pro/square/issues/28
+		 */
+		if (!this.built && this.dfForm('fieldset.df-card-new.dfe_square').is(':visible')) {
+			this.built = true;
+			this.square.build();
+		}
+	}
 });});
