@@ -9,8 +9,13 @@
 https://github.com/mage2pro/core/blob/3.2.5/Payment/view/frontend/web/template/main.html#L50-L56
 2017-11-15
 `afterRender='<callback>'` does not work at least in Magento 2.0.2: https://github.com/mage2pro/stripe/issues/50
+2018-10-19
+attr: {id: dfCardExpirationCompositeId()} does not work in ft86motorsports.com (Magento 2.2.5)
+for an unknown reason, so I set `id='dfe_square_expiration_composite'` explicitly.
+«SqPaymentForm element with id `dfe_square_postal_code` not found. Has the DOM finished loading?»:
+https://github.com/mage2pro/square/issues/32
 -->
-		<input class='input-text' type='text' value='' data-bind="
+		<input class='input-text' id='dfe_square_expiration_composite' type='text' value='' data-bind="
 			afterRender: dfOnRender
 			,attr: {
 				autocomplete: off

@@ -1,6 +1,6 @@
 {
 	"name": "mage2pro/square"
-	,"version": "2.2.6"
+	,"version": "2.2.7"
 	,"description": "Square Payments integration with Magento 2"
 	,"type": "magento2-module"
 	,"homepage": "https://mage2.pro/c/extensions/square"

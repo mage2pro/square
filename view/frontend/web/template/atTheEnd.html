@@ -7,13 +7,19 @@ https://github.com/mage2pro/core/blob/3.2.5/Payment/view/frontend/web/template/m
 2018-09-08
 Square does not allow the payment form fields to be hidden anymore:
 «SqPaymentForm element with id `<...>` is not visible. Does it or a parent element have `display:none`?»
-https://github.com/mage2pro/square/issues/28 -->
+https://github.com/mage2pro/square/issues/28
+2018-10-19
+attr: {id: dfCardPostalCodeId()} does not work in ft86motorsports.com (Magento 2.2.5)
+for an unknown reason, so I set `id='dfe_square_postal_code'` explicitly.
+«SqPaymentForm element with id `dfe_square_postal_code` not found. Has the DOM finished loading?»:
+https://github.com/mage2pro/square/issues/32
+-->
 <div class='field postalCode required'>
 	<label data-bind="attr: {for: dfCardPostalCodeId()}" class='label'>
 		<span><!-- ko df_i18n: 'Postal Code'--><!-- /ko --></span>
 	</label>
 	<div class='control'>
-		<input class='input-text postalCode' type='text' value='' data-bind="
+		<input class='input-text postalCode' id='dfe_square_postal_code' type='text' value='' data-bind="
 			afterRender: dfOnRender
 			,attr: {
 				'data-container': getCode() + '-postalCode'
