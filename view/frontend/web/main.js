@@ -467,8 +467,19 @@ return parent.extend({
 	 * @override
 	 * @see Df_Payment/card::newCardChosen()
 	 * @used-by Df_Payment/view/frontend/web/template/card.html
+	 * @returns {Boolean}
 	 */
-	newCardChosen: function() {this.tryBuild();},
+	newCardChosen: function() {
+		this._super();
+		this.tryBuild();
+		/**
+		 * 2018-10-19
+		 * «if you do want to let the default click action proceed,
+		 * just return true from your click handler function»
+		 * https://knockoutjs.com/documentation/click-binding.html#note-3-allowing-the-default-click-action
+		 */
+		return true;
+	},
 	/**
 	 * 2016-09-28
 	 * @override
