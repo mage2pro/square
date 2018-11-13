@@ -5,7 +5,7 @@ namespace Dfe\Square\Facade;
  * «Connect API v2 Reference» → «API Data Types» → «Card»
  * https://docs.connect.squareup.com/api/connect/v2#type-card
  */
-final class Card implements \Df\StripeClone\Facade\ICard {
+final class Card extends \Df\StripeClone\Facade\Card {
 	/**
 	 * 2017-10-07
 	 * @used-by \Df\StripeClone\Facade\Card::create()
@@ -27,7 +27,7 @@ final class Card implements \Df\StripeClone\Facade\ICard {
 	 * 		`VISA`
 	 * Type: string.
 	 * @override
-	 * @see \Df\StripeClone\Facade\ICard::brand()
+	 * @see \Df\StripeClone\Facade\Card::brand()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\CardFormatter::label()
 	 * @return string
@@ -55,7 +55,7 @@ final class Card implements \Df\StripeClone\Facade\ICard {
 	 * Note 3. It should be an ISO-2 code or `null`.
 	 * Type: string.
 	 * @override
-	 * @see \Df\StripeClone\Facade\ICard::country()
+	 * @see \Df\StripeClone\Facade\Card::country()
 	 * @used-by \Df\StripeClone\CardFormatter::country()
 	 * @return string
 	 */
@@ -66,7 +66,7 @@ final class Card implements \Df\StripeClone\Facade\ICard {
 	 * «The month of the card's expiration date. This value is always between 1 and 12, inclusive.»
 	 * Type: integer.
 	 * @override
-	 * @see \Df\StripeClone\Facade\ICard::expMonth()
+	 * @see \Df\StripeClone\Facade\Card::expMonth()
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @return int
@@ -77,7 +77,7 @@ final class Card implements \Df\StripeClone\Facade\ICard {
 	 * 2017-10-07 «The four-digit year of the card's expiration date»
 	 * Type: integer.
 	 * @override
-	 * @see \Df\StripeClone\Facade\ICard::expYear()
+	 * @see \Df\StripeClone\Facade\Card::expYear()
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @return int
@@ -88,7 +88,7 @@ final class Card implements \Df\StripeClone\Facade\ICard {
 	 * 2017-10-07 «The card's unique ID, if any»
 	 * Type: string.
 	 * @override
-	 * @see \Df\StripeClone\Facade\ICard::id()
+	 * @see \Df\StripeClone\Facade\Card::id()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Facade\Customer::cardIdForJustCreated()
 	 * @return string
@@ -99,7 +99,7 @@ final class Card implements \Df\StripeClone\Facade\ICard {
 	 * 2017-10-07 «The last 4 digits of the card's number»
 	 * Type: string.
 	 * @override
-	 * @see \Df\StripeClone\Facade\ICard::last4()
+	 * @see \Df\StripeClone\Facade\Card::last4()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\CardFormatter::label()
 	 * @return string
@@ -111,7 +111,7 @@ final class Card implements \Df\StripeClone\Facade\ICard {
 	 * This value is present only if this object represents a customer's card on file.»
 	 * Type: string.
 	 * @override
-	 * @see \Df\StripeClone\Facade\ICard::owner()
+	 * @see \Df\StripeClone\Facade\Card::owner()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @return string|null
 	 */
