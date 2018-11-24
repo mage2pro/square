@@ -59,6 +59,15 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	protected function k_CustomerId() {return 'customer_id';}
 
 	/**
+	 * 2018-11-24 https://docs.connect.squareup.com/api/connect/v2#endpoint-charge
+	 * @override
+	 * @see \Df\StripeClone\P\Charge::k_Description()
+	 * @used-by \Df\StripeClone\P\Charge::request()
+	 * @return string
+	 */
+	protected function k_Description() {return 'note';}
+
+	/**
 	 * 2017-10-09
 	 * @override
 	 * @see \Df\StripeClone\P\Charge::p()
