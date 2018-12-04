@@ -111,11 +111,39 @@ final class Customer extends \Df\StripeClone\Facade\Customer {
 	 * `cards`: «The non-confidential details of the customer's cards on file»
 	 * «Connect API v2 Reference» → «Data Types» → «Customer»
 	 * https://docs.connect.squareup.com/api/connect/v2#type-customer
+	 * 2018-12-04
+	 * The `cards` key can be absent:
+	 * https://github.com/mage2pro/core/issues/83
+	 * «array_map(): Argument #2 should be an array
+	 * in vendor/mage2pro/core/StripeClone/Facade/Customer.php on line 149».
+	 * An example of a $c object without `cards`:
+	 *	{
+	 *		"address": {
+	 *			"address_line_1": "4705 Rue Saint-Laurent",
+	 *			"administrative_district_level_1": "Quebec",
+	 *			"country": "CA",
+	 *			"locality": "Sorel",
+	 *			"postal_code": "J3R5S8"
+	 *		},
+	 *		"company_name": "Paille chevrolet sorel tracy ",
+	 *		"created_at": "2018-11-24T00:04:56.002Z",
+	 *		"creation_source": "THIRD_PARTY",
+	 *		"email_address": "<...>",
+	 *		"family_name": "<...>",
+	 *		"given_name": "philippe",
+	 *		"id": "P08A11D3PD4EBDD5ZNG50PHDRM",
+	 *		"note": "<...>",
+	 *		"phone_number": "5149982307",
+	 *		"preferences": {
+	 *			"email_unsubscribed": false
+	 *		},
+	 *		"updated_at": "2018-11-24T00:04:56Z"
+	 *	}
 	 * @override
 	 * @see \Df\StripeClone\Facade\Customer::cardsData()
 	 * @used-by \Df\StripeClone\Facade\Customer::cards()
 	 * @param Operation $c
 	 * @return array(array(string => string))
 	 */
-	protected function cardsData($c) {return $c['cards'];}
+	protected function cardsData($c) {return df_eta($c['cards']);}
 }
