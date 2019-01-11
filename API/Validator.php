@@ -31,7 +31,7 @@ final class Validator extends \Df\API\Response\Validator {
 	 * 2017-10-08
 	 * @override
 	 * @see \Df\API\Response\Validator::valid()
-	 * @used-by \Df\API\Response\Validator::validate()
+	 * @used-by \Df\API\Client::_p()
 	 * @return bool
 	 */
 	function valid() {return !$this->errors();}
