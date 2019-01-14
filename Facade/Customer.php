@@ -75,7 +75,7 @@ final class Customer extends \Df\StripeClone\Facade\Customer {
 	 * @param array(string => mixed) $p
 	 * @return Operation
 	 */
-	function create(array $p) {return (new C)->post($p);}
+	function create(array $p) {return C::s()->post($p);}
 
 	/**
 	 * 2017-10-08 A result looks like `JDKYHBWT1D4F8MFH63DBMEN8Y4`.
