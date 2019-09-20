@@ -21,6 +21,17 @@ bin/magento maintenance:disable
 ```
 If you have problems with these commands, please check the [detailed instruction](https://mage2.pro/t/263).
 
+## How to update
+```
+bin/magento maintenance:enable
+composer clear-cache
+composer update mage2pro/square
+bin/magento setup:upgrade
+rm -rf var/di var/generation generated/code && bin/magento setup:di:compile
+rm -rf pub/static/* && bin/magento setup:static-content:deploy en_US <additional locales, e.g.: de_DE>
+bin/magento maintenance:disable
+```
+
 ## Licensing
 It is a paid extension, not free.  
 You can use it for free for the testing puproses only.  
