@@ -15,6 +15,7 @@ final class Method extends \Df\StripeClone\Method {
 	/**
 	 * 2017-10-09
 	 * @used-by \Dfe\Square\Facade\Customer::cardAdd()
+	 * @used-by \Dfe\Square\P\Address::p()
 	 * @return string|null
 	 */
 	function postalCode() {return $this->iia(self::$II_POSTAL_CODE);}

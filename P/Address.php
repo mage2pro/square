@@ -15,7 +15,7 @@ final class Address extends \Df\Payment\Operation {
 	 * @used-by \Dfe\Square\P\Charge::p()
 	 * @return array(string => mixed)
 	 */
-	function billing() {return $this->p($this->addressB());}
+	function billing() {return $this->p($this->addressB(), true);}
 
 	/**
 	 * 2017-10-09
@@ -31,9 +31,10 @@ final class Address extends \Df\Payment\Operation {
 	 * @used-by billing()
 	 * @used-by shipping()
 	 * @param A|null $a
+	 * @param bool $isBilling [optional]
 	 * @return array(string => mixed)
 	 */
-	private function p(A $a = null) {/** @var A|null $a */ return !$a ? [] : [
+	private function p(A $a = null, $isBilling = false) {/** @var A|null $a */ return !$a ? [] : [
 		// 2017-10-09
 		// «The first line of the address.
 		// Fields that start with `address_line` provide the address's most specific details,
@@ -68,7 +69,8 @@ final class Address extends \Df\Payment\Operation {
 		// 2017-10-09  «Optional organization name when it's representing recipient». Type: string.
 		,'organization' => $a->getCompany()
 		// 2017-10-09 «The address's postal code». Type: string.
-		,'postal_code' => $a->getPostcode()
+		// 2019-09-21 «The postal code in billing address doesn't match the one used for card nonce creation.»
+		,'postal_code' => !$isBilling ? $a->getPostcode() : $this->m()->postalCode()
 		// 2017-10-09 «A civil region within the address's locality, if any». Type: string.
 		,'sublocality' => ''
 		// 2017-10-09  «A civil region within the address's sublocality, if any». Type: string.

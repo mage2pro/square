@@ -109,7 +109,7 @@ return parent.extend({
 				 *		}
 				 * https://docs.connect.squareup.com/articles/adding-payment-form#noncecallbackformat
 				 */
-				cardNonceResponseReceived: $.proxy(function(errors, nonce) {
+				cardNonceResponseReceived: $.proxy(function(errors, nonce, cardData) {
 					/**
 					 * 2017-10-06
 					 * «The `errors` parameter is an array of objects
@@ -128,6 +128,7 @@ return parent.extend({
 						 * https://docs.connect.squareup.com/articles/adding-payment-form#noncecallbackformat
 						 */
 						this.token = nonce;
+						this.postalCode(cardData['billing_postal_code']);
 						this.placeOrderInternal();
 					}
 					else {
@@ -274,7 +275,7 @@ return parent.extend({
 					else {
 						$.when(dfc.geo()).then($.proxy(function(data) {
 							this.postalCode(data['zip_code']);
-						}), this)
+						}, this))
 					}
 				}, this)
 				/**
