@@ -97,7 +97,7 @@ final class Customer extends \Df\StripeClone\Facade\Customer {
 	 *			"detail": "Customer with ID `111` not found."
 	 *		}
 	 * We will return null in this case.
-	 * @see \Dfe\Square\T\CaseT\Customer::t02_get()
+	 * @see \Dfe\Square\Test\CaseT\Customer::t02_get()
 	 * @override
 	 * @see \Df\StripeClone\Facade\Customer::_get()
 	 * @used-by \Df\StripeClone\Facade\Customer::get()

@@ -1,8 +1,8 @@
 <?php
-namespace Dfe\Square\T\CaseT;
-use Dfe\Square\API\Facade\Customer as C;
+namespace Dfe\Square\Test\CaseT;
+use Dfe\Square\API\Facade\Location as L;
 // 2017-10-08
-final class Customer extends \Dfe\Square\T\CaseT {
+final class Location extends \Dfe\Square\Test\CaseT {
 	/** @test 2017-10-08 */
 	function t00() {}
 
@@ -12,7 +12,7 @@ final class Customer extends \Dfe\Square\T\CaseT {
 	 */
 	function t01_all() {
 		try {
-			print_r((new C)->all()->j());
+			print_r((new L)->all()->j());
 		}
 		catch (\Exception $e) {
 			if (function_exists('xdebug_break')) {
@@ -22,10 +22,10 @@ final class Customer extends \Dfe\Square\T\CaseT {
 		}
 	}
 
-	/** @test 2017-10-09 */
-	function t02_get() {
+	/** 2017-10-08 */
+	function t02_map() {
 		try {
-			print_r((new C)->get('111')->j());
+			print_r((new L)->map());
 		}
 		catch (\Exception $e) {
 			if (function_exists('xdebug_break')) {
