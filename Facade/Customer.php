@@ -63,7 +63,7 @@ final class Customer extends \Df\StripeClone\Facade\Customer {
 		 * Type: string. Required.
 		 */
 		,'card_nonce' => $token
-		// 2017-10-08 «The cardholder's name». Type: string. Optional.
+		# 2017-10-08 «The cardholder's name». Type: string. Optional.
 		,'cardholder_name' => $m->cardholder()
 	])['id'];}
 

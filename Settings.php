@@ -1,6 +1,6 @@
 <?php
 namespace Dfe\Square;
-// 2016-09-28
+# 2016-09-28
 /** @method static Settings s() */
 final class Settings extends \Df\StripeClone\Settings {
 	/**

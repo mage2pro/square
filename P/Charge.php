@@ -1,7 +1,7 @@
 <?php
 namespace Dfe\Square\P;
-// 2017-10-09 «Connect API v2 Reference» → «Endpoints» → «Transactions» → «Charge»
-// https://docs.connect.squareup.com/api/connect/v2#endpoint-charge
+# 2017-10-09 «Connect API v2 Reference» → «Endpoints» → «Transactions» → «Charge»
+# https://docs.connect.squareup.com/api/connect/v2#endpoint-charge
 final class Charge extends \Df\StripeClone\P\Charge {
 	/**
 	 * 2017-10-09
@@ -75,16 +75,16 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	 * @return array(string => mixed)
 	 */
 	protected function p() {$a = Address::sg(); /** @var Address $a */ return [
-		// 2017-10-09
-		// «The buyer's billing address.
-		// This value is optional, but this transaction is ineligible for chargeback protection
-		// if neither this parameter nor shipping_address is provided.»
-		// Type: Address.
+		# 2017-10-09
+		# «The buyer's billing address.
+		# This value is optional, but this transaction is ineligible for chargeback protection
+		# if neither this parameter nor shipping_address is provided.»
+		# Type: Address.
 		'billing_address' => $a->billing()
-		// 2017-10-10
-		// «The buyer's email address, if available.
-		// This value is optional,
-		// but this transaction is ineligible for chargeback protection if it is not provided.»
+		# 2017-10-10
+		# «The buyer's email address, if available.
+		# This value is optional,
+		# but this transaction is ineligible for chargeback protection if it is not provided.»
 		,'buyer_email_address' => $this->customerEmail()
 		/**
 		 * 2017-10-07
@@ -96,11 +96,11 @@ final class Charge extends \Df\StripeClone\P\Charge {
 		 * https://docs.connect.squareup.com/api/connect/v2#idempotencykeys
 		 */
 		,'idempotency_key' => uniqid()
-		// 2017-10-09
-		// «The buyer's shipping address, if available.
-		// This value is optional, but this transaction is ineligible for chargeback protection
-		// if neither this parameter nor billing_address is provided.»
-		// Type: Address.
+		# 2017-10-09
+		# «The buyer's shipping address, if available.
+		# This value is optional, but this transaction is ineligible for chargeback protection
+		# if neither this parameter nor billing_address is provided.»
+		# Type: Address.
 		,'shipping_address' => $a->shipping()
 	];}
 

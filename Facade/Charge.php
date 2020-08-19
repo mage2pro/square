@@ -85,9 +85,9 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 */
 	function refund($id, $a) {
 		$api = new T; /** @var T $api */
-		// 2017-10-09
-		// [Square] An example of a response to `GET /v2/locations/{location_id}/transactions/{transaction_id}`
-		// https://mage2.pro/t/4654
+		# 2017-10-09
+		# [Square] An example of a response to `GET /v2/locations/{location_id}/transactions/{transaction_id}`
+		# https://mage2.pro/t/4654
 		$t = $api->get($id); /** @var Operation $t */
 		$tender = $t->a('tenders/0'); /** @var array(string => mixed) $tender */
 		return $api->refund($id, [
@@ -104,10 +104,10 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 			 * https://docs.connect.squareup.com/api/connect/v2#type-money
 			 */
 			'amount_money' => [
-				// 2017-10-09
-				// «The amount of money, in the smallest denomination of the currency indicated by currency.
-				// For example, when currency is `USD`, amount is in cents.»
-				// Type: integer.
+				# 2017-10-09
+				# «The amount of money, in the smallest denomination of the currency indicated by currency.
+				# For example, when currency is `USD`, amount is in cents.»
+				# Type: integer.
 				'amount' => $a
 				/**
 				 * 2017-10-09
@@ -130,16 +130,16 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 			 * Type: string.
 			 */
 			,'idempotency_key' => uniqid()
-			// 2017-10-09 «A description of the reason for the refund. Default value: "Refund via API".»
-			// Type: string.
+			# 2017-10-09 «A description of the reason for the refund. Default value: "Refund via API".»
+			# Type: string.
 			,'reason' => ''
-			// 2017-10-09
-			// Note 1.
-			// «The ID of the tender to refund.
-			// A Transaction has one or more tenders (i.e., methods of payment) associated with it,
-			// and you refund each tender separately with the Connect API.»
-			// Type: string.
-			// Note 2. It is a string like «KnL67ZIwXCPtzOrqj0HrkxMF».
+			# 2017-10-09
+			# Note 1.
+			# «The ID of the tender to refund.
+			# A Transaction has one or more tenders (i.e., methods of payment) associated with it,
+			# and you refund each tender separately with the Connect API.»
+			# Type: string.
+			# Note 2. It is a string like «KnL67ZIwXCPtzOrqj0HrkxMF».
 			,'tender_id' => $tender['id']
 		]);
 	}

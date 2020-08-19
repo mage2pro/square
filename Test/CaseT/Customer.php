@@ -1,7 +1,7 @@
 <?php
 namespace Dfe\Square\Test\CaseT;
 use Dfe\Square\API\Facade\Customer as C;
-// 2017-10-08
+# 2017-10-08
 final class Customer extends \Dfe\Square\Test\CaseT {
 	/** @test 2017-10-08 */
 	function t00() {}

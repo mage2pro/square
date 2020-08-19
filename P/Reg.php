@@ -1,7 +1,7 @@
 <?php
 namespace Dfe\Square\P;
-// 2017-10-10 «Connect API v2 Reference» → «Endpoints» → «Customers» → «CreateCustomer»
-// https://docs.connect.squareup.com/api/connect/v2#endpoint-createcustomer
+# 2017-10-10 «Connect API v2 Reference» → «Endpoints» → «Customers» → «CreateCustomer»
+# https://docs.connect.squareup.com/api/connect/v2#endpoint-createcustomer
 final class Reg extends \Df\StripeClone\P\Reg {
 	/**
 	 * 2017-10-10
@@ -41,18 +41,18 @@ final class Reg extends \Df\StripeClone\P\Reg {
 	 * @return array(string => mixed)
 	 */
 	protected function p() {return [
-		// 2017-10-10 «The customer's physical address». Type: Address.
-		// https://docs.connect.squareup.com/api/connect/v2#type-address
+		# 2017-10-10 «The customer's physical address». Type: Address.
+		# https://docs.connect.squareup.com/api/connect/v2#type-address
 		'address' => Address::sg()->shipping()
-		// 2017-10-10 «The name of the customer's company». Type: string.
+		# 2017-10-10 «The name of the customer's company». Type: string.
 		,'company_name' => $this->addressBS()->getCompany()
-		// 2017-10-10 «The customer's family (i.e., last) name». Type: string.
+		# 2017-10-10 «The customer's family (i.e., last) name». Type: string.
 		,'family_name' => $this->customerNameL()
-		// 2017-10-10 «The customer's given (i.e., first) name». Type: string.
+		# 2017-10-10 «The customer's given (i.e., first) name». Type: string.
 		,'given_name' => $this->customerNameF()
-		// 2017-10-10 «A nickname for the customer». Type: string.
+		# 2017-10-10 «A nickname for the customer». Type: string.
 		,'nickname' => ''
-		// 2017-10-10 «The customer's phone number». Type: STUB.
+		# 2017-10-10 «The customer's phone number». Type: STUB.
 		,'phone_number' => $this->customerPhone()
 	];}
 }

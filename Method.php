@@ -2,7 +2,7 @@
 namespace Dfe\Square;
 use Df\Core\Exception as DFE;
 use Magento\Sales\Model\Order\Payment\Transaction as T;
-// 2016-09-28
+# 2016-09-28
 /** @method Settings s() */
 final class Method extends \Df\StripeClone\Method {
 	/**
@@ -39,8 +39,8 @@ final class Method extends \Df\StripeClone\Method {
 	 */
 	protected function amountLimits() {return [
 		'AUD' => [1, 50000], 'CAD' => [1, 50000], 'GBP' => [1, 50000]
-		// 2017-10-05 @todo It is certainly wrong!
-		// Need to be updated when I will have the right limits from the Square support.
+		# 2017-10-05 @todo It is certainly wrong!
+		# Need to be updated when I will have the right limits from the Square support.
 		,'JPY' => [1, 50000]
 		,'USD' => [1, 50000]
 	];}

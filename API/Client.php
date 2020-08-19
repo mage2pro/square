@@ -2,7 +2,7 @@
 namespace Dfe\Square\API;
 use Dfe\Square\Settings as S;
 use Zend_Http_Client as C;
-// 2017-10-08
+# 2017-10-08
 final class Client extends \Df\API\Client {
 	/**
 	 * 2017-10-08
