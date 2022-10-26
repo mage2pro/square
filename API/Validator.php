@@ -13,9 +13,8 @@ final class Validator extends \Df\API\Response\Validator {
 	 * @override
 	 * @see \Df\API\Exception::long()
 	 * @used-by \Df\API\Client::_p()
-	 * @return string
 	 */
-	function long() {return df_json_encode($this->errors());}
+	function long():string {return df_json_encode($this->errors());}
 
 	/**
 	 * 2017-10-08
@@ -23,18 +22,16 @@ final class Validator extends \Df\API\Response\Validator {
 	 * @see \Df\API\Exception::short()
 	 * @used-by \Df\API\Client::_p()
 	 * @used-by \Dfe\Square\Source\Location::exception()
-	 * @return string
 	 */
-	function short() {return df_cc_br(array_column($this->errors(), 'detail'));}
+	function short():string {return df_cc_br(array_column($this->errors(), 'detail'));}
 
 	/**
 	 * 2017-10-08
 	 * @override
 	 * @see \Df\API\Response\Validator::valid()
 	 * @used-by \Df\API\Client::_p()
-	 * @return bool
 	 */
-	function valid() {return !$this->errors();}
+	function valid():bool {return !$this->errors();}
 
 	/**
 	 * 2017-10-08

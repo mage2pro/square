@@ -17,7 +17,7 @@ final class Location extends \Df\Payment\Source\API\Key\Testable {
 	 * 2017-02-15
 	 * @override
 	 * @see \Df\Config\Source\API\Key::apiKeyName()
-	 * @used-by \Df\Config\Source\API\Key::apiKey()
+	 * @used-by \Df\Config\Source\API\Key::isRequirementMet()
 	 * @return string
 	 */
 	protected function apiKeyName() {return $this->tkey('AccessToken');}
@@ -39,7 +39,7 @@ final class Location extends \Df\Payment\Source\API\Key\Testable {
 	 * @param \Exception|V $e
 	 * @return array(string => string)
 	 */
-	protected function exception(\Exception $e) {return ['error' => $e instanceof V ? $e->short() : df_ets($e)];}
+	protected function exception(\Exception $e):array {return ['error' => $e instanceof V ? $e->short() : df_ets($e)];}
 
 	/**
 	 * 2017-02-15
@@ -48,5 +48,5 @@ final class Location extends \Df\Payment\Source\API\Key\Testable {
 	 * @used-by \Df\Config\Source\API::map()
 	 * @return array(string => string)
 	 */
-	protected function fetch() {return (new L)->map();}
+	protected function fetch():array {return (new L)->map();}
 }

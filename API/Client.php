@@ -73,7 +73,6 @@ final class Client extends \Df\API\Client {
 	 * @see \Df\API\Client::urlBase()
 	 * @used-by \Df\API\Client::__construct()
 	 * @used-by \Df\API\Client::url()
-	 * @return string
 	 */
-	protected function urlBase() {return 'https://connect.squareup.com/v2';}
+	protected function urlBase():string {return 'https://connect.squareup.com/v2';}
 }

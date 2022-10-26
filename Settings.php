@@ -22,7 +22,6 @@ final class Settings extends \Df\StripeClone\Settings {
 	 * @override
 	 * @see \Df\API\Settings::publicKey()
 	 * @used-by \Df\StripeClone\ConfigProvider::config()
-	 * @return string
 	 */
-	function publicKey() {return $this->testable('applicationID');}
+	function publicKey():string {return $this->testable('applicationID');}
 }
