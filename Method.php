@@ -34,7 +34,7 @@ final class Method extends \Df\StripeClone\Method {
 	 * https://github.com/mage2pro/square/issues/8
 	 * @override
 	 * @see \Df\Payment\Method::amountLimits()
-	 * @used-by isAvailable()
+	 * @used-by self::isAvailable()
 	 * @return array(string => array(int|float))
 	 */
 	protected function amountLimits() {return [
@@ -52,9 +52,7 @@ final class Method extends \Df\StripeClone\Method {
 	 * @used-by \Df\Payment\Method::assignData()
 	 * @return string[]
 	 */
-	protected function iiaKeys() {return array_merge(parent::iiaKeys(), [
-		self::$II_CARDHOLDER, self::$II_POSTAL_CODE
-	]);}
+	protected function iiaKeys() {return array_merge(parent::iiaKeys(), [self::$II_CARDHOLDER, self::$II_POSTAL_CODE]);}
 
 	/**
 	 * 2017-10-07
@@ -68,15 +66,15 @@ final class Method extends \Df\StripeClone\Method {
 
 	/**
 	 * 2017-10-09
-	 * @used-by cardholder()
-	 * @used-by iiaKeys()
+	 * @used-by self::cardholder()
+	 * @used-by self::iiaKeys()
 	 */
 	private static $II_CARDHOLDER = 'cardholder';
 
 	/**
 	 * 2017-10-09
-	 * @used-by iiaKeys()
-	 * @used-by postalCode()
+	 * @used-by self::iiaKeys()
+	 * @used-by self::postalCode()
 	 */
 	private static $II_POSTAL_CODE = 'postalCode';
 }

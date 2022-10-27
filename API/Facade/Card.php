@@ -25,8 +25,8 @@ final class Card extends \Df\API\Facade {
 
 	/**
 	 * 2017-10-08
-	 * @used-by __construct()
-	 * @used-by prefix()
+	 * @used-by self::__construct()
+	 * @used-by self::prefix()
 	 * @var string
 	 */
 	private $_customerId;

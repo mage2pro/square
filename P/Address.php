@@ -28,8 +28,8 @@ final class Address extends \Df\Payment\Operation {
 	/**
 	 * 2017-10-09 «Connect API v2 Reference» → «Data Types» → «Address»
 	 * https://docs.connect.squareup.com/api/connect/v2#type-address
-	 * @used-by billing()
-	 * @used-by shipping()
+	 * @used-by self::billing()
+	 * @used-by self::shipping()
 	 * @param A|null $a
 	 * @param bool $isBilling [optional]
 	 * @return array(string => mixed)

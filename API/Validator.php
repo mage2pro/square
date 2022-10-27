@@ -60,9 +60,9 @@ final class Validator extends \Df\API\Response\Validator {
 	 * `detail`:
 	 * 		is a human-readable string that will help you diagnose the error.
 	 * 		This value can change for a particular error.
-	 * @used-by long()
-	 * @used-by short()
-	 * @used-by valid()
+	 * @used-by self::long()
+	 * @used-by self::short()
+	 * @used-by self::valid()
 	 * @return array(array(string => string))|null
 	 */
 	private function errors() {return dfa($this->r(), 'errors');}
