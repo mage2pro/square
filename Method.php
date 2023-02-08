@@ -37,7 +37,7 @@ final class Method extends \Df\StripeClone\Method {
 	 * @used-by self::isAvailable()
 	 * @return array(string => array(int|float))
 	 */
-	protected function amountLimits() {return [
+	protected function amountLimits():array {return [
 		'AUD' => [1, 50000], 'CAD' => [1, 50000], 'GBP' => [1, 50000]
 		# 2017-10-05 @todo It is certainly wrong!
 		# Need to be updated when I will have the right limits from the Square support.
