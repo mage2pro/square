@@ -3,13 +3,10 @@ namespace Dfe\Square\Test\CaseT;
 use Dfe\Square\API\Facade\Location as L;
 # 2017-10-08
 final class Location extends \Dfe\Square\Test\CaseT {
-	/** @test 2017-10-08 */
+	/** 2017-10-08 @test */
 	function t00() {}
 
-	/**
-	 * 2017-10-08
-	 * [Square] An example of a response to `GET /v2/locations`: https://mage2.pro/t/4647
-	 */
+	/** 2017-10-08 [Square] An example of a response to `GET /v2/locations`: https://mage2.pro/t/4647 */
 	function t01_all() {
 		try {
 			print_r((new L)->all()->j());

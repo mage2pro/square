@@ -9,7 +9,7 @@ class Info extends \Df\StripeClone\Block\Info {
 	 * @see \Df\StripeClone\Block\Info::prepare()
 	 * @used-by \Df\Payment\Block\Info::prepareToRendering()
 	 */
-	final protected function prepare() {
+	final protected function prepare():void {
 		if ($this->tm()->res0()) {
 			parent::prepare();
 		}

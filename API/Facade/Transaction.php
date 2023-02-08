@@ -24,9 +24,8 @@ final class Transaction extends LocationBased {
 	 * https://docs.connect.squareup.com/api/connect/v2#endpoint-voidtransaction
 	 * @used-by \Dfe\Square\Facade\Charge::void()
 	 * @param string $id
-	 * @return O
 	 */
-	function void_($id) {return $this->p($id, Z::POST, 'void');}
+	function void_($id):O {return $this->p($id, Z::POST, 'void');}
 
 	/**
 	 * 2017-10-09 «Connect API v2 Reference» → «Endpoints» → «Transactions» → «CreateRefund»

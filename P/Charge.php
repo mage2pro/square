@@ -13,9 +13,9 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	 * @override
 	 * @see \Df\StripeClone\P\Charge::k_CardId()
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @return string
+	 * @used-by \Df\StripeClone\P\Reg::k_CardId()
 	 */
-	function k_CardId() {return 'customer_card_id';}
+	function k_CardId():string {return 'customer_card_id';}
 
 	/**
 	 * 2017-10-09
@@ -24,16 +24,15 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return array(string => string|int)
 	 */
-	protected function amountAndCurrency() {return ['amount_money' => parent::amountAndCurrency()];}
+	protected function amountAndCurrency():array {return ['amount_money' => parent::amountAndCurrency()];}
 
 	/**
 	 * 2017-10-09
 	 * @override
 	 * @see \Df\StripeClone\P\Charge::inverseCapture()
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @return bool
 	 */
-	protected function inverseCapture() {return true;}
+	protected function inverseCapture():bool {return true;}
 
 	/**
 	 * 2017-10-09
@@ -44,9 +43,8 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	 * @override
 	 * @see \Df\StripeClone\P\Charge::k_Capture()
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @return string
 	 */
-	protected function k_Capture() {return 'delay_capture';}
+	protected function k_Capture():string {return 'delay_capture';}
 
 	/**
 	 * 2017-10-09
@@ -54,18 +52,16 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	 * This field is required if you provide a value for `customer_card_id`, and optional otherwise.»
 	 * @see \Df\StripeClone\P\Charge::k_CustomerId()
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @return string
 	 */
-	protected function k_CustomerId() {return 'customer_id';}
+	protected function k_CustomerId():string {return 'customer_id';}
 
 	/**
 	 * 2018-11-24 https://docs.connect.squareup.com/api/connect/v2#endpoint-charge
 	 * @override
 	 * @see \Df\StripeClone\P\Charge::k_Description()
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @return string
 	 */
-	protected function k_Description() {return 'note';}
+	protected function k_Description():string {return 'note';}
 
 	/**
 	 * 2017-10-09
@@ -74,7 +70,7 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	 * @used-by \Df\StripeClone\P\Charge::request()
 	 * @return array(string => mixed)
 	 */
-	protected function p() {$a = Address::sg(); /** @var Address $a */ return [
+	protected function p():array {$a = Address::sg(); /** @var Address $a */ return [
 		# 2017-10-09
 		# «The buyer's billing address.
 		# This value is optional, but this transaction is ineligible for chargeback protection
@@ -109,7 +105,6 @@ final class Charge extends \Df\StripeClone\P\Charge {
 	 * @override
 	 * @see \Df\StripeClone\P\Charge::k_DSD()
 	 * @used-by \Df\StripeClone\P\Charge::request()
-	 * @return string
 	 */
-	protected function k_DSD() {return null;}
+	protected function k_DSD():string {return '';}
 }

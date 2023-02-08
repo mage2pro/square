@@ -1,9 +1,7 @@
 <?php
 namespace Dfe\Square\Facade;
-use Df\API\Operation;
+use Df\API\Operation as O;
 use Dfe\Square\API\Facade\Transaction as T;
-use Magento\Sales\Model\Order\Creditmemo as CM;
-use Magento\Sales\Model\Order\Payment as OP;
 /**
  * 2017-10-08
  * [Square] An example of a response to `POST /v2/locations/{location_id}/transactions`
@@ -20,9 +18,8 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * @param string $id
 	 * @param int|float $a
 	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
-	 * @return Operation
 	 */
-	function capturePreauthorized($id, $a) {return (new T)->capture($id);}
+	function capturePreauthorized($id, $a):O {return (new T)->capture($id);}
 
 	/**
 	 * 2017-10-09
@@ -45,19 +42,17 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * @see \Df\StripeClone\Facade\Charge::create()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
 	 * @param array(string => mixed) $p
-	 * @return Operation
 	 */
-	function create(array $p) {return (new T)->post($p);}
+	function create(array $p):O {return (new T)->post($p);}
 
 	/**
 	 * 2017-10-08 A result looks like `KnL67ZIwXCPtzOrqj0HrkxMF`.
 	 * @override
 	 * @see \Df\StripeClone\Facade\Charge::id()
 	 * @used-by \Df\StripeClone\Method::chargeNew()
-	 * @param Operation $c
-	 * @return string
+	 * @param O $c
 	 */
-	function id($c) {return $c['id'];}
+	function id($c):string {return $c['id'];}
 
 	/**
 	 * 2017-10-08
@@ -67,28 +62,24 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * @see \Df\StripeClone\Facade\Charge::pathToCard()
 	 * @used-by \Df\StripeClone\Block\Info::cardDataFromChargeResponse()
 	 * @used-by \Df\StripeClone\Facade\Charge::cardData()
-	 * @return string
 	 */
-	function pathToCard() {return 'tenders/0/card_details/card';}
+	function pathToCard():string {return 'tenders/0/card_details/card';}
 
 	/**
 	 * 2017-10-09 «Connect API v2 Reference» → «Endpoints» → «Transactions» → «CreateRefund»
 	 * https://docs.connect.squareup.com/api/connect/v2#endpoint-createrefund
+	 * 2022-12-19 The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
 	 * @override
 	 * @see \Df\StripeClone\Facade\Charge::refund()
 	 * @used-by \Df\StripeClone\Method::_refund()
-	 * @param string $id
-	 * @param float $a
-	 * В формате и валюте платёжной системы.
-	 * Значение готово для применения в запросе API.
 	 * @return null
 	 */
-	function refund($id, $a) {
+	function refund(string $id, int $a) {
 		$api = new T; /** @var T $api */
 		# 2017-10-09
 		# [Square] An example of a response to `GET /v2/locations/{location_id}/transactions/{transaction_id}`
 		# https://mage2.pro/t/4654
-		$t = $api->get($id); /** @var Operation $t */
+		$t = $api->get($id); /** @var O $t */
 		$tender = $t->a('tenders/0'); /** @var array(string => mixed) $tender */
 		return $api->refund($id, [
 			/**
@@ -157,10 +148,9 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * @override
 	 * @see \Df\StripeClone\Facade\Charge::tokenIsNew()
 	 * @used-by \Df\StripeClone\Payer::tokenIsNew()
-	 * @param string $id
-	 * @return bool
+	 * @used-by \Dfe\Stripe\Method::cardType()
 	 */
-	function tokenIsNew($id) {return 36 !== strlen($id);}
+	function tokenIsNew(string $id):bool {return 36 !== strlen($id);}
 
 	/**
 	 * 2017-10-09 «Connect API v2 Reference» → «Endpoints» → «Transactions» → «VoidTransaction»
@@ -168,8 +158,6 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * @override
 	 * @see \Df\StripeClone\Facade\Charge::void()
 	 * @used-by \Df\StripeClone\Method::_refund()
-	 * @param string $id
-	 * @return null
 	 */
-	function void($id) {return (new T)->void_($id);}
+	function void(string $id):O {return (new T)->void_($id);}
 }

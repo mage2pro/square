@@ -11,27 +11,24 @@ final class Reg extends \Df\StripeClone\P\Reg {
 	 * @override
 	 * @see \Df\StripeClone\P\Reg::k_CardId()
 	 * @used-by \Df\StripeClone\P\Reg::request()
-	 * @return string
 	 */
-	protected function k_CardId() {return null;}
+	protected function k_CardId():string {return '';}
 
 	/**
 	 * 2017-10-10
 	 * @override
 	 * @see \Df\StripeClone\P\Reg::k_Description()
 	 * @used-by \Df\StripeClone\P\Reg::request()
-	 * @return string
 	 */
-	protected function k_Description() {return 'note';}
+	protected function k_Description():string {return 'note';}
 
 	/**
 	 * 2017-10-10 «The customer's email address»
 	 * @override
 	 * @see \Df\StripeClone\P\Reg::k_Email()
 	 * @used-by \Df\StripeClone\P\Reg::request()
-	 * @return string
 	 */
-	protected function k_Email() {return 'email_address';}
+	protected function k_Email():string {return 'email_address';}
 
 	/**
 	 * 2017-10-10

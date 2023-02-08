@@ -52,7 +52,7 @@ final class Method extends \Df\StripeClone\Method {
 	 * @used-by \Df\Payment\Method::assignData()
 	 * @return string[]
 	 */
-	protected function iiaKeys() {return array_merge(parent::iiaKeys(), [self::$II_CARDHOLDER, self::$II_POSTAL_CODE]);}
+	protected function iiaKeys():array {return array_merge(parent::iiaKeys(), [self::$II_CARDHOLDER, self::$II_POSTAL_CODE]);}
 
 	/**
 	 * 2017-10-07
@@ -60,9 +60,8 @@ final class Method extends \Df\StripeClone\Method {
 	 * @see \Df\StripeClone\Method::transUrlBase()
 	 * @used-by \Df\StripeClone\Method::transUrl()
 	 * @param T $t
-	 * @return string
 	 */
-	protected function transUrlBase(T $t) {return '';}
+	protected function transUrlBase(T $t):string {return '';}
 
 	/**
 	 * 2017-10-09

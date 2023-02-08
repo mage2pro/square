@@ -30,9 +30,8 @@ final class Card extends \Df\StripeClone\Facade\Card {
 	 * @see \Df\StripeClone\Facade\Card::brand()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\CardFormatter::label()
-	 * @return string
 	 */
-	function brand() {return dftr($this->_p['card_brand'], [
+	function brand():string {return dftr($this->_p['card_brand'], [
 		'AMERICAN_EXPRESS' => 'American Express'
 		,'CHINA_UNIONPAY' => 'China UnionPay'
 		,'DISCOVER' => 'Discover'
@@ -57,9 +56,8 @@ final class Card extends \Df\StripeClone\Facade\Card {
 	 * @override
 	 * @see \Df\StripeClone\Facade\Card::country()
 	 * @used-by \Df\StripeClone\CardFormatter::country()
-	 * @return string
 	 */
-	function country() {return dfa_deep($this->_p, 'address/country');}
+	function country():string {return dfa_deep($this->_p, 'address/country');}
 
 	/**
 	 * 2017-10-07
@@ -70,9 +68,8 @@ final class Card extends \Df\StripeClone\Facade\Card {
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\Facade\Card::isActive()
-	 * @return int
 	 */
-	function expMonth() {return intval($this->_p['exp_month']);}
+	function expMonth():int {return intval($this->_p['exp_month']);}
 
 	/**
 	 * 2017-10-07 «The four-digit year of the card's expiration date»
@@ -82,9 +79,8 @@ final class Card extends \Df\StripeClone\Facade\Card {
 	 * @used-by \Df\StripeClone\CardFormatter::exp()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\Facade\Card::isActive()
-	 * @return int
 	 */
-	function expYear() {return intval($this->_p['exp_year']);}
+	function expYear():int {return intval($this->_p['exp_year']);}
 
 	/**
 	 * 2017-10-07 «The card's unique ID, if any»
@@ -93,9 +89,8 @@ final class Card extends \Df\StripeClone\Facade\Card {
 	 * @see \Df\StripeClone\Facade\Card::id()
 	 * @used-by \Df\StripeClone\ConfigProvider::cards()
 	 * @used-by \Df\StripeClone\Facade\Customer::cardIdForJustCreated()
-	 * @return string
 	 */
-	function id() {return $this->_p['id'];}
+	function id():string {return $this->_p['id'];}
 
 	/**
 	 * 2017-10-07 «The last 4 digits of the card's number»
@@ -104,9 +99,8 @@ final class Card extends \Df\StripeClone\Facade\Card {
 	 * @see \Df\StripeClone\Facade\Card::last4()
 	 * @used-by \Df\StripeClone\CardFormatter::ii()
 	 * @used-by \Df\StripeClone\CardFormatter::label()
-	 * @return string
 	 */
-	function last4() {return $this->_p['last_4'];}
+	function last4():string {return $this->_p['last_4'];}
 
 	/**
 	 * 2017-10-07 «The cardholder name.

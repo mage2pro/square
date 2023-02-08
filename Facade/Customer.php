@@ -18,23 +18,21 @@ final class Customer extends \Df\StripeClone\Facade\Customer {
 	 * @override
 	 * @see \Df\StripeClone\Facade\Customer::addCardInASeparateStepForNewCustomers()
 	 * @used-by \Df\StripeClone\Payer::newCard()
-	 * @return bool
 	 */
-	function addCardInASeparateStepForNewCustomers() {return true;}
+	function addCardInASeparateStepForNewCustomers():bool {return true;}
 
 	/**
 	 * 2017-10-08 «Connect API v2 Reference» → «Endpoints» → «Customers» → «CreateCustomerCard»
 	 * https://docs.connect.squareup.com/api/connect/v2#endpoint-createcustomercard
 	 * 2017-10-10 The result looks like: «82e66bb3-36ab-51cd-45e7-f9f251c73b08».
 	 * «[Square] An example of a response to `POST /v2/customers/{customer_id}/cards`»: https://mage2.pro/t/4652
+	 * 2022-12-19 We can not declare the $c argument type because it is undeclared in the overriden method.
 	 * @override
 	 * @see \Df\StripeClone\Facade\Customer::cardAdd()
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @param Operation $c
-	 * @param string $token
-	 * @return string
 	 */
-	function cardAdd($c, $token) {/** @var M $m */$m = $this->m(); return (new Card($c['id']))->post([
+	function cardAdd($c, string $token):string {/** @var M $m */$m = $this->m(); return (new Card($c['id']))->post([
 		/**
 		 * 2017-10-08
 		 * Note 1. «Address information for the card on file.
@@ -83,9 +81,8 @@ final class Customer extends \Df\StripeClone\Facade\Customer {
 	 * @see \Df\StripeClone\Facade\Customer::id()
 	 * @used-by \Df\StripeClone\Payer::newCard()
 	 * @param Operation $c
-	 * @return string
 	 */
-	function id($c) {return $c['id'];}
+	function id($c):string {return $c['id'];}
 
 	/**
 	 * 2017-10-08
