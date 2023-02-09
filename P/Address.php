@@ -82,7 +82,6 @@ final class Address extends \Df\Payment\Operation {
 	 * @used-by \Dfe\Square\Facade\Customer::cardAdd()
 	 * @used-by \Dfe\Square\P\Charge::p()
 	 * @used-by \Dfe\Square\P\Reg::p()
-	 * @return self
 	 */
-	static function sg() {static $r; return $r ? $r : $r = new self(dfpm(__CLASS__));}
+	static function sg():self {static $r; return $r ? $r : $r = new self(dfpm(__CLASS__));}
 }
