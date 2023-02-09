@@ -11,7 +11,7 @@ final class Card extends \Df\StripeClone\Facade\Card {
 	 * @used-by \Df\StripeClone\Facade\Card::create()
 	 * @param array(string => string) $p
 	 */
-	function __construct($p) {$this->_p = $p;}
+	function __construct(array $p) {$this->_p = $p;}
 
 	/**
 	 * 2017-10-07 «The card's brand (such as  VISA). See CardBrand for all possible values.»
