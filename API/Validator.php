@@ -65,5 +65,5 @@ final class Validator extends \Df\API\Response\Validator {
 	 * @used-by self::valid()
 	 * @return array(array(string => string))|null
 	 */
-	private function errors() {return $this->r('errors');}
+	private function errors():array {return $this->r('errors');}
 }
