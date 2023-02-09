@@ -23,7 +23,7 @@ final class Address extends \Df\Payment\Operation {
 	 * @used-by \Dfe\Square\P\Reg::p()
 	 * @return array(string => mixed)
 	 */
-	function shipping() {return $this->p($this->addressS());}
+	function shipping():array {return $this->p($this->addressS());}
 
 	/**
 	 * 2017-10-09 «Connect API v2 Reference» → «Data Types» → «Address»
