@@ -6,9 +6,8 @@ final class Settings extends \Df\StripeClone\Settings {
 	/**
 	 * 2016-09-28 «Personal Access Token»
 	 * @used-by \Dfe\Square\API\Client::headers()
-	 * @return string
 	 */
-	function accessToken() {return $this->testableP();}
+	function accessToken():string {return $this->testableP();}
 
 	/**
 	 * 2016-10-06
