@@ -141,5 +141,5 @@ final class Customer extends \Df\StripeClone\Facade\Customer {
 	 * @param Operation $c
 	 * @return array(array(string => string))
 	 */
-	protected function cardsData($c) {return df_eta($c['cards']);}
+	protected function cardsData($c):array {return df_eta($c['cards']);}
 }
