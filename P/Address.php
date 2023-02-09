@@ -15,7 +15,7 @@ final class Address extends \Df\Payment\Operation {
 	 * @used-by \Dfe\Square\P\Charge::p()
 	 * @return array(string => mixed)
 	 */
-	function billing() {return $this->p($this->addressB(), true);}
+	function billing():array {return $this->p($this->addressB(), true);}
 
 	/**
 	 * 2017-10-09
