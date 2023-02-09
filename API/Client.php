@@ -52,7 +52,7 @@ final class Client extends \Df\API\Client {
 	 * @used-by \Df\API\Client::p()
 	 * @return array(string => string)
 	 */
-	protected function headers() {/** @var S $s */$s = dfps($this); return
+	protected function headers():array {/** @var S $s */$s = dfps($this); return
 		['Accept' => 'application/json', 'Authorization' => "Bearer {$s->accessToken()}"]
 		+ (!in_array($this->method(), [C::POST, C::PUT]) ? [] : ['Content-Type' => 'application/json'])
 	;}
