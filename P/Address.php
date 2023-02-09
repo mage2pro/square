@@ -32,7 +32,7 @@ final class Address extends \Df\Payment\Operation {
 	 * @used-by self::shipping()
 	 * @return array(string => mixed)
 	 */
-	private function p(A $a = null, bool $isBilling = false) {/** @var A|null $a */ return !$a ? [] : [
+	private function p(A $a = null, bool $isBilling = false):array {/** @var A|null $a */ return !$a ? [] : [
 		# 2017-10-09
 		# «The first line of the address.
 		# Fields that start with `address_line` provide the address's most specific details,
