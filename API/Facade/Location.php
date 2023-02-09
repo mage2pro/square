@@ -14,7 +14,7 @@ final class Location extends \Df\API\Facade {
 	 * @used-by \Dfe\Square\Source\Location::fetch()
 	 * @return array(string => string)
 	 */
-	function map() {return df_sort(array_column(
+	function map():array {return df_sort(array_column(
 		array_filter($this->all()->a(), function(array $i) {return
 			/**
 			 * 2017-10-08
