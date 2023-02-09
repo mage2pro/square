@@ -62,9 +62,8 @@ final class Client extends \Df\API\Client {
 	 * @override
 	 * @see \Df\API\Client::responseValidatorC()
 	 * @used-by \Df\API\Client::_p()
-	 * @return string
 	 */
-	protected function responseValidatorC() {return \Dfe\Square\API\Validator::class;}
+	protected function responseValidatorC():string {return \Dfe\Square\API\Validator::class;}
 
 	/**
 	 * 2017-10-08 «Connect API v2 Reference» → «Connect API v2 Conventions» → «Endpoint paths»
