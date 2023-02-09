@@ -14,9 +14,8 @@ final class Transaction extends LocationBased {
 	 * 2017-10-09 «Connect API v2 Reference» → «Endpoints» → «Transactions» → «CaptureTransaction»
 	 * https://docs.connect.squareup.com/api/connect/v2#endpoint-capturetransaction
 	 * @used-by \Dfe\Square\Facade\Charge::capturePreauthorized()
-	 * @return O
 	 */
-	function capture(string $id) {return $this->p($id, Z::POST, 'capture');}
+	function capture(string $id):O {return $this->p($id, Z::POST, 'capture');}
 
 	/**
 	 * 2017-10-09 «Connect API v2 Reference» → «Endpoints» → «Transactions» → «VoidTransaction»
