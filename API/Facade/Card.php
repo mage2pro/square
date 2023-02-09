@@ -11,9 +11,8 @@ final class Card extends \Df\API\Facade {
 	 * @override
 	 * @see \Df\API\Facade::__construct()
 	 * @used-by \Dfe\Square\Facade\Customer::cardAdd()
-	 * @param string $customerId
 	 */
-	function __construct($customerId) {$this->_customerId = $customerId; parent::__construct();}
+	function __construct(string $customerId) {$this->_customerId = $customerId; parent::__construct();}
 
 	/**
 	 * 2017-10-08
