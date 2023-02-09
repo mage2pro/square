@@ -29,7 +29,6 @@ final class Transaction extends LocationBased {
 	 * https://docs.connect.squareup.com/api/connect/v2#endpoint-createrefund
 	 * @used-by \Dfe\Square\Facade\Charge::refund()
 	 * @param array(string => mixed) $p
-	 * @return O
 	 */
-	function refund(string $id, array $p) {return $this->p([$id, $p], Z::POST, 'refund');}
+	function refund(string $id, array $p):O {return $this->p([$id, $p], Z::POST, 'refund');}
 }
