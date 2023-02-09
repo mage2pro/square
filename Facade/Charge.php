@@ -15,11 +15,10 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * @override
 	 * @see \Df\StripeClone\Facade\Charge::capturePreauthorized()
 	 * @used-by \Df\StripeClone\Method::charge()
-	 * @param string $id
 	 * @param int|float $a
 	 * The $a value is already converted to the PSP currency and formatted according to the PSP requirements.
 	 */
-	function capturePreauthorized($id, $a):O {return (new T)->capture($id);}
+	function capturePreauthorized(string $id, $a):O {return (new T)->capture($id);}
 
 	/**
 	 * 2017-10-09
