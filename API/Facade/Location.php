@@ -15,7 +15,7 @@ final class Location extends \Df\API\Facade {
 	 * @return array(string => string)
 	 */
 	function map():array {return df_sort(array_column(
-		array_filter($this->all()->a(), function(array $i) {return
+		array_filter($this->all()->a(), function(array $i):bool {return
 			/**
 			 * 2017-10-08
 			 * Note 1.
