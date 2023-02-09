@@ -12,9 +12,8 @@ final class Settings extends \Df\StripeClone\Settings {
 	/**
 	 * 2016-10-06
 	 * @used-by \Dfe\Square\API\Facade\LocationBased::prefix()
-	 * @return string
 	 */
-	function location() {return $this->testable();}
+	function location():string {return $this->testable();}
 
 	/**
 	 * 2016-11-12 «Application ID»
