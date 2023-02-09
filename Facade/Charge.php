@@ -26,9 +26,8 @@ final class Charge extends \Df\StripeClone\Facade\Charge {
 	 * @override
 	 * @see \Df\StripeClone\Facade\Charge::cardIdPrefix()
 	 * @used-by \Df\StripeClone\Payer::tokenIsNew()
-	 * @return string
 	 */
-	function cardIdPrefix() {return 'icard-';}
+	function cardIdPrefix():string {return 'icard-';}
 
 	/**
 	 * 2017-10-08
