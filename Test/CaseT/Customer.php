@@ -4,10 +4,10 @@ use Dfe\Square\API\Facade\Customer as C;
 # 2017-10-08
 final class Customer extends \Dfe\Square\Test\CaseT {
 	/** 2017-10-08 @test */
-	function t00() {}
+	function t00():void {}
 
 	/** 2017-10-08 [Square] An example of a response to `GET /v2/locations`: https://mage2.pro/t/4647 */
-	function t01_all() {
+	function t01_all():void {
 		try {
 			print_r((new C)->all()->j());
 		}
@@ -20,7 +20,7 @@ final class Customer extends \Dfe\Square\Test\CaseT {
 	}
 
 	/** 2017-10-09 @test */
-	function t02_get() {
+	function t02_get():void {
 		try {
 			print_r((new C)->get('111')->j());
 		}
