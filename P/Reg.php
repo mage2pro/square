@@ -37,7 +37,7 @@ final class Reg extends \Df\StripeClone\P\Reg {
 	 * @used-by \Df\StripeClone\P\Reg::request()
 	 * @return array(string => mixed)
 	 */
-	protected function p() {return [
+	protected function p():array {return [
 		# 2017-10-10 «The customer's physical address». Type: Address.
 		# https://docs.connect.squareup.com/api/connect/v2#type-address
 		'address' => Address::sg()->shipping()
