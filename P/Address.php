@@ -30,7 +30,6 @@ final class Address extends \Df\Payment\Operation {
 	 * https://docs.connect.squareup.com/api/connect/v2#type-address
 	 * @used-by self::billing()
 	 * @used-by self::shipping()
-	 * @param A|null $a
 	 * @return array(string => mixed)
 	 */
 	private function p(A $a = null, bool $isBilling = false) {/** @var A|null $a */ return !$a ? [] : [
