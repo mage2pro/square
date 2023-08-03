@@ -11,11 +11,11 @@ final class Customer extends \Dfe\Square\Test\CaseT {
 		try {
 			print_r((new C)->all()->j());
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $t) {
 			if (function_exists('xdebug_break')) {
 				xdebug_break();
 			}
-			throw $e;
+			throw $t;
 		}
 	}
 
@@ -24,11 +24,11 @@ final class Customer extends \Dfe\Square\Test\CaseT {
 		try {
 			print_r((new C)->get('111')->j());
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $t) {
 			if (function_exists('xdebug_break')) {
 				xdebug_break();
 			}
-			throw $e;
+			throw $t;
 		}
 	}
 }

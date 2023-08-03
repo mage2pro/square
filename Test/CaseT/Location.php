@@ -11,11 +11,11 @@ final class Location extends \Dfe\Square\Test\CaseT {
 		try {
 			print_r((new L)->all()->j());
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $t) {
 			if (function_exists('xdebug_break')) {
 				xdebug_break();
 			}
-			throw $e;
+			throw $t;
 		}
 	}
 
@@ -24,11 +24,11 @@ final class Location extends \Dfe\Square\Test\CaseT {
 		try {
 			print_r((new L)->map());
 		}
-		catch (\Exception $e) {
+		catch (\Throwable $t) {
 			if (function_exists('xdebug_break')) {
 				xdebug_break();
 			}
-			throw $e;
+			throw $t;
 		}
 	}
 }

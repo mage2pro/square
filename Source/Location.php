@@ -2,6 +2,7 @@
 namespace Dfe\Square\Source;
 use Dfe\Square\API\Facade\Location as L;
 use Dfe\Square\API\Validator as V;
+use Throwable as Th; # 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 /**
  * 2016-10-06
  * 2017-10-07
@@ -32,13 +33,14 @@ final class Location extends \Df\Payment\Source\API\Key\Testable {
 
 	/**
 	 * 2017-02-15
+	 * 2023-08-02 "Treat `\Throwable` similar to `\Exception`": https://github.com/mage2pro/core/issues/311
 	 * @override
 	 * @see \Df\Config\Source\API::exception()
 	 * @used-by \Df\Config\Source\API::map()
-	 * @param \Exception|V $e
+	 * @param Th|V $t
 	 * @return array(string => string)
 	 */
-	protected function exception(\Exception $e):array {return ['error' => $e instanceof V ? $e->short() : df_xts($e)];}
+	protected function exception(Th $t):array {return ['error' => $t instanceof V ? $t->short() : df_xts($t)];}
 
 	/**
 	 * 2017-02-15
